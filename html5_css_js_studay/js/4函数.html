@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+
+<body>
+    <script>
+        //声明
+        function f() { alert("fun1 test!") }
+        f(a);
+        function b(a, b) { return a + b; }
+        alert(b(1, 2));
+        //不确定 几个参数
+        function c() {
+            arguments.length//有几个参数 
+            arguments[0] //参数1
+        }
+    </script>
+    <script>
+        f(); //错误 不能夸 script 断
+    </script>
+</body>
+
+</html>

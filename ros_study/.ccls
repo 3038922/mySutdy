@@ -1,0 +1,5 @@
+clang
+%c -std=c11
+%cpp -std=c++17
+-I/opt/ros/melodic/include/
+-I/home/ares/catkin_ws/devel/include/
