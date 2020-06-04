@@ -33,3 +33,8 @@ function verificationCode(n) {
     }
     return arr.join("");//拼接
 }
+function countDate(var1, var2) {
+    d1 = new Date(var1);
+    d2 = new Date(var2);
+    return parseInt(Math.abs(d1.getTime() - d2.getTime()) / 1000 / 3600 / 24);
+}
