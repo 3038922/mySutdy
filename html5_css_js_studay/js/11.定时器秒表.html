@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器,秒表</title>
+    <style>
+        #div1 {
+            width: 600px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            margin: 100px auto;
+            border: 1px;
+        }
+    </style>
+    <style>
+        #div2 {
+            width: 600px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            margin: 100px auto;
+            border: 1px;
+        }
+    </style>
+    <script>
+        // var i = 0;
+        // //lambda
+        // setInterval(function () {
+        //     var oDiv = document.getElementById("div1");
+        //     oDiv.innerHTML = i++;
+        // }, 1000);
+    </script>
+    <script>
+        //写在这里的代码是整个页面加载完成后运行的
+        function $(id) { return document.getElementById(id); }
+        window.onload = function () {
+            //秒表类
+            var time = {
+                mil: 0,
+                reset: function () {
+                    $("mil").innerHTML = $("sec").innerHTML = $("min").innerHTML = time.mil = 0;
+                },
+                start: function () {
+                    //lambda
+                    setInterval(function () {
+                        time.mil += 10;
+                        $("min").innerHTML = (time.mil % 100) % 60;
+                        $("sec").innerHTML = time.mil % 100;
+                        $("mil").innerHTML = time.mil;
+                    }, 10);
+                },
+                stop: function () {
+
+                },
+            };
+            //获取按钮
+            $("start").onclick = time.start();
+            $("reset").onclick = time.reset();
+            $("stop").onclick = time.stop();
+        }
+    </script>
+</head>
+
+<body>
+    <div id='div1'>0</div>
+    <div id='div2'>
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+        <span>:</span>
+        <span id="mil">00</span>
+        <br />
+
+        <button id='reset'>重置</button>
+        <button id='start'>开始</button>
+        <button id='stop'>停止</button>
+    </div>
+
+</body>
+
+</html>
