@@ -46,3 +46,4 @@ function doubleNum(n) {
     }
 
 }
+function $(id) { return document.getElementById(id); }
