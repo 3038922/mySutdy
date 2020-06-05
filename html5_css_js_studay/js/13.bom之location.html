@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>location</title>
+    <script src="usrapi.js"></script>
+    <script>
+        document.write(location.hostname, "<br/>");
+        document.write(location.port, "<br/>");
+        document.write(location.pathname, "<br/>");
+        document.write(location.search, "<br/>");//查询字符串
+        document.write(location.hash, "<br/>");//显示锚点
+        document.write(location == document.location);//这两个是一样的意思
+        window.onload = function () {
+            //获取按钮
+            $("跳转").onclick = function () {
+                location.assign("https://www.baidu.com")//当前窗口跳转URL 有历史记录
+            }
+            $("替换").onclick = function () {
+                location.replace("https://www.google.com")//当前窗口替换成新的url 没历史记录
+            }
+            $("强制刷新").onclick = function () {
+
+                location.reload(true) //刷新 不经过浏览器缓存 强制重载
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="跳转">跳转</button>
+        <button id="替换">替换</button>
+        <button id="强制刷新">强制刷新</button>
+    </div>
+
+
+</body>
+
+</html>
