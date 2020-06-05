@@ -38,3 +38,11 @@ function countDate(var1, var2) {
     d2 = new Date(var2);
     return parseInt(Math.abs(d1.getTime() - d2.getTime()) / 1000 / 3600 / 24);
 }
+function doubleNum(n) {
+    if (n < 10)
+        return "0" + n;
+    else {
+        return n;
+    }
+
+}

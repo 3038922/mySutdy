@@ -25,41 +25,48 @@
             border: 1px;
         }
     </style>
+
     <script>
-        // var i = 0;
-        // //lambda
-        // setInterval(function () {
-        //     var oDiv = document.getElementById("div1");
-        //     oDiv.innerHTML = i++;
-        // }, 1000);
+        var i = 0;
+        //lambda
+        setInterval(function () {
+            var oDiv = document.getElementById("div1");
+            oDiv.innerHTML = i++;
+        }, 1000);
+    </script>
+    <script src='usrapi.js'></script>
+    <script>
+        //秒表类
+        var time = {
+            mil: 0,
+            flag: null,
+            reset: function () {
+                clearInterval(time.flag);
+                time.mil = 0;
+                $("mil").innerHTML = $("sec").innerHTML = $("min").innerHTML = "00";
+            },
+            start: function () {
+                //lambda
+                time.flag = setInterval(function () {
+                    time.mil++;
+                    $("mil").innerHTML = doubleNum(time.mil % 100);
+                    $("sec").innerHTML = doubleNum(parseInt((time.mil / 100) % 60));
+                    $("min").innerHTML = doubleNum(parseInt((time.mil / 100 / 60) % 60));
+                }, 10);
+            },
+            stop: function () {
+                clearInterval(time.flag)
+            },
+        };
     </script>
     <script>
         //写在这里的代码是整个页面加载完成后运行的
         function $(id) { return document.getElementById(id); }
         window.onload = function () {
-            //秒表类
-            var time = {
-                mil: 0,
-                reset: function () {
-                    $("mil").innerHTML = $("sec").innerHTML = $("min").innerHTML = time.mil = 0;
-                },
-                start: function () {
-                    //lambda
-                    setInterval(function () {
-                        time.mil += 10;
-                        $("min").innerHTML = (time.mil % 100) % 60;
-                        $("sec").innerHTML = time.mil % 100;
-                        $("mil").innerHTML = time.mil;
-                    }, 10);
-                },
-                stop: function () {
-
-                },
-            };
             //获取按钮
-            $("start").onclick = time.start();
-            $("reset").onclick = time.reset();
-            $("stop").onclick = time.stop();
+            $("start").onclick = time.start; //不能加括号 这只是地址关联 加括号就成执行方法了
+            $("reset").onclick = time.reset;
+            $("stop").onclick = time.stop;
         }
     </script>
 </head>
