@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom</title>
+    <script src="usrapi.js"></script>
+    <script>
+        // document.getElementById(id);
+        // node.getElementByTagName(标签名);
+        // document.getElementsByName(name的属性值);一般使用在表单元素里
+        window.onload = function () {
+            var aLis = document.getElementsByTagName("li");
+            alert(aLis.length) //获取全部li节点
+            var aLis = $("ol1").getElementsByTagName("li")
+            for (var i = 0; i < aLis.length; i++) {
+                aLis[i].style.backgroundColor = "red";
+            }
+            var nodes = document.getElementsByClassName("box")
+            for (const iterator of nodes) {
+                iterator.style.backgroundColor = "black";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li name="hello">hello</li>
+        <li class="box">class=box</li>
+        <div name="hello" class="box"> div hello and box</div>
+    </ul>
+    <input type="text" name='hello'>
+    <span name='hello'></span>
+    <ol id='ol1'>
+        <li>ol111</li>
+        <li>ol222</li>
+        <li name="hello">olhello</li>
+        <li class="box">olclass=box</li>
+        <div name="hello" class="box">ol div hello and box</div>
+    </ol>
+</body>
+
+</html>
