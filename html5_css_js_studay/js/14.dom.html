@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dom</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 200px;
+            background-color: white;
+            border: 1px solid black;
+            margin: 100px auto;
+        }
+    </style>
     <script src="usrapi.js"></script>
     <script>
         // document.getElementById(id);
@@ -21,6 +30,9 @@
             for (const iterator of nodes) {
                 iterator.style.backgroundColor = "black";
             }
+            //随机色
+            var oDiv = document.getElementById("div1");
+            oDiv.style.backgroundColor = randomColor();
         }
     </script>
 </head>
@@ -42,6 +54,13 @@
         <li class="box">olclass=box</li>
         <div name="hello" class="box">ol div hello and box</div>
     </ol>
+    <div id="div1">
+
+        <script>
+            document.write(randomColor());
+        </script>
+    </div>
+
 </body>
 
 </html>
