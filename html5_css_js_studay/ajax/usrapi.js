@@ -58,7 +58,7 @@ function querystring(obj) {
         str += i + "=" + obj[i] + "&";
     return str.substring(0, str.length - 1);
 }
-function $ajax(method = "get", url, data) {
+function $ajax({ method = "get", url, data }) {
     var xhr = null;
     try {
         xhr = new XMLHttpRequest();
