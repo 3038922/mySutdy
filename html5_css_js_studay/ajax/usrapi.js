@@ -52,6 +52,12 @@ function randomColor() {
     var str = "rgba(" + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + "1)"
     return str;
 }
+function querystring(obj) {
+    var str = "";
+    for (var i in obj)
+        str += i + "=" + obj[i] + "&";
+    return str.substring(0, str.length - 1);
+}
 function $ajax(method = "get", url, data) {
     var xhr = null;
     try {
@@ -60,6 +66,8 @@ function $ajax(method = "get", url, data) {
     catch (error) {
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
+    if (data)
+        data = querystring(data);
     if (method == "get" && data)
         url += "?" + data;
     xhr.open(method, url, true);
