@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)#C17
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-Wno-unused-variable -Wno-unused-function)
 #是谁就改成谁
-set(name "cow")
+set(name "chenlaoshi")
 #头文件路径
 INCLUDE_DIRECTORIES("./include/")
 #枚举头文件
