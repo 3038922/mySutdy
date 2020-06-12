@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json对象</title>
+    <script src="usrapi.js"></script>
+    <script>
+        //数组转换
+        // var arr = [100, true, "hello"];
+        // var str = JSON.stringify(arr);//数组转换成JSON格式字符串
+        // alert(arr);
+        // alert(str);
+        // var str = '[100,true,"hello"]';
+        // var arr = JSON.parse(str);
+        // alert(str);
+        // alert(arr[1]);
+        //对象转换
+        // var obj = {
+        //     username: "咕咕鸡",
+        //     age: 18,
+        //     sex: "男"
+        // };
+        // var str = JSON.stringify(obj);//对象转换成字符串格式
+        // alert(obj);
+        // alert(str);
+        // var str = '{"username":"咕咕鸡","age":18,"sex":"男"}';
+        // var obj = JSON.parse(str);
+        // alert(str);
+        // for (const it in obj) {
+        //     document.write(it + "<br/>");
+        // }
+
+        //通过ajax 下载数据
+        window.onload = function () {
+            obtn1 = document.getElementById("btn1");
+            obtn1.onclick = function () {
+                $ajax({
+                    method: "get",
+                    url: "1.getList.php",
+                    success: function (result) {
+                        var arr = JSON.parse(result);//解析字符串
+                        for (var i = 0; i < arr.length; i++)
+                            alert(i + "," + arr[i])
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                })
+            };
+            obtn2 = document.getElementById("btn2");
+            obtn2.onclick = function () {
+                $ajax({
+                    method: "get",
+                    url: "2.getList.php",
+                    success: function (result) {
+                        var obj = JSON.parse(result);//解析字符串
+                        for (const it in obj) {
+                            document.write(it, ':', obj[it], '<br/>');
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                })
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <button id="btn1">普通数组转换</button>
+    <button id="btn2">关联数组转换</button>
+</body>
+
+</html>
