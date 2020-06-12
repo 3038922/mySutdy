@@ -58,7 +58,7 @@ function querystring(obj) {
         str += i + "=" + obj[i] + "&";
     return str.substring(0, str.length - 1);
 }
-function $ajax({ method = "get", url, data }) {
+function $ajax({ method = "get", url, data, success, error }) {
     var xhr = null;
     try {
         xhr = new XMLHttpRequest();
@@ -80,9 +80,14 @@ function $ajax({ method = "get", url, data }) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4)
             if (xhr.status == 200)
-                alert(xhr.responseText);
+                /**
+                 * 如何处理数据?
+                 * 回调函数
+                 */
+                success(xhr.responseText);
             else
-                alert(xhr.status);
+                if (error)
+                    error(xhr.status);
     }
 
 }

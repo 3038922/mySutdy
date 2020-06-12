@@ -17,6 +17,12 @@
                         username: "xxx",
                         age: 12,
                         pw: "protoss"
+                    },
+                    success: function (result) {
+                        alert("get请求下载数据:" + result);
+                    },
+                    error: function (msg) {
+                        alert(msg);
                     }
                 })
             }
@@ -29,6 +35,12 @@
                         username: "ppp",
                         age: 7,
                         pw: "protoss"
+                    },
+                    success: function (result) {
+                        alert("post请求下载数据:" + result);
+                    },
+                    error: function (msg) {
+                        alert(msg);
                     }
                 })
             }
