@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>前后端分离测试</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -15,17 +15,23 @@
             oT1 = document.getElementById("t1");
             obtn1.onclick = function () {
                 $ajax({
-                    method: "get",
+                    method: "post",
                     url: "8.php操作mysql.php",
                     success: function (result) {
                         var arr = JSON.parse(result);//解析字符串
                         var str = "";
                         for (var i = 0; i < arr.length; i++)
-                            str += '<tr><td>${arr[i].id}</td> \
-                                <td>${arr[i].name}</td > \
-                                <td>${arr[i].english}</td >\
-                                <td>${arr[i].math}</td >\
-                                <td>${arr[i].chinese}</td ></tr>';
+                            str += `<tr><td>${arr[i].id}</td>
+                            <td>${arr[i].name}</td>
+                            <td>${arr[i].english}</td>
+                            <td>${arr[i].math}</td>
+                            <td>${arr[i].chinese}</td ></tr>`;
+                        // str += "<tr><td>" + arr[i].id + "</td>" +
+                        //     "<td>" + arr[i].name + "</td>" +
+                        //     "<td>" + arr[i].english + "</td>" +
+                        //     "<td>" + arr[i].math + "</td>" +
+                        //     "<td>" + arr[i].chinese + "</td></tr>";
+                        //document.write(arr[i].id, " ", arr[i].name, " ", arr[i].english, " ", arr[i].math, " ", arr[i].chinese, "</br>");
                         oT1.innerHTML = str;
                     },
                     error: function (msg) {
@@ -54,6 +60,20 @@
                     </tr>
                 </thead>
                 <tbody id="t1">
+                    <tr>
+                        <td>asdf</td>
+                        <td>asf</td>
+                        <td>asdf</td>
+                        <td>adsf</td>
+                        <td>adsf</td>
+                    </tr>
+                    <tr>
+                        <td>asdf</td>
+                        <td>asf</td>
+                        <td>asdf</td>
+                        <td>adsf</td>
+                        <td>adsf</td>
+                    </tr>
 
                 </tbody>
             </table>
