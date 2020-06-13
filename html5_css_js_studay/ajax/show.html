@@ -16,7 +16,7 @@
             obtn1.onclick = function () {
                 $ajax({
                     method: "post",
-                    url: "index.php",
+                    url: "show.php",
                     success: function (result) {
                         var arr = JSON.parse(result);//解析字符串
                         var str = "";
