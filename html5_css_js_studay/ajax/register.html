@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="usrapi.js"></script>
+    <script>
+        //通过ajax 下载数据
+        window.onload = function () {
+            var obtn1 = document.getElementById("btn1");
+            var aInuputs = document.getElementsByTagName("input");
+            obtn1.onclick = function () {
+                if (aInuputs[1].value != aInuputs[2].value)
+                    alert("两次密码输入不一致");
+                else
+                    $ajax({
+                        method: "post",
+                        url: "register.php",
+                        data: {
+                            username: aInuputs[0].value,
+                            password: aInuputs[1].value,
+                            addTime: new Data().getTime(),
+                        },
+                        success: function (result) {
+                            var obj = JSON.parse(result);
+                            alert(obj.message);
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                        }
+                    })
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h2 class="display-4">注册</h2>
+            <br>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">用户名</label>
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password1">密码</label>
+                        <input type="password" class="form-control" name="password1">
+                        <label for="password2">重复密码</label>
+                        <input type="password" class="form-control" name="password2">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn1">注册</button>
+                <button type="submit" class="btn btn-primary" id="btn2">取消</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
