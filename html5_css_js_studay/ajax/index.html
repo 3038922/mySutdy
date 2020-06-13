@@ -11,12 +11,12 @@
     <script>
         //通过ajax 下载数据
         window.onload = function () {
-            obtn1 = document.getElementById("btn1");
-            oT1 = document.getElementById("t1");
+            var obtn1 = document.getElementById("btn1");
+            var oT1 = document.getElementById("t1");
             obtn1.onclick = function () {
                 $ajax({
                     method: "post",
-                    url: "8.php操作mysql.php",
+                    url: "index.php",
                     success: function (result) {
                         var arr = JSON.parse(result);//解析字符串
                         var str = "";
@@ -60,23 +60,12 @@
                     </tr>
                 </thead>
                 <tbody id="t1">
-                    <tr>
-                        <td>asdf</td>
-                        <td>asf</td>
-                        <td>asdf</td>
-                        <td>adsf</td>
-                        <td>adsf</td>
-                    </tr>
-                    <tr>
-                        <td>asdf</td>
-                        <td>asf</td>
-                        <td>asdf</td>
-                        <td>adsf</td>
-                        <td>adsf</td>
-                    </tr>
 
                 </tbody>
             </table>
+            <div class="panel-footer">
+                <a href="insert.html">添加学生</a>
+            </div>
         </div>
     </div>
 </body>

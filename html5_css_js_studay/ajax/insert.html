@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插入</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="usrapi.js"></script>
+    <script>
+        //通过ajax 下载数据
+        window.onload = function () {
+            var obtn1 = document.getElementById("btn1");
+            var aInuputs = document.getElementsByTagName("input");
+            obtn1.onclick = function () {
+                $ajax({
+                    method: "post",
+                    url: "insert.php",
+                    data: {
+                        name: aInuputs[0].value,
+                        chinese: aInuputs[1].value,
+                        math: aInuputs[2].value,
+                        english: aInuputs[3].value,
+                    },
+                    success: function (result) {
+                        var obj = JSON.parse(result);
+                        alert(obj.message);
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                })
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h2 class="display-4">添加学生信息</h2>
+            <br>
+            <div class="form-group">
+                <label for="name">姓名:</label>
+                <input type="text" class="form-control" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="chinese">语文:</label>
+                <input type="text" class="form-control" name="chinese" />
+            </div>
+            <div class="form-group">
+                <label for="math">数学:</label>
+                <input type="text" class="form-control" name="math" />
+            </div>
+            <div class="form-group">
+                <label for="english">英语:</label>
+                <input type="text" class="form-control" name="english" />
+            </div>
+            <div class="form-group">
+                <button id="btn1" type="button" class="btn btn-primary btn-lg form-control">提交</button>
+            </div>
+            <div class="panel-footer">
+                <a href="index.html">查看学员成绩</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
