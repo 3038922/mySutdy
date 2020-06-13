@@ -22,12 +22,15 @@
     //6 发送sql语句
     $result=mysqli_query($study,$sql);
     //设置表头
-    echo "<table border= '1'>";
-    echo "<tr><th>学号</th><th>姓名</th><th>英语</th><th>数学</th><th>语文</th></tr>";
+    // echo "<table border= '1'>";
+    // echo "<tr><th>学号</th><th>姓名</th><th>英语</th><th>数学</th><th>语文</th></tr>";
     //7 处理结果 全部显示
+    $arr=array();//创建索引数组
     while ($row=mysqli_fetch_assoc($result))
-       echo "<tr><th>{$row['id']}</th><th>{$row['name']}</th><th>{$row['english']}</th><th>{$row['math']}</th><th>{$row['chinese']}</th></tr>";
-    echo "</table>";
+        array_push($arr,$row);
+    echo json_encode($arr);
+    //    echo "<tr><th>{$row['id']}</th><th>{$row['name']}</th><th>{$row['english']}</th><th>{$row['math']}</th><th>{$row['chinese']}</th></tr>";
+    // echo "</table>";
     //8 释放结果集
     mysqli_free_result($result);
     mysqli_close($study);

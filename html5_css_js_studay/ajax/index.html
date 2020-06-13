@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前后端分离测试</title>
+    <script src="usrapi.js"></script>
+    <script>
+        //数组转换
+        // var arr = [100, true, "hello"];
+        // var str = JSON.stringify(arr);//数组转换成JSON格式字符串
+        // alert(arr);
+        // alert(str);
+        // var str = '[100,true,"hello"]';
+        // var arr = JSON.parse(str);
+        // alert(str);
+        // alert(arr[1]);
+        //对象转换
+        // var obj = {
+        //     username: "咕咕鸡",
+        //     age: 18,
+        //     sex: "男"
+        // };
+        // var str = JSON.stringify(obj);//对象转换成字符串格式
+        // alert(obj);
+        // alert(str);
+        // var str = '{"username":"咕咕鸡","age":18,"sex":"男"}';
+        // var obj = JSON.parse(str);
+        // alert(str);
+        // for (const it in obj) {
+        //     document.write(it + "<br/>");
+        // }
+
+        //通过ajax 下载数据
+        window.onload = function () {
+            obtn1 = document.getElementById("btn1");
+            obtn1.onclick = function () {
+                $ajax({
+                    method: "get",
+                    url: "8.php操作mysql.php",
+                    success: function (result) {
+                        var obj = JSON.parse(result);//解析字符串
+                        for (const it in obj) {
+                            document.write(it, ':', obj[it], '<br/>');
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                })
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="btn1">获取</button>
+    </div>
+
+</body>
+
+</html>
