@@ -7,7 +7,18 @@
     $password=$_POST['password'];
     $addTime=$_POST['addTime'];
 
-
+    if(!$username){
+        $responseData['code']=3;
+        $responseData['message']="用户名不能为空";
+        echo json_encode($responseData); 
+        exit;
+    }
+    if(!$password){
+        $responseData['code']=4;
+        $responseData['message']="密码不能为空";
+        echo json_encode($responseData); 
+        exit;
+    }
     /**
      * 1 连接数据库 7.x版本
      * 第一个参数 IP 
@@ -28,8 +39,21 @@
     //4 选择数据库
     mysqli_select_db($study,"study");
     //5  准备SQL语句
-    //注意 name 是字符串
-    $sql= "insert into users(username,password,create_time) values('{$username}','{$password}',{$addTime})";
+    //验证用户是否重名
+    $sql1= "select * from users where username='{$username}'";
+    $result1=mysqli_query($study,$sql1);
+    $row=mysqli_fetch_assoc($result1);
+    if($row){
+        $responseData['code']=5;
+        $responseData['message']="用户名已存在";
+        echo json_encode($responseData); 
+        mysqli_free_result($result);
+        mysqli_close($study);
+        exit;
+    }
+    //ADD 注意密码进行MD5加密
+    $pwMd5=md5(md5(md5($password)."xxx")."yyy");
+    $sql= "insert into users(username,password,create_time) values('{$username}','{$pwMd5}',{$addTime})";
     //6 发送sql语句
     $result=mysqli_query($study,$sql);
     //7 处理结果 全部显示
