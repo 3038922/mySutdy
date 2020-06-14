@@ -36,8 +36,11 @@
                             var obj = JSON.parse(result);
                             if (obj.code)
                                 oAlert.className = "alert alert-danger";
-                            else
+                            else {
                                 oAlert.className = "alert alert-success";
+                                //成功后跳转
+                                setTimeout(function () { location.href = "login.html"; }, 2000);
+                            }
                             oAlert.innerHTML = obj.message;
                         },
                         error: function (msg) {
@@ -71,6 +74,9 @@
                     </div>
                     <button class="btn btn-primary " id="confrm">注册</button>
                     <button class="btn btn-primary " id="btn2">取消</button>
+                    <div class="panel-footer">
+                        <a href="login.html">马上登录</a>
+                    </div>
                 </form>
             </div>
         </div>

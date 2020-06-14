@@ -4,33 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主页</title>
+    <title>登录</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        #alert_info {
+            text-align: center;
+            display: none;
+        }
+    </style>
     <script src="usrapi.js"></script>
     <script>
         //通过ajax 下载数据
         window.onload = function () {
-            var obtn1 = document.getElementById("btn1");
+            var oConfrm = document.getElementById("confrm");
             var aInuputs = document.getElementsByTagName("input");
-            obtn1.onclick = function () {
+            var oAlert = document.getElementById("alert-info");
+            oConfrm.onclick = function () {
                 $ajax({
                     method: "post",
-                    url: "insert.php",
+                    url: "login.php",
                     data: {
-                        name: aInuputs[0].value,
-                        chinese: aInuputs[1].value,
-                        math: aInuputs[2].value,
-                        english: aInuputs[3].value,
+                        username: aInuputs[0].value,
+                        password: aInuputs[1].value,
                     },
                     success: function (result) {
                         var obj = JSON.parse(result);
-                        alert(obj.message);
+                        if (obj.code)
+                            oAlert.className = "alert alert-danger";
+                        else
+                            oAlert.className = "alert alert-success";
+                        oAlert.innerHTML = obj.message;
                     },
                     error: function (msg) {
                         alert(msg);
                     }
-                })
+                });
             };
         };
     </script>
@@ -39,32 +48,27 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h2 class="display-4">添加学生信息</h2>
+            <h2 class="display-4">登录</h2>
             <br>
             <div class="form-group">
-                <label for="name">姓名:</label>
-                <input type="text" class="form-control" name="name" />
-            </div>
-            <div class="form-group">
-                <label for="chinese">语文:</label>
-                <input type="text" class="form-control" name="chinese" />
-            </div>
-            <div class="form-group">
-                <label for="math">数学:</label>
-                <input type="text" class="form-control" name="math" />
-            </div>
-            <div class="form-group">
-                <label for="english">英语:</label>
-                <input type="text" class="form-control" name="english" />
-            </div>
-            <div class="form-group">
-                <button id="btn1" type="button" class="btn btn-primary btn-lg form-control">提交</button>
-            </div>
-            <div class="panel-footer">
-                <a href="show.html">查看学员成绩</a>
-            </div>
-            <div class="panel-footer">
-                <a href="show.html">查看学员成绩</a>
+                <form>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="username">用户名</label>
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">密码</label>
+                            <input type="password" class="form-control" name="password1">
+                        </div>
+                        <div id="alert_info" class="alert alert-danger"></div>
+                    </div>
+                    <button class="btn btn-primary " id="confrm">确定</button>
+                    <button class="btn btn-primary " id="btn2">取消</button>
+                    <div class="panel-footer">
+                        <a href="register.html">马上注册</a>
+                    </div>
+                </form>
             </div>
         </div>
 
