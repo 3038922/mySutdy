@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <style>
         #alert_info {
             text-align: center;
@@ -19,8 +18,9 @@
         window.onload = function () {
             var oConfrm = document.getElementById("confrm");
             var aInuputs = document.getElementsByTagName("input");
-            var oAlert = document.getElementById("alert-info");
+            var oAlert = document.getElementById("alert_info");
             oConfrm.onclick = function () {
+                oAlert.style.display = "inline";
                 $ajax({
                     method: "post",
                     url: "login.php",
@@ -63,8 +63,8 @@
                         </div>
                         <div id="alert_info" class="alert alert-danger"></div>
                     </div>
-                    <button class="btn btn-primary " id="confrm">确定</button>
-                    <button class="btn btn-primary " id="btn2">取消</button>
+                    <button type="button" class="btn btn-primary " id="confrm">确定</button>
+                    <button type="button" class="btn btn-primary " id="btn2">取消</button>
                     <div class="panel-footer">
                         <a href="register.html">马上注册</a>
                     </div>

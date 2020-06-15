@@ -18,10 +18,11 @@
         window.onload = function () {
             var oConfrm = document.getElementById("confrm");
             var aInuputs = document.getElementsByTagName("input");
-            var oAlert = document.getElementById("alert-info");
+            var oAlert = document.getElementById("alert_info");
             oConfrm.onclick = function () {
+                oAlert.style.display = "inline";
                 if (aInuputs[1].value != aInuputs[2].value)
-                    alert("两次密码输入不一致");
+                    oAlert.innerHTML = "两次密码输入不一致";
                 else
                     $.post({
                         url: "register.php",
@@ -70,8 +71,8 @@
                         </div>
                         <div id="alert_info" class="alert alert-danger"></div>
                     </div>
-                    <button class="btn btn-primary " id="confrm">注册</button>
-                    <button class="btn btn-primary " id="btn2">取消</button>
+                    <button type="button" class="btn btn-primary " id="confrm">注册</button>
+                    <button type="button" class="btn btn-primary " id="btn2">取消</button>
                     <div class="panel-footer">
                         <a href="login.html">马上登录</a>
                     </div>
