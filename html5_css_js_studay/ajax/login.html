@@ -32,8 +32,11 @@
                         var obj = JSON.parse(result);
                         if (obj.code)
                             oAlert.className = "alert alert-danger";
-                        else
+                        else {
                             oAlert.className = "alert alert-success";
+                            //成功后跳转
+                            setTimeout(function () { location.href = "userlist.html"; }, 1000);
+                        }
                         oAlert.innerHTML = obj.message;
                     },
                     error: function (msg) {
