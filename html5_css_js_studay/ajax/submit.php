@@ -5,7 +5,7 @@
     //取数据
     $username=$_POST['username'];
     $password=$_POST['password'];
-    $addTime=$_POST['addTime'];
+    $id=$_POST['id'];
 
     if(!$username){
         $responseData['code']=3;
@@ -16,6 +16,12 @@
     if(!$password){
         $responseData['code']=4;
         $responseData['message']="密码不能为空";
+        echo json_encode($responseData); 
+        exit;
+    }
+    if(!$id){
+        $responseData['code']=6;
+        $responseData['message']="id不能为空";
         echo json_encode($responseData); 
         exit;
     }
@@ -40,7 +46,7 @@
     mysqli_select_db($study,"study");
     //5  准备SQL语句
     //验证用户是否重名
-    $sql= "select * from users where username='{$username}'";
+    $sql= "select * from users where username='{$username}' and id!='{$id}'";
     $result=mysqli_query($study,$sql);
     $row=mysqli_fetch_assoc($result);
     if($row){
@@ -51,23 +57,25 @@
         mysqli_close($study);
         exit;
     }
+    
     //ADD 注意密码进行MD5加密
     $pwMd5=md5(md5(md5($password)."xxx")."yyy");
-    $sql= "insert into users(username,password,create_time) values('{$username}','{$pwMd5}',{$addTime})";
+    $sqlupdate= "update users set username='{$username}',password='{$pwMd5}' where id={$id}";//修改数据
     //6 发送sql语句
-    $result=mysqli_query($study,$sql);
+    $resultupdate=mysqli_query($study,$sqlupdate);
     //7 处理结果 全部显示
-    if(!$result){
+    if(!$resultupdate){
         $responseData['code']=2;
-        $responseData['message']="注册失败";
+        $responseData['message']="修改失败";
         echo json_encode($responseData); 
         exit;
     }
     else{
-        $responseData['message']="注册成功";
+        $responseData['message']="修改成功";
         echo json_encode($responseData); 
     }
     //8 释放结果集
     mysqli_free_result($result);
+    mysqli_free_result($resultupdate);
     mysqli_close($study);
 ?>

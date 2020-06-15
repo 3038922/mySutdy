@@ -46,7 +46,7 @@
                 success: function (result) {
                     var obj = JSON.parse(result);
 
-                    if (obj.code == 3) {
+                    if (!obj.code) {
                         var row = JSON.parse(obj.message);//二次解析
                         aInuputs[0].value = row.username;
                         aInuputs[1].value = row.password;
@@ -76,6 +76,16 @@
                         id: aInuputs[2].value,
                     },
                     success: function (result) {
+                        var obj = JSON.parse(result);
+                        if (!obj.code) {
+                            oAlert.style.display = "inline"
+                            oAlert.className = "alert alert-success";
+                        }
+                        else {
+                            oAlert.style.display = "inline"
+                            oAlert.className = "alert alert-danger";
+                        }
+                        oAlert.innerHTML = obj.message;
                     },
                     error: function (msg) {
                         alert(msg);
@@ -100,7 +110,7 @@
                         <input type="text" class="form-control" id="password" placeholder="密码">
                     </div>
                     <div class="col-auto">
-                        <input type="hidden" class="form-control" id="id" placeholder="id">
+                        <input type="hidden" class="form-control">
                     </div>
                     <div class="col-auto">
                         <button type="button" class="btn btn-primary " id="confrm">确定</button>

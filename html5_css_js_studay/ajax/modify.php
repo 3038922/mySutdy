@@ -45,7 +45,6 @@
         exit;
     }
     else{
-        $responseData['code']=3;
         $responseData['message']=json_encode($row);//拼接上去
         echo json_encode($responseData); 
     }
