@@ -40,9 +40,9 @@
     mysqli_select_db($study,"study");
     //5  准备SQL语句
     //验证用户是否重名
-    $sql1= "select * from users where username='{$username}'";
-    $result1=mysqli_query($study,$sql1);
-    $row=mysqli_fetch_assoc($result1);
+    $sql= "select * from users where username='{$username}'";
+    $result=mysqli_query($study,$sql1);
+    $row=mysqli_fetch_assoc($result);
     if($row){
         $responseData['code']=5;
         $responseData['message']="用户名已存在";

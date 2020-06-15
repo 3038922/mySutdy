@@ -25,7 +25,7 @@
         $responseData['code']=2;
         $responseData['message']="删除失败";
         echo json_encode($responseData); 
-        mysqli_free_result($result);
+        mysqli_free_result($result1);
         mysqli_close($study);
         exit;
     }
@@ -35,6 +35,6 @@
         echo json_encode($responseData); 
     }
     //8 释放结果集
-    mysqli_free_result($result);
+    mysqli_free_result($result1);
     mysqli_close($study);
 ?>
