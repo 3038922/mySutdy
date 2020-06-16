@@ -6,26 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>前后端传输</title>
     <script type="text/javascript" src="vue.js/vue.js"></script>
+    <script>
+        window.onload.then(res => {
+        })
+    </script>
 </head>
 
 <body>
     <div id="box">
-
+        <button @click=handleGetData>获取天气信息</button>
+        <ul>
+            <li v-for="data in datalist">
+                <h3>{{data}}</h3>
+            </li>
+        </ul>
     </div>
 
     <script type="text/javascript">
 
-        fetch("./json/test.json").then(res => res.json()).then(res => {
-            console.log(res);
-        })
+
 
         var vm = new Vue({
             el: "#box",
             data: {
-                mytext: "",
+                datalist: [],
             },
             methods: {
-
+                handleGetData() {
+                    fetch("./json/test.json").then(res => res.json()).then(res => {
+                        console.log(res);
+                        this.datalist = res;
+                    })
+                },
             }
         });
     </script>
