@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤应用</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+    <style>
+        .red {
+            background: red;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text">
+
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                datalist: ["aaa", "vvv", "protoss", "add", "cee", "candy"],
+                obj: {
+                    name: "candy",
+                    sex: "femail",
+                    age: 100,
+                    data: "2014-7-24"
+                }
+            },
+            methods: {
+                handleClick() { }
+            }
+        });
+    </script>
+</body>
+
+</html>
