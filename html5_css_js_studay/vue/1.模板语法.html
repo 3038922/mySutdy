@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        {{10+20}}
+        <p>{{myname}}</p>
+        {{myhtml}}
+        <!-- 指令 -->
+        <div v-html="myhtml"></div>
+        <div v-show="isShow">动态显示和隐藏</div>
+        <div v-if="isCreate">动态的创建和删除</div>
+    </div>
+
+    <!-- 未被渲染 -->
+    <div>
+        {{10+20}}
+        <p>{{myname}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#box",//VUE 渲染开始的地方
+            data: {
+                myname: "kerwin",
+                isShow: true,
+                isCreate: true,
+                myhtml: "<b>1111111</b>",
+            }//状态
+        })
+    </script>
+</body>
+
+</html>

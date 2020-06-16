@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class与style</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+    <style>
+        .red {
+            background: red;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div style="background: yellow;">1111111 </div>
+        <!-- 这里用@绑定click -->
+        <button @click="handleClick()">切换</button>
+        <!-- 注意用:绑定class -->
+        <div :class="isActive?'red':'yellow'">我是动态绑定class -三目运算</div>
+        <!-- 注意用:绑定class -->
+        <div :class="classobj">我是动态绑定class -对象写法</div>
+        <!-- 注意用:绑定class -->
+        <div :class="classarr">我是动态绑定class -数组写法</div>
+
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                isActive: true,
+                classobj: {
+                    a: true,
+                    b: true,
+                },
+                classarr: ["a", "b"],//可以动态添加,删除 
+            },
+            methods: {
+                handleClick() {
+                    this.isActive = !this.isActive;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
