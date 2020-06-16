@@ -37,4 +37,3 @@
     //8 释放结果集
     mysqli_free_result($result1);
     mysqli_close($study);
-?>

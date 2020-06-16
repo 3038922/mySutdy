@@ -6,4 +6,3 @@ $arr2=array('username'=>'小屁屁',
             'age'=>12,
             'sex'=>'男');
 echo json_encode($arr2);
-?>
