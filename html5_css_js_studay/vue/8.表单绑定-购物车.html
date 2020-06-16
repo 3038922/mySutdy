@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单绑定-购物车</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="data in datalist">
+                {{data}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                datalist: [
+                    {
+                        name: "咕咕鸡",
+                        price: 10,
+                        number: 1,
+                        id: '1',
+                    },
+                    {
+                        name: "candy",
+                        price: 100,
+                        number: 2,
+                        id: '2',
+                    },
+                    {
+                        name: "喵喵",
+                        price: 80,
+                        number: 3,
+                        id: '3',
+                    },
+                    {
+                        name: "汪汪队",
+                        price: 44,
+                        number: 1,
+                        id: '4',
+                    },
+
+                ]
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
