@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>条件渲染</title>
+    <title>列表渲染</title>
     <script type="text/javascript" src="vue.js/vue.js"></script>
     <style>
         .red {
@@ -21,34 +21,39 @@
     <div id="box">
         <!-- 这里用@绑定click -->
         <button @click="handleClick()">切换</button>
-        <div v-if='isCreate'>动态创建和删除--11111111</div>
-        <div v-else>动态创建和删除--2222222</div>
-
         <ul v-if="datalist.length">
-            <li v-for=" data in datalist">
-                {{data}}
+            <li v-for="(data,index) in datalist" key="data">
+                {{index}}----{{data}}
             </li>
         </ul>
-        <div v-else> 购物车空空如也</div>
+        <!-- of 属于迭代器吧 -->
+        <ul v-if="datalist.length">
+            <li v-for="(data,index) of datalist">
+                {{index}}----{{data}}
+            </li>
+        </ul>
 
-        <div v-if="which==1">1111</div>
-        <div v-else-if="which==2">2222</div>
-        <div v-else>33333</div>
+        <ul>
+            <li v-for="(value,key) in obj">
+                {{key}}----{{value}}
+            </li>
+        </ul>
     </div>
 
     <script type="text/javascript">
         var vm = new Vue({
             el: "#box",
             data: {
-                which: 1,
-                isCreate: true,
-                datalist: [],
+                datalist: ['111', '222', '333'],
+                obj: {
+                    name: "candy",
+                    sex: "femail",
+                    age: 100,
+                    data: "2014-7-24",
+                }
             },
             methods: {
                 handleClick() {
-                    this.isCreate = !this.isCreate;
-                    this.datalist = ["1111", "2222"];
-                    this.which += 1;
                 }
             }
         })
