@@ -28,6 +28,12 @@
         <div :class="classobj">我是动态绑定class -对象写法</div>
         <!-- 注意用:绑定class -->
         <div :class="classarr">我是动态绑定class -数组写法</div>
+        <!-- 注意用:绑定style 注意优先级-->
+        <div :style="'background:'+(isActive?'red':'yellow')">我是动态绑定style -三目运算</div>
+        <!-- 注意用:绑定style -->
+        <div :style="styleobj">我是动态绑定style -对象写法</div>
+        <!-- 注意用:绑定style -->
+        <div :style="stylearr">我是动态绑定style -数组写法</div>
 
     </div>
 
@@ -41,6 +47,10 @@
                     b: true,
                 },
                 classarr: ["a", "b"],//可以动态添加,删除 
+                styleobj: {
+                    background: "red",
+                },
+                stylearr: [{ background: "blue" }],//可以动态添加,删除 
             },
             methods: {
                 handleClick() {
