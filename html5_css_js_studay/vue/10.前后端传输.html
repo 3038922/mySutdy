@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>前后端传输</title>
     <script type="text/javascript" src="vue.js/vue.js"></script>
-    <script>
-        window.onload.then(res => {
-        })
-    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div id="box">
-        <button @click=handleGetData>获取天气信息</button>
+        <button @click=handleGetData>获取天气信息_fetch</button>
+        <ul>
+            <li v-for="data in datalist">
+                <h3>{{data}}</h3>
+            </li>
+        </ul>
+        <button @click=handleAxiosGet>获取天气信息_axios_get</button>
         <ul>
             <li v-for="data in datalist">
                 <h3>{{data}}</h3>
@@ -23,8 +26,6 @@
     </div>
 
     <script type="text/javascript">
-
-
 
         var vm = new Vue({
             el: "#box",
@@ -38,6 +39,15 @@
                         this.datalist = res;
                     })
                 },
+                handleAxiosGet() {
+                    axios.get("./json/test.json").then(res => {
+                        console.log(res);
+                        // axios会自动包装 要取data取数据
+                        this.datalist = res.data;
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }
             }
         });
     </script>
