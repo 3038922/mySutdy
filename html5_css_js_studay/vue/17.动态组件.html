@@ -17,7 +17,9 @@
         <!-- 新款动态写法 自己都不知道加载谁 -->
         <!-- keep-alive 保留状态 避免重新渲染 表示切换后 方框里的东西一直存在 -->
         <keep-alive>
-            <component :is="who"></component>
+            <transition name="animate__animated  animate__backOutUp animate__backInDown" mode="out-in">
+                <component :is="who"></component>
+            </transition>
         </keep-alive>
         <footer>
             <ul>
