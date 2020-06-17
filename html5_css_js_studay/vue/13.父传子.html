@@ -1,35 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组件</title>
+    <title>父传子</title>
     <script type="text/javascript" src="vue.js/vue.js"></script>
 </head>
 
 <body>
     <div id="box">
-        <navbar></navbar>
+        <!-- 加个:就是动态绑定 :@$ 有啥区别? -->
+        <navbar myname="home" :myshow="false"></navbar>
+        <navbar myname="list" :myshow="true"></navbar>
+        <!-- 调用跟组件里的属性 用:绑定 -->
+        <navbar :myname="parentname" :myshow="true"></navbar>
         <child></child>
 
     </div>
     <script type="text/javascript">
         //全局组件
         Vue.component("navbar", {
-            template: `<section>
-            <div style="background:yellow">
-            <button @click="handleindex()">主页</button> 
-            <button>返回</button>
-            <child></child>
-            <navbarchild></navbarchild>
-          
-        </div>
-        </section>`,
+            template: `<div>
+                <button>返回</button>
+                navbar --{{myname}}
+                <button v-show="myshow">主页</button>
+                </div>`,
+            //全局函数
             methods: {
                 handleindex() {
                     console.log("index");
                 }
+            },
+            //接受父组件传来的属性 无法验证不好 放弃
+            // props: ["myname", "myshow"],
+            //改成对象写法 属性验证
+            props: {
+                myname: String,
+                myshow: Boolean,
             },
             //局部定义组件
             components: {
@@ -43,10 +51,11 @@
             template: `<div> child组件-全局定义 </div>`,
         })
 
-
+        //根节点
         new Vue({
             el: "#box",
             data: {
+                parentname: "我是根节点的属性",
 
             },
             methods: {
