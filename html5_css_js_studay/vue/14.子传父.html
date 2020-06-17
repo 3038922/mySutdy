@@ -10,17 +10,22 @@
 
 <body>
     <div id="box">
-        父组件
-        <!-- 监听事件用@ 注意参数必须$event写全-->
-        <child @myevent="handleEvent($event)"></child>
+        <!-- 儿子2想去改父组件里的属性去改控制儿子1的显示 -->
+        <!-- 儿子2去控制父亲的data 
+            @myevent 是HTML中定义的
+            @handleevent 是父组件里定义的-->
+        <navbar @myevent="handleEvent($event)"></navbar>
+        <siderbar v-show="isShow"></siderbar>
     </div>
+
     <script type="text/javascript">
         //子组件1
-        Vue.component("child", {
-            template: `<div>
-                    <p>child组件</p>
-                    <button @click="payMoney()">click</button>
-                </div>`,
+        Vue.component("siderbar", {
+            template: `<div style="background:yellow;width:200px;"><ul>
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ul></div>`,
             // 子组件参数
             data() {
                 //这里写法有点奇葩 要传出去的要加个return 
@@ -51,6 +56,24 @@
                 }
             }
         })
+        //子组件2
+        Vue.component("navbar", {
+            template: `<div>navbar
+                     <button @click="handleClick($event)">navbar-butoon</button>
+                    </div>`,
+            props: {
+                isFatherShow: Boolean,
+            },
+            //子组件函数
+            methods: {
+                handleClick(ev) {
+                    //.$emit 是VUE官方内置方法  去匹配父组件里的@myevent
+                    //.$emit 分发 事件的意思
+                    console.log(ev);
+                    this.$emit("myevent");
+                },
+            }
+        })
 
 
         //根节点
@@ -58,15 +81,12 @@
             el: "#box",
             data: {
                 parentname: "我是根节点的属性",
-
+                isShow: false,
             },
             methods: {
-                handleEvent(ev) {
-                    console.log("父组件收到钱了", ev);
+                handleEvent() {
+                    this.isShow = !this.isShow;
                 }
-
-            },
-            coputed: {
 
             }
         })//root component 根组件
