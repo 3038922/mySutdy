@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件总线</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <auhtor></auhtor>
+        <user></user>
+
+    </div>
+    <script>
+        var bus = new Vue();//空vue实例就是 中央事件总线
+        //作者
+        Vue.component("auhtor", {
+            template: `<div style="background:blue">
+            我是一个微信公众号作者
+            <input type="text" ref="mytext">
+            <button @click="handleSubmit">发布</button>
+        </div>`,
+            mounted() {
+                console.log("生命周期函数 当前组之间DOM 创建完成后就就会调用")
+            },
+            methods: {
+                handleSubmit() {
+                    //触发 发布 注意名字要一样
+                    //发送
+                    bus.$emit("wechatmessage", this.$refs.mytext.value);
+                }
+            },
+        })
+
+        //用户
+        Vue.component("user", {
+            //合适的位置 订阅好, bug.$on
+            template: `<div style="background:yellow">
+                <p>我是微信用户</p>
+                {{text}}
+                </div>`,
+            //子节点里必须用这种方式显示东西
+            data() {
+                return {
+                    text: "",
+                }
+            },
+            //生命周期函数 当前组之间DOM 创建完成后就就会调用
+            //一共有八个 这是其中一个
+            mounted() {
+                // bus.$on("wechatmessage", function () {
+                //     console.log("收到推送了");
+                // });
+                bus.$on("wechatmessage", (data) => {
+                    console.log("收到推送了:", data);
+                    this.text = data;
+                });
+                console.log("生命周期函数 当前组之间DOM 创建完成后就就会调用")
+            },
+
+        })
+
+        //总线
+        new Vue({
+            el: "#box",
+
+        })
+    </script>
+</body>
+
+</html>
