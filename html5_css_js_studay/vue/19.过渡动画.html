@@ -10,12 +10,14 @@
 </head>
 
 <body>
-    <div class="animate__animated animate__fadeInLeft">hinge</div>
+    <div class="animate__animated animate__bounce animate__fadeInRight">hinge</div>
     <div id="box">
         <button @click="isShow=!isShow">click</button>
         <!-- 动画效果 -->
-        <transition name="animate__animated animate__fadeInLeft">
-            <div v-show="isShow">11111</div>
+        <transition name="animate__animated animate__fadeInRight animate__fadeOutTopRight" mode="in-out">
+            <!-- key值不一样也会形成切换 -->
+            <p v-if="isShow" key="1">11111</p>
+            <p v-else>32222</p>
         </transition>
 
     </div>
