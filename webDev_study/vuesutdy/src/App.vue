@@ -2,39 +2,54 @@
   <div>
     hello vue
     <input
-      type='text'
-      ref='mytext'
+      type="text"
+      ref="mytext"
     />
-    <button @click='handleAdd()'>add</button>
+    <button @click="handleAdd()">add</button>
     <ul>
       <li
-        v-for='data in datalist'
-        :key='data'
+        v-for="data in datalist"
+        :key="data"
       >{{ data }}</li>
     </ul>
+    <navbar>
+      <button @click="isShow=!isShow">click</button>
+    </navbar>
+    <sidebar v-show="isShow"></sidebar>
   </div>
+
 </template>
 
 <script>
 import navbar from './components/Navbar'
 import sidebar from './components/Sidebar'
-// 定义vue
-import Vue from 'vue'
-Vue.component('navbar', navbar)
-Vue.component('sidebar', sidebar)
+
 // 注册成全局组件
+// 定义vue
+// import Vue from "vue";
+// Vue.component("navbar", navbar);
+// Vue.component("sidebar", sidebar);
 
 // ES6 导出
 export default {
   data () {
     return {
-      datalist: []
+      datalist: [],
+      isShow: false
     }
   },
   methods: {
     handleAdd () {
       this.datalist.push(this.$refs.mytext.value)
     }
+  },
+  components: {
+    // 局部定义
+    navbar: navbar,
+    sidebar: sidebar
+  },
+  mounted () {
+    // ajax请求放这里
   }
 }
 </script>
