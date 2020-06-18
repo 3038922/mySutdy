@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue' // ES6 模块导入方式
 import App from './App.vue'
 import router from './router'
 import store from './store'
