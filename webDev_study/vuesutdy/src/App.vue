@@ -1,12 +1,10 @@
 <template>
   <div>
     hello vue
-    <input type="text" ref="mytext">
+    <input type="text" ref="mytext" />
     <button>add</button>
     <ul>
-      <li v-for="data in datalist" :key="data">
-        {{data}}
-      </li>
+      <li v-for="data in datalist" :key="data">{{data}}</li>
     </ul>
   </div>
 </template>
