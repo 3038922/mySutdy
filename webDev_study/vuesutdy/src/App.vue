@@ -1,29 +1,22 @@
 <template>
   <div>
     hello vue
-    <input
-      type="text"
-      ref="mytext"
-    />
+    <input type="text" ref="mytext" />
     <button @click="handleAdd()">add</button>
     <ul>
-      <li
-        v-for="data in datalist"
-        :key="data"
-      >{{ data }}</li>
+      <li v-for="data in datalist" :key="data">{{ data }}</li>
     </ul>
     <navbar>
-      <button @click="isShow=!isShow">click</button>
+      <button @click="isShow = !isShow">click</button>
     </navbar>
     <sidebar v-show="isShow"></sidebar>
   </div>
-
 </template>
 
 <script>
 import navbar from './components/Navbar'
 import sidebar from './components/Sidebar'
-
+import axios from 'axios'
 // 注册成全局组件
 // 定义vue
 // import Vue from "vue";
@@ -54,7 +47,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 ul {
   list-style: none;
   li {
