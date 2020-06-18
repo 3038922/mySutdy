@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swiper库</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+    <!-- swiper的库 -->
+    <script type="text/javascript" src="swiper.js/swiper.js"></script>
+    <link rel="stylesheet" href="css/swiper.css">
+    <style>
+        .swiper-container {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <swiper :key="datalist.length">
+            <div class="swiper-slide" v-for="data in datalist">
+                {{data}}
+            </div>
+        </swiper>
+    </div>
+    <script>
+        //swiper组件封装
+        Vue.component("swiper", {
+            template: `<div class="swiper-container a">
+            <div class="swiper-wrapper">
+                   <slot></slot>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+        </div>`,
+
+            mounted() {
+                //似乎加入了KEY值
+                new Swiper(".a", {
+                    loop: true,
+                    //如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    }
+                })
+            },
+        });
+
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                datalist: [],
+            },
+            //挂载后
+            mounted() {
+                setTimeout(() => {
+                    this.datalist = ["1111", "2222", "3333"];
+                    //这里并没初始化好 不要NEW在这里 
+                    //状态改完 ,异步更新dom
+
+                }, 2000)
+            },
+            updated() {
+                //创建UI写这里?
+                //最好创建封装组件
+                // new Swiper(".a", {
+                //     loop: true,
+                //     //如果需要分页器
+                //     pagination: {
+                //         el: '.swiper-pagination',
+                //     }
+                // })
+            },
+        })
+    </script>
+</body>
+
+</html>
