@@ -1,5 +1,6 @@
 <template>
   <div>
+    <tabbar></tabbar>
     hello vue
     <input type="text"
            ref="mytext" />
@@ -18,8 +19,10 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
+// 导入组件
+import Navbar from '@/components/Navbar'
+import Sidebar from '@/components/Sidebar'
+import Tabbar from '@/components/Tabbar'
 import axios from 'axios'
 // 注册成全局组件
 // 定义vue
@@ -43,7 +46,8 @@ export default {
   components: {
     // 局部定义
     navbar: Navbar,
-    sidebar: Sidebar
+    sidebar: Sidebar,
+    tabbar: Tabbar
   },
   mounted () {
     // ajax请求放这里
