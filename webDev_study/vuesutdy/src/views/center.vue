@@ -6,18 +6,18 @@
 <script>
 const auth = {
   isLogin() {
-    return false;
-  },
-};
+    return false
+  }
+}
 export default {
   // 触发时间要早
   beforeRouteEnter(to, from, next) {
-    console.log("局部盘查");
+    console.log('局部盘查')
     if (auth.isLogin()) {
-      next();
+      next()
     } else {
-      next("/login");
+      next('/login')
     }
-  },
-};
+  }
+}
 </script>

@@ -20,7 +20,7 @@
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
-import axios from 'axios'
+
 // 注册成全局组件
 // 定义vue
 // import Vue from "vue";
@@ -45,12 +45,6 @@ export default {
     navbar: Navbar,
     sidebar: Sidebar,
     tabbar: Tabbar
-  },
-  mounted() {
-    // ajax请求放这里
-    axios.get('/json/maoyan.json').then((res) => {
-      console.log(res.data)
-    })
   }
 }
 </script>
