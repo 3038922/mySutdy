@@ -55,4 +55,13 @@ const router = new Router({
   ]
 })
 
+// 全局守卫
+router.beforeEach((to, from, next) => {
+  if (to.path === '/center') {
+    console.log('盘查')
+  } else {
+    // 必须用next()放行
+    next()
+  }
+})
 export default router
