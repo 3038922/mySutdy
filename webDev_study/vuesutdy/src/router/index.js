@@ -4,7 +4,8 @@ import Router from 'vue-router'
 import Film from '@/views/film'
 import Cinema from '@/views/cinema'
 import Center from '@/views/center'
-
+import Nowplaying from '@/views/film/nowplaying'
+import Comingsoon from '@/views//film/comingsoon'
 Vue.use(Router)
 
 const router = new Router({
@@ -13,7 +14,22 @@ const router = new Router({
   routes: [
     {
       path: '/film',
-      component: Film
+      component: Film,
+      // 二级路由
+      children: [
+        {
+          path: 'nowplaying',
+          component: Nowplaying
+        },
+        {
+          path: 'comingsoon',
+          component: Comingsoon
+        },
+        {
+          path: '',
+          redirect: 'nowplaying'
+        }
+      ]
     },
     {
       path: '/cinema',
@@ -22,6 +38,11 @@ const router = new Router({
     {
       path: '/center',
       component: Center
+    },
+    // 如果都不匹配 重定向
+    {
+      path: '*',
+      redirect: '/film'
     }
   ]
 })

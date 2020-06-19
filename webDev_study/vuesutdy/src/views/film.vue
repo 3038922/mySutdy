@@ -1,5 +1,7 @@
 <template>
   <div>
-    film
+    轮播
+    <!-- 路由容器 -->
+    <router-view></router-view>
   </div>
 </template>
