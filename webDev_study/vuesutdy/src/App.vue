@@ -1,13 +1,10 @@
 <template>
   <div>
-    <tabbar></tabbar>
-    hello vue
-    <input type="text"
-           ref="mytext" />
+    <tabbar></tabbar>hello vue
+    <input type="text" ref="mytext" />
     <button @click="handleAdd()">add</button>
     <ul>
-      <li v-for="data in datalist"
-          :key="data">{{ data }}</li>
+      <li v-for="data in datalist" :key="data">{{ data }}</li>
     </ul>
     <navbar>
       <button @click="isShow = !isShow">click</button>
@@ -20,10 +17,10 @@
 
 <script>
 // 导入组件
-import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
-import Tabbar from '@/components/Tabbar'
-import axios from 'axios'
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+import Tabbar from "@/components/Tabbar";
+import axios from "axios";
 // 注册成全局组件
 // 定义vue
 // import Vue from "vue";
@@ -32,30 +29,30 @@ import axios from 'axios'
 
 // ES6 导出
 export default {
-  data () {
+  data() {
     return {
       datalist: [],
-      isShow: false
-    }
+      isShow: false,
+    };
   },
   methods: {
-    handleAdd () {
-      this.datalist.push(this.$refs.mytext.value)
-    }
+    handleAdd() {
+      this.datalist.push(this.$refs.mytext.value);
+    },
   },
   components: {
     // 局部定义
     navbar: Navbar,
     sidebar: Sidebar,
-    tabbar: Tabbar
+    tabbar: Tabbar,
   },
-  mounted () {
+  mounted() {
     // ajax请求放这里
-    axios.get('/json/maoyan.json').then((res) => {
-      console.log(res.data)
-    })
-  }
-}
+    axios.get("/json/maoyan.json").then((res) => {
+      console.log(res.data);
+    });
+  },
+};
 </script>
 
 <style lang="scss">
