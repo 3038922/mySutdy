@@ -6,9 +6,9 @@
     <ul>
       <li v-for="data in datalist" :key="data">{{ data }}</li>
     </ul>
-    <navbar>
+    <!-- <navbar>
       <button @click="isShow = !isShow">click</button>
-    </navbar>
+    </navbar> -->
     <sidebar v-show="isShow"></sidebar>
     <!-- 路由容器 -->
     <router-view></router-view>
@@ -17,7 +17,7 @@
 
 <script>
 // 导入组件
-import Navbar from '@/components/Navbar'
+// import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
 
@@ -42,7 +42,7 @@ export default {
   },
   components: {
     // 局部定义
-    navbar: Navbar,
+    // navbar: Navbar,
     sidebar: Sidebar,
     tabbar: Tabbar
   }
@@ -50,10 +50,15 @@ export default {
 </script>
 
 <style lang="scss">
-ul {
+//全局样式
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+li {
   list-style: none;
-  li {
-    background: orange;
-  }
 }
 </style>

@@ -2,8 +2,8 @@
   <div>
     nowplaying
     <ul>
-      <li v-for="data in datalist" :key="data" @click="handleChangePage(data)">
-        {{ data }}
+      <li v-for="data in datalist" :key="data.filmId" @click="handleChangePage(data)">
+        {{ data.name }}
       </li>
     </ul>
   </div>
@@ -14,13 +14,23 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      datalist: ['1111', '2222', '3333']
+      datalist: []
     }
   },
   mounted() {
     // ajax请求放这里
-    axios.get('/json/maoyan.json').then((res) => {
+    // axios.get('/json/maoyan.json').then((res) => {
+    //   console.log(res.data)
+    // })
+    axios({
+      url: 'https://m.maizuo.com/gateway?cityId=620100&pageNum=1&pageSize=10&type=1&k=1917647',
+      headers: {
+        'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1592581289360498079989762"}',
+        'X-Host': 'mall.film-ticket.film.list'
+      }
+    }).then((res) => {
       console.log(res.data)
+      this.datalist = res.data.data.films
     })
   },
   methods: {
