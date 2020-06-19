@@ -12,6 +12,8 @@
       <button @click="isShow = !isShow">click</button>
     </navbar>
     <sidebar v-show="isShow"></sidebar>
+    <!-- 路由容器 -->
+    <router-view></router-view>
   </div>
 </template>
 
