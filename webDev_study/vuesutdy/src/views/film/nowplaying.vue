@@ -1,9 +1,14 @@
 <template>
   <div>
-    nowplaying
+    <h2>正在上映</h2>
     <ul>
       <li v-for="data in datalist" :key="data.filmId" @click="handleChangePage(data)">
-        {{ data.name }}
+        <!-- 记得加个: 不知道啥意思 -->
+        <img :src="data.poster" alt="" />
+        <h3>{{ data.name }}</h3>
+        <p>观众评分:{{ data.grade }}</p>
+        <!-- 返回的是数组,用过滤器 -->
+        <p>主演:{{ data.actors | actorfilter }}</p>
       </li>
     </ul>
   </div>
@@ -11,6 +16,11 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+Vue.filter('actorfilter', (data) => {
+  var newlist = data.map((item) => item.name)
+  return newlist.join(' ') // 不加join 返回的是字符串
+})
 export default {
   data() {
     return {
@@ -44,3 +54,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+ul {
+  li {
+    overflow: hidden;
+    padding: 10px;
+    img {
+      float: left;
+      width: 100px;
+    }
+  }
+}
+</style>
