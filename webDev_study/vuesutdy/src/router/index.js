@@ -8,6 +8,7 @@ import Comingsoon from '@/views/film/comingsoon'
 import Cinema from '@/views/cinema'
 import Center from '@/views/center'
 import Detail from '@/views/detail'
+import Login from '@/views/login'
 Vue.use(Router)
 
 const router = new Router({
@@ -38,6 +39,10 @@ const router = new Router({
       component: Cinema
     },
     {
+      path: '/login',
+      component: Login
+    },
+    {
       path: '/detail/:id', // 动态路由写法
       // 命名路由 可以命名跳转
       name: 'ares',
@@ -45,6 +50,7 @@ const router = new Router({
     },
     {
       path: '/center',
+      alias: '/my',
       component: Center
     },
     // 如果都不匹配 重定向
@@ -54,14 +60,24 @@ const router = new Router({
     }
   ]
 })
-
-// 全局守卫
-router.beforeEach((to, from, next) => {
-  if (to.path === '/center') {
-    console.log('盘查')
-  } else {
-    // 必须用next()放行
-    next()
-  }
-})
+// const auth = {
+//   isLogin() {
+//     return false;
+//   },
+// };
+// 全局守卫 路由守卫
+// router.beforeEach((to, from, next) => {
+//   if (to.path === "/center") {
+//     if (auth.isLogin()) {
+//       console.log("允许访问");
+//       next();
+//     } else {
+//       console.log("拒绝访问");
+//       next("/login");
+//     }
+//   } else {
+//     // 必须用next()放行
+//     next();
+//   }
+// });
 export default router
