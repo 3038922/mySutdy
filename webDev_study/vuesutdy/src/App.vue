@@ -17,14 +17,15 @@
 
 <script>
 // 导入组件
+// import axios from 'axios'
 // import Navbar from '@/components/Navbar'
 // import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
 
 // 注册成全局组件
 // 定义vue
-// import Vue from "vue";
-// Vue.component("navbar", navbar);
+// import Vue from 'vue'
+// Vue.component('axios', axios)
 // Vue.component("sidebar", sidebar);
 
 // ES6 导出

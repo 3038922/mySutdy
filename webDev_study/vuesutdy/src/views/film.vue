@@ -39,10 +39,14 @@ export default {
   mounted() {
     axios.get('/json/maoyan.json').then((res) => {
       this.looplist = res.data.movieList
-      console.log(this.looplist)
     })
-    // 监听
+    // 监听 注意这里是全局 必须设置离开解绑
     window.onscroll = this.handleScroll
+  },
+
+  beforeDestroy() {
+    // 离开页面解绑
+    window.onscroll = null
   },
   methods: {
     handleScroll() {
