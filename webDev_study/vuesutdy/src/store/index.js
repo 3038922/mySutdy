@@ -22,14 +22,15 @@ export default new Vuex.Store({
     // 专门写异步处理的
     getComingListAction(store) {
       axios({
-        url: 'https://m.maizuo.com/gateway?type=2&cityId=620100&k=1616921',
+        url: 'https://m.maizuo.com/gateway?cityId=620100&pageNum=1&pageSize=10&type=2&k=4884084',
         headers: {
           'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1592581289360498079989762"}',
           'X-Host': 'mall.film-ticket.film.list'
         }
       }).then(res => {
         console.log(res.data)
-        store.commit('getComingListAction', res.data.data.films)
+        // 传数据这样 comlist 就可以获得数据了
+        store.commit('comingListMutation', res.data.data.films)
       })
     }
   },
