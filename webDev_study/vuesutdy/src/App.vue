@@ -1,6 +1,7 @@
 <template>
   <div>
-    <tabbar v-if="isShow"></tabbar>
+    <h2>HDfans新版</h2>
+    <tabbar v-if="$store.state.isTabbarShow"></tabbar>
     <!-- 路由容器 -->
     <router-view></router-view>
   </div>
@@ -12,7 +13,7 @@
 // import Navbar from '@/components/Navbar'
 // import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
-import bus from '@/bus/index.js'
+// import bus from '@/bus/index.js'
 // 注册成全局组件
 // 定义vue
 // import Vue from 'vue'
@@ -23,8 +24,7 @@ import bus from '@/bus/index.js'
 export default {
   data() {
     return {
-      datalist: [],
-      isShow: true
+      datalist: []
     }
   },
   methods: {
@@ -40,9 +40,9 @@ export default {
   },
   mounted() {
     // 监听 一定记得加$$$$$$$
-    bus.$on('maizuo', (data) => {
-      this.isShow = data
-    })
+    // bus.$on('maizuo', (data) => {
+    //   this.isShow = data
+    // })
   }
 }
 </script>

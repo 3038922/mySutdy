@@ -8,8 +8,12 @@
         <i class="iconfont icon-form"></i>
         电影
       </router-link>
-      <router-link to="/center" tag="li" activeClass="myactive">主页</router-link>
-      <router-link to="/cinema" tag="li" activeClass="myactive">电影院</router-link>
+      <router-link to="/center" tag="li" activeClass="myactive">电视剧</router-link>
+      <router-link to="/cinema" tag="li" activeClass="myactive">音乐</router-link>
+      <router-link to="/cinema" tag="li" activeClass="myactive">游戏</router-link>
+      <router-link to="/cinema" tag="li" activeClass="myactive">软件</router-link>
+      <router-link to="/cinema" tag="li" activeClass="myactive">其他</router-link>
+      <router-link to="/cinema" tag="li" activeClass="myactive">小姐姐</router-link>
       <!-- #一定要的 淘汰了 -->
       <!-- <li><a href='/#/film'>film</a></li>
       <li><a href='#/cinema'>cinema</a></li>
