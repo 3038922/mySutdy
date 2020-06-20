@@ -1,15 +1,6 @@
 <template>
   <div>
-    <tabbar></tabbar>
-    <!-- <input type="text" ref="mytext" /> -->
-    <!-- <button @click="handleAdd()">add</button>
-    <ul>
-      <li v-for="data in datalist" :key="data">{{ data }}</li>
-    </ul> -->
-    <!-- <navbar>
-      <button @click="isShow = !isShow">click</button>
-    </navbar> -->
-    <!-- <sidebar v-show="isShow"></sidebar> -->
+    <tabbar v-if="isShow"></tabbar>
     <!-- 路由容器 -->
     <router-view></router-view>
   </div>
@@ -21,7 +12,7 @@
 // import Navbar from '@/components/Navbar'
 // import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
-
+import bus from '@/bus/index.js'
 // 注册成全局组件
 // 定义vue
 // import Vue from 'vue'
@@ -33,7 +24,7 @@ export default {
   data() {
     return {
       datalist: [],
-      isShow: false
+      isShow: true
     }
   },
   methods: {
@@ -46,6 +37,12 @@ export default {
     // navbar: Navbar,
     // sidebar: Sidebar,
     tabbar: Tabbar
+  },
+  mounted() {
+    // 监听 一定记得加$$$$$$$
+    bus.$on('maizuo', (data) => {
+      this.isShow = data
+    })
   }
 }
 </script>

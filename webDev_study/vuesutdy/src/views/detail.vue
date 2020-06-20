@@ -18,6 +18,7 @@
  */
 import Vue from 'vue'
 import Swiper from '@/views/detail/detailswiper'
+import bus from '@/bus/index.js'
 Vue.filter('filterPath', (res) => {
   return res.replace('w.h', '256.360')
 })
@@ -29,8 +30,16 @@ export default {
   data() {
     return {
       filminfo: null,
-      stars: [111, 222, 333, 444, 666, 788, 999, 1112, 333, 444, 555, 666, 777, 88]
+      stars: [111, 222, 333, 444, 666, 788, 999, 1112, 1111, 4444, 5555555, 665556, 666777, 88]
     }
+  },
+  // 加载前
+  beforeMount() {
+    bus.$emit('maizuo', false)
+  },
+  // 销毁后
+  beforeDestroy() {
+    bus.$emit('maizuo', true)
   },
   mounted() {
     // 这里拿到了电影的IP 其实应该去后端根据ID 发送请求 拿到详细信息.
