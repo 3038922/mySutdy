@@ -19,14 +19,14 @@ import Vue from 'vue'
 /**
  * 过滤地址 替换 w.h
  */
-Vue.filter('filterPath', (res) => {
+Vue.filter('filterPath', res => {
   return res.replace('w.h', '128.180')
 })
 /**
  * 过滤原来的那种字符串名字
  */
-Vue.filter('actorfilter', (data) => {
-  var newlist = data.map((item) => item.name)
+Vue.filter('actorfilter', data => {
+  var newlist = data.map(item => item.name)
   return newlist.join(' ') // 不加join 返回的是字符串
 })
 export default {
@@ -37,7 +37,7 @@ export default {
   },
   mounted() {
     // ajax请求放这里
-    axios.get('/json/maoyan.json').then((res) => {
+    axios.get('/json/maoyan.json').then(res => {
       this.datalist = res.data.movieList
     })
     // axios({

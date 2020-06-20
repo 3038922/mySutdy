@@ -34,8 +34,6 @@ export default {
   },
   components: {
     // 局部定义
-    // navbar: Navbar,
-    // sidebar: Sidebar,
     tabbar: Tabbar
   },
   mounted() {

@@ -24,7 +24,7 @@ export default {
         'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1592638718370406569541637","bc":"110100"}',
         'X-Host': 'mall.film-ticket.cinema.list'
       }
-    }).then((res) => {
+    }).then(res => {
       console.log(res.data)
       this.datalist = res.data.data.cinemas
       // 等数据全加载好了 才调用

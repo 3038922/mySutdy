@@ -21,7 +21,7 @@ import Filmheader from '@/views/film/filmheader'
 /**
  * 过滤地址 替换 w.h
  */
-Vue.filter('filterPath', (res) => {
+Vue.filter('filterPath', res => {
   return res.replace('w.h', '128.180')
 })
 export default {
@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('/json/maoyan.json').then((res) => {
+    axios.get('/json/maoyan.json').then(res => {
       this.looplist = res.data.movieList
     })
     // 监听 注意这里是全局 必须设置离开解绑

@@ -18,7 +18,7 @@
  */
 import Vue from 'vue'
 import Swiper from '@/views/detail/detailswiper'
-Vue.filter('filterPath', (res) => {
+Vue.filter('filterPath', res => {
   return res.replace('w.h', '256.360')
 })
 export default {
