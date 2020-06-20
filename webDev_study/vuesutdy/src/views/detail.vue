@@ -34,11 +34,11 @@ export default {
   },
   // 加载前
   beforeMount() {
-    this.$store.state.isTabbarShow = false
+    this.$store.commit('test', false)
   },
   // 销毁后
   beforeDestroy() {
-    this.$store.state.isTabbarShow = true
+    this.$store.commit('test', true)
   },
   mounted() {
     // 这里拿到了电影的IP 其实应该去后端根据ID 发送请求 拿到详细信息.
