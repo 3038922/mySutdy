@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>正在上映</h2>
     <ul>
       <li v-for="data in datalist" :key="data.id" @click="handleChangePage(data)">
         <!-- 记得加个: 不知道啥意思 -->

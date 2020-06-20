@@ -6,7 +6,7 @@
 <script>
 const auth = {
   isLogin() {
-    return false
+    return true
   }
 }
 export default {

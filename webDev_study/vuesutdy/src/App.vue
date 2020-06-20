@@ -1,15 +1,15 @@
 <template>
   <div>
-    <tabbar></tabbar>hello vue
-    <input type="text" ref="mytext" />
-    <button @click="handleAdd()">add</button>
+    <tabbar></tabbar>
+    <!-- <input type="text" ref="mytext" /> -->
+    <!-- <button @click="handleAdd()">add</button>
     <ul>
       <li v-for="data in datalist" :key="data">{{ data }}</li>
-    </ul>
+    </ul> -->
     <!-- <navbar>
       <button @click="isShow = !isShow">click</button>
     </navbar> -->
-    <sidebar v-show="isShow"></sidebar>
+    <!-- <sidebar v-show="isShow"></sidebar> -->
     <!-- 路由容器 -->
     <router-view></router-view>
   </div>
@@ -18,7 +18,7 @@
 <script>
 // 导入组件
 // import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
+// import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
 
 // 注册成全局组件
@@ -43,7 +43,7 @@ export default {
   components: {
     // 局部定义
     // navbar: Navbar,
-    sidebar: Sidebar,
+    // sidebar: Sidebar,
     tabbar: Tabbar
   }
 }
