@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>HDfans新版</h2>
-    <tabbar v-if="$store.state.isTabbarShow"></tabbar>
+    <tabbar v-if="isTabbarShow"></tabbar>
     <!-- 路由容器 -->
     <router-view></router-view>
   </div>
@@ -13,6 +13,7 @@
 // import Navbar from '@/components/Navbar'
 // import Sidebar from '@/components/Sidebar'
 import Tabbar from '@/components/Tabbar'
+import { mapState } from 'vuex'
 // import bus from '@/bus/index.js'
 // 注册成全局组件
 // 定义vue
@@ -36,6 +37,21 @@ export default {
     // 局部定义
     tabbar: Tabbar
   },
+  /**
+   * 计算属性
+   * 定义起来像函数 用起来像属性
+   */
+  // 新写法
+  computed: {
+    ...mapState(['isTabbarShow']) // ... 是ES6中的展开合并运算符 可以用来合并数组[...arr1,...arr2] 对象{...obj1,...obj2}
+  }, // 可以加多个
+  // 老写法
+  // computed: {
+  //   isShow() {
+  //     return this.$store.state.isTabbarShow
+  //   }
+  // },
+
   mounted() {
     // 监听 一定记得加$$$$$$$
     // bus.$on('maizuo', (data) => {
