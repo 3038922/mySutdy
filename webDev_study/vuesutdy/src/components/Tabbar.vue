@@ -24,7 +24,7 @@
 
 <style lang="scss" scope>
 .myactive {
-  color: red;
+  color: rgb(157, 165, 180);
 }
 nav {
   position: fixed;
@@ -32,13 +32,14 @@ nav {
   left: 0px;
   width: 100%;
   height: 50px;
-  background: white;
+  background: rgb(157, 165, 180);
   ul {
     display: flex;
     li {
       flex: 1;
       line-height: 50px;
       text-align: center;
+      color: #e1e4e8;
     }
   }
 }

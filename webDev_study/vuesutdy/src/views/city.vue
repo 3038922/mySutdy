@@ -60,4 +60,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+* {
+  background: rgb(36, 41, 46);
+  color: black;
+}
+</style>

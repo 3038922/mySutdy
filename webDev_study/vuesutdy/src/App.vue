@@ -61,12 +61,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 //全局样式
 * {
   margin: 0;
   padding: 0;
-  background: black;
+  background: rgb(36, 41, 46);
   color: whitesmoke;
 }
 html {

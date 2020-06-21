@@ -16,13 +16,13 @@ ul {
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background: white;
-    color: black;
+    background: rgb(24, 26, 31);
+    color: #e1e4e8;
   }
 }
 .active {
-  color: red;
-  border-bottom: 2px solid red;
+  color: rgb(157, 165, 180);
+  border-bottom: 2px solid rgb(157, 165, 180);
 }
 .fixed {
   position: fixed;
@@ -30,6 +30,6 @@ ul {
   top: 0px;
   width: 100%;
   height: 40px;
-  background: white;
+  background: rgb(24, 26, 31);
 }
 </style>
