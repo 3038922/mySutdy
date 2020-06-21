@@ -6,6 +6,12 @@ import store from './store'
 // eslint-disable-line no-unused-vars
 // import Alla from './module/moduleA' // 导入所有接口
 import { a1, a2 as mya2 } from './module/moduleB' // 可以只导入某几个接口
+// 引入 ElementUI
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 console.log(a1, mya2)

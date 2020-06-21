@@ -2,6 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import { TABBAR_MUTATION } from '@/type'
+
+/**
+ * 同步 异步都可以放这里做.
+ *  mutations -> state-> Vue components -> Actions -> mutations
+ */
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
