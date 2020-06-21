@@ -9,8 +9,14 @@ import { a1, a2 as mya2 } from './module/moduleB' // 可以只导入某几个接
 // 引入 ElementUI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// 引入 mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+// import { InfiniteScroll } from 'mint-ui'
 
+// Vue.use(InfiniteScroll)
 Vue.use(ElementUI)
+Vue.use(MintUI)
 
 Vue.config.productionTip = false
 

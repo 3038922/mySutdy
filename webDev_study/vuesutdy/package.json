@@ -12,6 +12,7 @@
     "better-scroll": "^1.15.2",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "mint-ui": "^2.2.13",
     "sass-loader": "^8.0.2",
     "swiper": "^5.4.5",
     "vue": "^2.6.11",

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
       <li v-for="data in datalist" :key="data.id" @click="handleChangePage(data)">
         <!-- 记得加个: 不知道啥意思 -->
         <img :src="data.img | filterPath" alt="" />
@@ -19,25 +19,26 @@ import Vue from 'vue'
 /**
  * 过滤地址 替换 w.h
  */
-Vue.filter('filterPath', res => {
+Vue.filter('filterPath', (res) => {
   return res.replace('w.h', '128.180')
 })
 /**
  * 过滤原来的那种字符串名字
  */
-Vue.filter('actorfilter', data => {
-  var newlist = data.map(item => item.name)
+Vue.filter('actorfilter', (data) => {
+  var newlist = data.map((item) => item.name)
   return newlist.join(' ') // 不加join 返回的是字符串
 })
 export default {
   data() {
     return {
-      datalist: []
+      datalist: [],
+      loading: false
     }
   },
   mounted() {
     // ajax请求放这里
-    axios.get('/json/maoyan.json').then(res => {
+    axios.get('/json/maoyan.json').then((res) => {
       this.datalist = res.data.movieList
     })
     // axios({
@@ -58,6 +59,17 @@ export default {
       // 传统方式 this.$router.push(`/detail/${id}`)
       // 用路由名字导航 更麻烦
       this.$router.push({ name: 'ares', params: { id: id } })
+    },
+    loadMore() {
+      console.log('到底了')
+      this.loading = true
+      setTimeout(() => {
+        // let last = this.list[this.list.length - 1]
+        // for (let i = 1; i <= 10; i++) {
+        //   this.list.push(last + i)
+        // }
+        this.loading = false
+      }, 2500)
     }
   }
 }
