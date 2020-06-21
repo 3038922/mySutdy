@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="data in $store.state.cominglist" :key="data.filmId">
+      <li v-for="data in $store.getters.cominglistGetter" :key="data.filmId">
         <img :src="data.poster" alt="" />
         <h3>{{ data.name }}</h3>
         <p>导演:{{ data.director }}</p>

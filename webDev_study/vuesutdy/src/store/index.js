@@ -8,6 +8,15 @@ export default new Vuex.Store({
     isTabbarShow: true, // 自定义的共享状态
     cominglist: [] // 缓存用的吧
   },
+  getters: {
+    /**
+     * 使用这个函数看 comingsoon.vue
+     * @param {*} state 必须用这个传cominglist
+     */
+    cominglistGetter(state) {
+      return state.cominglist.filter((item, index) => index < 3) // 仅取出返回数组的前三个
+    }
+  },
   mutations: {
     // 为了更好的监控 DEBUG
     test(state, data) {
@@ -27,7 +36,7 @@ export default new Vuex.Store({
           'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1592581289360498079989762"}',
           'X-Host': 'mall.film-ticket.film.list'
         }
-      }).then(res => {
+      }).then((res) => {
         console.log(res.data)
         // 传数据这样 comlist 就可以获得数据了
         store.commit('comingListMutation', res.data.data.films)
