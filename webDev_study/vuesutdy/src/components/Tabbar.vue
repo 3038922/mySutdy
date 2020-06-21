@@ -9,7 +9,7 @@
         电影
       </router-link>
       <router-link to="/center" tag="li" activeClass="myactive">电视剧</router-link>
-      <router-link to="/cinema" tag="li" activeClass="myactive">音乐</router-link>
+      <router-link to="/city" tag="li" activeClass="myactive">音乐</router-link>
       <router-link to="/cinema" tag="li" activeClass="myactive">游戏</router-link>
       <router-link to="/cinema" tag="li" activeClass="myactive">软件</router-link>
       <router-link to="/cinema" tag="li" activeClass="myactive">其他</router-link>

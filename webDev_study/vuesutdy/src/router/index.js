@@ -9,6 +9,7 @@ import Cinema from '@/views/cinema'
 import Center from '@/views/center'
 import Detail from '@/views/detail'
 import Login from '@/views/login'
+import City from '@/views/city'
 Vue.use(Router)
 
 const router = new Router({
@@ -52,6 +53,10 @@ const router = new Router({
       path: '/center',
       alias: '/my',
       component: Center
+    },
+    {
+      path: '/city',
+      component: City
     },
     // 如果都不匹配 重定向
     {

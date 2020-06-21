@@ -8,32 +8,11 @@
       <el-button type="warning">警告按钮</el-button>
       <el-button type="danger">危险按钮</el-button>
     </el-row>
-    <el-radio-group v-model="radio">
-      <el-radio :label="1">vue</el-radio>
-      <el-radio :label="2">c</el-radio>
-      <el-radio :label="3">python</el-radio>
-    </el-radio-group>
-    <p><el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949"></el-switch>开关</p>
-    <el-alert title="成功提示的文案" type="success" effect="dark"> </el-alert>
-    <el-alert title="消息提示的文案" type="info" effect="dark"> </el-alert>
-    <el-alert title="警告提示的文案" type="warning" effect="dark"> </el-alert>
-    <el-alert title="错误提示的文案" type="error" effect="dark"> </el-alert>
-
-    <!-- 弹框 -->
-    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
-
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <span>这是一段信息</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
-
-    <!-- mint-ui -->
-    <mt-button type="default">default</mt-button>
-    <mt-button type="primary">primary</mt-button>
-    <mt-button type="danger">danger</mt-button>
+    <mt-swipe :auto="4000">
+      <mt-swipe-item>1</mt-swipe-item>
+      <mt-swipe-item>2</mt-swipe-item>
+      <mt-swipe-item>3</mt-swipe-item>
+    </mt-swipe>
   </div>
 </template>
 <script>
@@ -53,10 +32,10 @@ export default {
   methods: {
     handleClose(done) {
       this.$confirm('确认关闭？')
-        .then((_) => {
+        .then(_ => {
           done()
         })
-        .catch((_) => {})
+        .catch(_ => {})
     }
   },
   // 触发时间要早
@@ -70,3 +49,9 @@ export default {
   }
 }
 </script>
+<style>
+.mint-swipe {
+  height: 200px;
+  background: coral;
+}
+</style>

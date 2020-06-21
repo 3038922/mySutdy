@@ -1,7 +1,10 @@
 <template>
   <div v-if="datalist" class="cinema">
     <ul>
-      <li v-for="data in datalist" :key="data.cinemaId">{{ data.name }}---{{ data.address }}</li>
+      <li v-for="data in datalist" :key="data.cinemaId">
+        {{ data.name }}
+        <p style="font-size: 12px;">{{ data.address }}</p>
+      </li>
     </ul>
   </div>
 </template>
@@ -18,8 +21,9 @@ export default {
     }
   },
   mounted() {
+    var id = localStorage.getItem('cityId')
     axios({
-      url: 'https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=6622498',
+      url: `https://m.maizuo.com/gateway?cityId=${id}&ticketFlag=1&k=6622498`,
       headers: {
         'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1592638718370406569541637","bc":"110100"}',
         'X-Host': 'mall.film-ticket.cinema.list'
