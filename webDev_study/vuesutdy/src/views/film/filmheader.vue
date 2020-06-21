@@ -17,6 +17,7 @@ ul {
     line-height: 40px;
     text-align: center;
     background: white;
+    color: black;
   }
 }
 .active {
