@@ -18,7 +18,8 @@
  */
 import Vue from 'vue'
 import Swiper from '@/views/detail/detailswiper'
-Vue.filter('filterPath', res => {
+import { TABBAR_MUTATION } from '@/type'
+Vue.filter('filterPath', (res) => {
   return res.replace('w.h', '256.360')
 })
 export default {
@@ -34,11 +35,11 @@ export default {
   },
   // 加载前
   beforeMount() {
-    this.$store.commit('test', false)
+    this.$store.commit(TABBAR_MUTATION, false)
   },
   // 销毁后
   beforeDestroy() {
-    this.$store.commit('test', true)
+    this.$store.commit(TABBAR_MUTATION, true)
   },
   mounted() {
     // 这里拿到了电影的IP 其实应该去后端根据ID 发送请求 拿到详细信息.

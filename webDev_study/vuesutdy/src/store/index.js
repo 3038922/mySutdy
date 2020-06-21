@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { TABBAR_MUTATION } from '@/type'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,7 +20,7 @@ export default new Vuex.Store({
   },
   mutations: {
     // 为了更好的监控 DEBUG
-    test(state, data) {
+    [TABBAR_MUTATION](state, data) {
       state.isTabbarShow = data
       console.log('I am test', data)
     },
