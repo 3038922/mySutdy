@@ -8,5 +8,8 @@
     <p>
       hello,{{name}}
     </p>
+    {% for it in users %}
+        <li>{{it.username}}</li>
+    {% endfor %}
   </body>
 </html>
