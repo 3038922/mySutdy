@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 添加新的路由记录
     path('sales/', include('sales.urls')),
-    path("", views.index, name="index"),
+    path('', include('App.urls')),
 ]

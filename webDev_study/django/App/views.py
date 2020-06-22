@@ -4,5 +4,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def index(request):
-    return HttpResponse("hello wrold")
+def home(request):
+    return render(request, "index.html", context={"title": "Django", "name": "guguji"})
