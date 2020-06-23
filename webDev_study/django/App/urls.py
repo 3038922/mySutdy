@@ -17,5 +17,9 @@ urlpatterns = [
     # 正则写法 re_path 和path最大的区别就是政策模式串 手机号码匹配 写不出来只能写成匹配8个数字
     re_path(r'^phone/(\d{11})/$', views.getPhone, name='phone'),
     # 命名组 带参数的 参数必须叫tel
-    re_path(r'^tel/(?P<tel>\d{11})/$', views.getTel, name='tel')
+    re_path(r'^tel/(?P<tel>\d{11})/$', views.getTel, name='tel'),
+    # 响应对象
+    path('response/', views.handleResponse, name='response'),
+    # 重定向
+    path('red/', views.handleRedirect, name='response')
 ]
