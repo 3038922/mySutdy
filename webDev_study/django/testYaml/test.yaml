@@ -1,0 +1,12 @@
+var:
+  host: http://10.195.106.43
+  port: 8000
+  rule: 3
+filed:
+  header:
+    Content-Type: text/html
+    Keep-Alive: 100
+    method: post
+  data:
+    username: 3038922
+    age: [12, 31]
