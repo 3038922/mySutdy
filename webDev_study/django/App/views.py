@@ -23,3 +23,15 @@ def listuser(request, name):
 
 def access(request, path):
     return HttpResponse(path)
+
+
+def getPhone(request, phone):
+    return HttpResponse(phone)
+
+
+def getTel(request, tel):
+    return HttpResponse(tel)
+
+
+def pathString(request, name):
+    return HttpResponse(name)
