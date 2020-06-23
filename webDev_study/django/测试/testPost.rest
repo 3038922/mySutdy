@@ -1,6 +1,7 @@
-POST http://10.195.106.43:8000/tel/15905706493/ HTTP/1.1
-content-type: application/x-www-form-urlencoded
-//这里必须有空行
+POST http://127.0.0.1:8000/app02/ajax HTTP/1.1
+content-type: application/json
 
-username=3038922&age=26&age=32
-
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}

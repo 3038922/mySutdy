@@ -24,4 +24,17 @@ from App.models import Users
 
 # 使用模板引擎
 def index(request):
-    return render(request, "templates/index.html", context=locals())
+    # 这个 渲染一次加载一次
+    return render(request, "index.html", context=locals())
+
+
+def handleAjax(request):
+    if request.is_ajax():
+        print("ajax")
+        JsonResponse({'code': 0, 'msg': '登录成功'})
+    else:
+        print('not ajax')
+    return JsonResponse({'name': 'tom', 'age': 20})
+
+
+# loader 加载一次 然后进行多次渲染

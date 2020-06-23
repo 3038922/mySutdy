@@ -62,7 +62,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         #'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板目录
         'DIRS': [],
-        'APP_DIRS': True,
+        'APP_DIRS': True,  #是否在应用下放模板引擎
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
