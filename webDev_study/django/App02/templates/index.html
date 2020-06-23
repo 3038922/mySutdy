@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <p>
+      hello,{{name}}
+    </p>
+    {% for it in users %}
+        <li>{{it.username}}</li>
+    {% endfor %}
+  </body>
+</html>

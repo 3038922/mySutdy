@@ -21,4 +21,5 @@ urlpatterns = [
     # 添加新的路由记录
     path('sales/', include('sales.urls')),
     path('', include('App.urls')),
+    path('app02/', include('App02.urls')),
 ]
