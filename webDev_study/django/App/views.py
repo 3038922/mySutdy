@@ -2,6 +2,7 @@ from django.shortcuts import render
 # 导入 HttpResponse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse  # 反向代理
 # Create your views here.
 from App.models import Users
 
@@ -91,4 +92,17 @@ def handleRedirect(request):
     # 重定向到指定路由
     # return HttpResponseRedirect('/admin/')  # 重定向到首页
     # 快捷方式 等价于上面
-    return redirect('/admin/')
+    # return redirect('/admin/')
+    # 也可以跳转百度
+    # return redirect('https://www.baidu.com/')
+
+    # 这个就是反向路由 由应用命令名空间:name来确定路由
+    print(reverse('App:home'))  # 不带参数
+    # 如果参数有名字 必须使用kwargs传参 如果没名字 比如正则 使用 args
+    print(reverse('App:show', kwargs={'name': "chen", 'age': 20}))  # 带参数
+    print(reverse('App:phone', args=('15905706493', )))  # 带参数 后面加个, 就正常了??
+
+    return redirect(reverse('App:home'))
+
+
+#反向定位:由应用的命名空间:name来确定路由

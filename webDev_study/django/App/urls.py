@@ -2,6 +2,7 @@ from django.urls import path
 from django.urls import re_path
 from App import views
 # 路由列表 名称就叫 urlpatterns
+app_name = "App"  #应用的名空间 必须使用app_name 这个变量名字
 urlpatterns = [
     # 不能/ 开头 path name 是命名路由的 跟路由无关
     path('home/', views.home, name='home'),

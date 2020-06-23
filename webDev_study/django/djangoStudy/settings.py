@@ -60,7 +60,7 @@ ROOT_URLCONF = 'djangoStudy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #  'DIRS': [os.path.join(BASE_DIR, 'templates')], # 模板目录
+        #'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板目录
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
