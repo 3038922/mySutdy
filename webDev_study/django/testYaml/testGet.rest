@@ -1,0 +1,7 @@
+GET http://10.195.106.43:8000/phone/15905706493/ 
+content-type: application/x-www-form-urlencoded
+//这里必须有空行
+
+username=3038922&age=26&age=32
+
+
