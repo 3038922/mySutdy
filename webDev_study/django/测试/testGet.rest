@@ -1,4 +1,4 @@
-GET http://10.195.106.43:8000/phone/15905706493/ 
+GET http://127.0.0.1:8000/show/asdf/28/
 content-type: application/x-www-form-urlencoded
 //这里必须有空行
 

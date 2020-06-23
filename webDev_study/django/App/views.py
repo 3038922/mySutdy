@@ -1,24 +1,31 @@
 from django.shortcuts import render
 # 导入 HttpResponse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.shortcuts import redirect
 # Create your views here.
 from App.models import Users
-from django.shortcuts import redirect
 
 
 def home(request):
     # 查询数据库
     users = Users.objects.all()
-    return render(request, "index.html", context={"title": "Django", "name": "挂机", "users": users})
+    return render(request,
+                  "index.html",
+                  context={
+                      "title": "Django",
+                      "name": "挂机",
+                      "users": users
+                  })
+
 
 # 视图函数第一个参数就是请求对象 由django传递
 # 视图函数的作用 接受请求参数 调用模型模板 生成HTML字符串或者返回JSON数据  返回给客户端
 # 至少知道GET POST FILES怎么获取
 
 
-def show(request, age):
+def show(request, name, age):
     print(type(age))
-    return HttpResponse(str(age))
+    return HttpResponse(name + ':' + str(age))
 
 
 def listuser(request, name):
@@ -28,6 +35,7 @@ def listuser(request, name):
 
 def access(request, path):
     return HttpResponse(path)
+
 
 # GET请求测试
 

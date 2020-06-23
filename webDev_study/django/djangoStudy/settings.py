@@ -12,11 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # 配置项目根目录路径
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -30,7 +28,6 @@ SECRET_KEY = ')$7gfv)^+0^sohss!&wels8dm32^v%q$ewhd-xt(1ncu1r!vuf'
 DEBUG = True
 # 允许的主机列表
 ALLOWED_HOSTS = ['localhost', '192.168.31.10', '10.195.106.43', '127.0.0.1']
-
 
 # Application definition
 # 安装应用
@@ -63,6 +60,7 @@ ROOT_URLCONF = 'djangoStudy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        #  'DIRS': [os.path.join(BASE_DIR, 'templates')], # 模板目录
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,7 +76,6 @@ TEMPLATES = [
 # 项目入口
 WSGI_APPLICATION = 'djangoStudy.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 # 数据库配置
@@ -91,7 +88,7 @@ WSGI_APPLICATION = 'djangoStudy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '10.195.106.43',
         'PORT': '3306',
         'USER': 'djangoStudy',
         'PASSWORD': 'protoss',
@@ -109,25 +106,28 @@ DATABASES = {
 # 验证
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 # 语言配置
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -136,7 +136,6 @@ USE_I18N = True
 USE_L10N = True
 # 是否使用国际标准时间 不使用 不改数据库时间是错的
 USE_TZ = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
