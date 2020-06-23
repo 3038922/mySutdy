@@ -19,3 +19,7 @@ def show(request, age):
 def listuser(request, name):
     print(name, type(name))
     return HttpResponse(name)
+
+
+def access(request, path):
+    return HttpResponse(path)
