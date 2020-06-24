@@ -1,127 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>修改</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <style>
-        #alert_info {
-            text-align: center;
-            display: none;
-        }
+      #alert_info {
+        text-align: center;
+        display: none;
+      }
     </style>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script>
-        function valueByName(search, name) {
-            var start = search.indexOf(name + "=");
-            if (start == -1)
-                return null;
-            else {
-                var end = search.indexOf("&", start);
-                if (end == -1)
-                    end = search.length;
-                //提取出要的键值对
-                var str = search.substring(start, end);
-                var arr = str.split("=");
-                return arr[1];
-            }
+      function valueByName(search, name) {
+        var start = search.indexOf(name + '=')
+        if (start == -1) return null
+        else {
+          var end = search.indexOf('&', start)
+          if (end == -1) end = search.length
+          //提取出要的键值对
+          var str = search.substring(start, end)
+          var arr = str.split('=')
+          return arr[1]
         }
+      }
     </script>
     <script>
-        //通过ajax 下载数据
-        window.onload = function () {
-            //填充表单数据
-            //根据ID拿到数据
-            var id = valueByName(location.search, "id");
-            var oAlert = document.getElementById("alert_info");
-            var aInuputs = document.getElementsByTagName("input");
-            //发送给后台 
-            $.post({
-                url: "modify.php",
-                data: {
-                    id: id,
-                },
-                success: function (result) {
-                    var obj = JSON.parse(result);
+      //通过ajax 下载数据
+      window.onload = function () {
+        //填充表单数据
+        //根据ID拿到数据
+        var id = valueByName(location.search, 'id')
+        var oAlert = document.getElementById('alert_info')
+        var aInuputs = document.getElementsByTagName('input')
+        //发送给后台
+        $.post({
+          url: 'modify.php',
+          data: {
+            id: id
+          },
+          success: function (result) {
+            var obj = JSON.parse(result)
 
-                    if (!obj.code) {
-                        var row = JSON.parse(obj.message);//二次解析
-                        aInuputs[0].value = row.username;
-                        aInuputs[1].value = row.password;
-                        aInuputs[2].value = row.id;
-                    }
-                    else {
-                        oAlert.style.display = "inline"
-                        oAlert.className = "alert alert-danger";
-                        oAlert.innerHTML = obj.message;
-                    }
-                },
-                error: function (msg) {
-                    alert(msg);
-                }
-            })
-            var oConfrm = document.getElementById("confrm");
-            var oCancel = document.getElementById("cancel");
-            oCancel.onclick = function () {
-                location.href = "userlist.html";
+            if (!obj.code) {
+              var row = JSON.parse(obj.message) //二次解析
+              aInuputs[0].value = row.username
+              aInuputs[1].value = row.password
+              aInuputs[2].value = row.id
+            } else {
+              oAlert.style.display = 'inline'
+              oAlert.className = 'alert alert-danger'
+              oAlert.innerHTML = obj.message
             }
-            oConfrm.onclick = function () {
-                $.post({
-                    url: "submit.php",
-                    data: {
-                        username: aInuputs[0].value,
-                        password: aInuputs[1].value,
-                        id: aInuputs[2].value,
-                    },
-                    success: function (result) {
-                        var obj = JSON.parse(result);
-                        if (!obj.code) {
-                            oAlert.style.display = "inline"
-                            oAlert.className = "alert alert-success";
-                        }
-                        else {
-                            oAlert.style.display = "inline"
-                            oAlert.className = "alert alert-danger";
-                        }
-                        oAlert.innerHTML = obj.message;
-                    },
-                    error: function (msg) {
-                        alert(msg);
-                    }
-                })
+          },
+          error: function (msg) {
+            alert(msg)
+          }
+        })
+        var oConfrm = document.getElementById('confrm')
+        var oCancel = document.getElementById('cancel')
+        oCancel.onclick = function () {
+          location.href = 'userlist.html'
+        }
+        oConfrm.onclick = function () {
+          $.post({
+            url: 'submit.php',
+            data: {
+              username: aInuputs[0].value,
+              password: aInuputs[1].value,
+              id: aInuputs[2].value
+            },
+            success: function (result) {
+              var obj = JSON.parse(result)
+              if (!obj.code) {
+                oAlert.style.display = 'inline'
+                oAlert.className = 'alert alert-success'
+              } else {
+                oAlert.style.display = 'inline'
+                oAlert.className = 'alert alert-danger'
+              }
+              oAlert.innerHTML = obj.message
+            },
+            error: function (msg) {
+              alert(msg)
             }
-        };
+          })
+        }
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="jumbotron">
-            <h2 class="display-4">修改</h2>
-            <br>
-            <form>
-                <div class="form-row align-items-center">
-                    <div class="col-auto">
-                        <input type="text" class="form-control" id="username" placeholder="用户名">
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" id="password" placeholder="密码">
-                    </div>
-                    <div class="col-auto">
-                        <input type="hidden" class="form-control">
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-primary " id="confrm">确定</button>
-                        <button type="button" class="btn btn-primary " id="cancel">取消</button>
-                    </div>
-                </div>
-                <div id="alert_info" class="alert alert-danger"></div>
-            </form>
-        </div>
-
+      <div class="jumbotron">
+        <h2 class="display-4">修改</h2>
+        <br />
+        <form>
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <input type="text" class="form-control" id="username" placeholder="用户名" />
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" id="password" placeholder="密码" />
+            </div>
+            <div class="col-auto">
+              <input type="hidden" class="form-control" />
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-primary" id="confrm">确定</button>
+              <button type="button" class="btn btn-primary" id="cancel">取消</button>
+            </div>
+          </div>
+          <div id="alert_info" class="alert alert-danger"></div>
+        </form>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

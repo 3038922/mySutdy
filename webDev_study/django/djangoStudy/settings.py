@@ -47,11 +47,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 接口测试临时关掉
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 接口测试临时关掉 中间件
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 自己添加的中间件
+    'utils.csrfTokenMiddleware.CsrfTokenMiddleware'
 ]
 # 根路由
 ROOT_URLCONF = 'djangoStudy.urls'

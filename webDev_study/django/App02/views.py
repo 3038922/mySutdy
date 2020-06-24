@@ -29,6 +29,7 @@ def index(request):
 
 
 def handleAjax(request):
+
     if request.is_ajax():
         print("ajax")
         JsonResponse({'code': 0, 'msg': '登录成功'})
