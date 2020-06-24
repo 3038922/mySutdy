@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>登录</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
     <style>
       #alert_info {
         text-align: center;
         display: none;
       }
     </style>
-    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
     <script>
       //通过ajax 下载数据
       window.onload = function () {
@@ -23,7 +23,8 @@
           aInuputs[1].value = $('input[name="csrfmiddlewaretoken"]').val()
           console.log(aInuputs[1].value)
           $.ajax({
-            url: 'http://127.0.0.1:8000/app02/ajax/',
+            // url: 'App02:ajax',
+            url: '/app02/ajax/',
             method: 'post',
             data: {
               user: aInuputs[0].value,

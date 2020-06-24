@@ -29,13 +29,13 @@ def index(request):
 
 
 def handleAjax(request):
-
     if request.is_ajax():
         print("ajax")
         JsonResponse({'code': 0, 'msg': '登录成功'})
     else:
         print('not ajax')
-    return JsonResponse({'name': 'tom', 'age': 20})
+    return render(request, "index.html")
+    # return JsonResponse({'name': 'tom', 'age': 20})
 
 
 # loader 加载一次 然后进行多次渲染
