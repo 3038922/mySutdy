@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # 配置项目根目录路径
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print("根目录路径:", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -53,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 自己添加的中间件
-    'utils.csrfTokenMiddleware.CsrfTokenMiddleware'
+    # 'utils.csrfTokenMiddleware.CsrfTokenMiddleware'
 ]
 # 根路由
 ROOT_URLCONF = 'djangoStudy.urls'
@@ -62,8 +63,8 @@ ROOT_URLCONF = 'djangoStudy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板目录
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板目录
+        #'DIRS': [],
         'APP_DIRS': True,  #是否在应用下放模板引擎
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +76,7 @@ TEMPLATES = [
         },
     },
 ]
+print('templates目录:', TEMPLATES[0]["DIRS"])
 # 项目入口
 WSGI_APPLICATION = 'djangoStudy.wsgi.application'
 
@@ -143,3 +145,5 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 # 静态资源请求路径
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+print("静态目录:", STATICFILES_DIRS)
