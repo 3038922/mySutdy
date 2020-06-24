@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 加入commdapp的自定义数据库表
     'common.apps.CommonConfig',
-    'App'  # 把自己的应用进行安装
+    'App',  # 把自己的应用进行安装
+    'mysql'
 ]
 
 MIDDLEWARE = [

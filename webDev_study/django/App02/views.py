@@ -1,5 +1,6 @@
 # 导入 HttpResponse
 from django.shortcuts import redirect, render
+from django.http import JsonResponse
 
 # from django.urls import reverse  # 反向代理
 # from django.views.decorators.csrf import csrf_exempt
@@ -45,6 +46,8 @@ def register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         print("用户名:", username, "密码:", password)
+        # 返回ajax请求 json
+        return JsonResponse({'code': 1, 'message': '登录成功'})
     else:
         print("不是AJAX POST请求")
-    return render(request, "index.html")
+        return render(request, "index.html")
