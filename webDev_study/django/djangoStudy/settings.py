@@ -65,8 +65,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板目录
-        #'DIRS': [],
-        'APP_DIRS': True,  #是否在应用下放模板引擎
+        # 'DIRS': [],
+        'APP_DIRS': True,  # 是否在应用下放模板引擎
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'djangoStudy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '10.195.106.43',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'djangoStudy',
         'PASSWORD': 'protoss',
