@@ -20,15 +20,14 @@
         var oAlert = document.getElementById('alert_info')
         oConfrm.onclick = function () {
           oAlert.style.display = 'inline'
-          aInuputs[1].value = $('input[name="csrfmiddlewaretoken"]').val()
-          console.log(aInuputs[1].value)
           $.ajax({
             // url: 'App02:ajax',
-            url: '/app02/ajax/',
+            url: '/app02/register/',
             method: 'post',
             data: {
-              user: aInuputs[0].value,
-              csrfmiddlewaretoken: aInuputs[1].value //必须有中间件的检测
+              csrfmiddlewaretoken: aInuputs[0].value,
+              username: aInuputs[1].value,
+              password: aInuputs[2].value //必须有中间件的检测
             },
             success: function (result) {
               var obj = JSON.parse(result)
@@ -58,6 +57,7 @@
         <br />
         <div class="form-group">
           <form>
+            {% csrf_token %}
             <div class="form-col">
               <div class="form-group">
                 <label for="username">用户名</label>
