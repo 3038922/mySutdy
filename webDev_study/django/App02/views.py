@@ -30,7 +30,7 @@ def index(request):
 
 def handleAjax(request):
     if request.is_ajax():
-        print("ajax")
+        print("ajax请求", request)
         JsonResponse({'code': 0, 'msg': '登录成功'})
     else:
         print('not ajax')
