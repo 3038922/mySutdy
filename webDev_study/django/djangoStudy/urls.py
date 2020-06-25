@@ -22,5 +22,4 @@ urlpatterns = [
     path('sales/', include('sales.urls')),
     path('', include('App.urls')),
     path('app02/', include('App02.urls')),
-    path('mysql/', include('mysql.urls')),
 ]

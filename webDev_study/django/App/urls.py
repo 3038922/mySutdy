@@ -1,6 +1,7 @@
-from django.urls import path
-from django.urls import re_path
+from django.urls import path, re_path
+
 from App import views
+
 # 路由列表 名称就叫 urlpatterns
 app_name = "App"  #应用的名空间 必须使用app_name 这个变量名字
 urlpatterns = [
@@ -22,5 +23,11 @@ urlpatterns = [
     # 响应对象
     path('response/', views.handleResponse, name='response'),
     # 重定向
-    path('red/', views.handleRedirect, name='response')
+    path('red/', views.handleRedirect, name='response'),
+    # 增
+    path('add/', views.handleAdd, name='add'),
+    # 删
+    path('delete/', views.handleDelete, name='delete'),
+    # 改
+    path('modify/', views.handleModify, name='modify')
 ]

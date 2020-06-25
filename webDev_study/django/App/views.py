@@ -4,12 +4,12 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse  # 反向代理
 # Create your views here.
-from App.models import Users
+from App.models import TestMysql
 
 
 def home(request):
     # 查询数据库
-    users = Users.objects.all()
+    users = TestMysql.objects.all()
     return render(request,
                   "index.html",
                   context={
@@ -106,3 +106,21 @@ def handleRedirect(request):
 
 
 #反向定位:由应用的命名空间:name来确定路由
+
+
+#增
+def handleAdd(request):
+    user = TestMysql(username='tom', password='123')
+    # 保存
+    user.save()
+    return HttpResponse('增')
+
+
+#删
+def handleDelete(request):
+    return HttpResponse('删')
+
+
+#改
+def handleModify(request):
+    return HttpResponse('改')

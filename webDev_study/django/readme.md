@@ -16,6 +16,7 @@
 ### lesson4
 
 - 创建 django 数据库所需要的一些表 `python3 ./manage.py migrate`
+- 强制同步数据库表 `python3 manage.py migrate App --fake`
 
 ### lesson5
 
