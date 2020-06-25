@@ -1,8 +1,11 @@
-from django.shortcuts import render
+import json
+from random import randint  # 使用randint需要加上这句
+from django.core import serializers  #将查询结果转为JSON
 # 导入 HttpResponse
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.shortcuts import redirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse  # 反向代理
+
 # Create your views here.
 from App.models import TestMysql
 
@@ -110,17 +113,77 @@ def handleRedirect(request):
 
 #增
 def handleAdd(request):
-    user = TestMysql(username='tom', password='123')
-    # 保存
-    user.save()
+    # user = TestMysql(username='admin121', password='protoss')
+    # # 保存
+    # user.save()
+
+    # #便利方法 不需要save() 也可以创建循环来保存 效率低
+    # user = {'username': 'adminaa22a', 'password': 'protoss'}
+    # TestMysql.objects.create(**user)
+
+    # 批量创建
+    # TestMysql.objects.bulk_create([
+    #     TestMysql(username='test1', password='protoss'),
+    #     TestMysql(username='test2', password='protoss'),
+    # ])
+    # 模拟数据批量创建
+    first = ["赵", "钱", "孙", "李", "周", "吴", "王"]
+    lastname = ['三', '春花', '翠花', '卫国', '二狗']
+    users = []
+    for name in range(100):
+        username = first[randint(0, 6)] + lastname[randint(0, 4)] + str(
+            randint(0, 10000))
+        users.append(
+            TestMysql(username=username, password=str(randint(11111, 99999))))
+    TestMysql.objects.bulk_create(users)
     return HttpResponse('增')
 
 
 #删
 def handleDelete(request):
-    return HttpResponse('删')
+    # 删除一条记录
+    # try:
+    #     user = TestMysql.objects.get(pk=1)  #pk 代表 uid
+    #     print(user, type(user))
+    #     if user:  #如果存在就删除
+    #         user.delete()
+    #     return HttpResponse('删')
+    # except Exception as e:
+    #     print(e)
+    #     return HttpResponse('删除出错')
+    # 删除多条记录
+    users = TestMysql.objects.filter(uid__gte=5)  # 这表示UID大于等于5
+    print(users)
+    users.delete()
+    return HttpResponse('批量删除')
+    # 逻辑删除 就是假删除 数据库里不真删掉 大概就是回收站 增加一个字段 来判断
 
 
 #改
 def handleModify(request):
+    #先查询
+    user = TestMysql.objects.get(pk=1)  #pk 代表 uid
+    #再修改
+    user.password = "3333333"
+    # 保存
+    user.save()
     return HttpResponse('改')
+
+
+# 查询 查询的返回类型都是QuerySet
+def handleFindData(request):
+    # all 过滤器 查询所有数据
+    # data = TestMysql.objects.all()
+    # filler 过滤器
+    #data = TestMysql.objects.filter(uid=10)  #过滤uid等于10的
+    # data = TestMysql.objects.filter(uid__gt=10)  #过滤uid大于10的
+    # for it in data:
+    #     print(it.username)
+
+    # return HttpResponse(json.dumps(data))  #返回第一条结果
+
+    # 查询结果转JSON
+    data = {}
+    res = TestMysql.objects.filter(uid__gt=10)
+    data['result'] = json.loads(serializers.serialize('json', res))
+    return JsonResponse(data)

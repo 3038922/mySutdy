@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 
 from App import views
+from django.forms import model_to_dict
 
 # 路由列表 名称就叫 urlpatterns
 app_name = "App"  #应用的名空间 必须使用app_name 这个变量名字
@@ -29,5 +30,7 @@ urlpatterns = [
     # 删
     path('delete/', views.handleDelete, name='delete'),
     # 改
-    path('modify/', views.handleModify, name='modify')
+    path('modify/', views.handleModify, name='modify'),
+    # 查
+    path('find/', views.handleFindData, name='find')
 ]
