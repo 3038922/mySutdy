@@ -22,4 +22,6 @@ urlpatterns = [
     path('sales/', include('sales.urls')),
     path('', include('App.urls')),
     path('app02/', include('App02.urls')),
+    # 路由分发
+    path('api/', include('api.urls')),
 ]
