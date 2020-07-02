@@ -20,8 +20,14 @@
 
 ### lesson5
 
+- 更新数据库表 `python3 ./manage.py makemigrations`
+- 强制同步数据库表 `python3 manage.py migrate`
 - 告诉 django 去 common 目录里看看,并更新数据库表 `python3 ./manage.py makemigrations common`
 
 ### lesson6
 
 - 设置管理员账号密码 `python3 ./manage.py createsuperuser`
+
+### DRF 框架 前后端分离仅做后端使用
+
+- 安装框架 `pip3 install djangorestframework`

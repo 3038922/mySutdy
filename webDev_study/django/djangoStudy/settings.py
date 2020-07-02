@@ -33,12 +33,16 @@ ALLOWED_HOSTS = ['localhost', '192.168.31.10', '10.195.106.43', '127.0.0.1']
 # Application definition
 # 安装应用
 INSTALLED_APPS = [
+    # 系统的
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 第三方的
+    'rest_framework',
+    # 自己的
     # 加入commdapp的自定义数据库表
     'common.apps.CommonConfig',
     'App',  # 把自己的应用进行安装
@@ -50,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 接口测试临时关掉 中间件
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

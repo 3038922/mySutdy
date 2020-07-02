@@ -10,6 +10,7 @@ class Book(View):
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         if not pk:  # 群查
+            # 序列化过程
             bookList = []
             for it in models.Book.objects.all():
                 dic = {}
@@ -41,4 +42,37 @@ class Book(View):
                                 json_dumps_params={'ensure_ascii': False})
 
     def post(self, request, *args, **kwargs):
+        # 前台通过urlencoding 方式提交数据
+        try:
+            bookObj = models.Book.objects.create(**request.POST.dict())
+            if bookObj:
+                return JsonResponse(
+                    {
+                        'status': 0,
+                        'msg': 'ok',
+                        'results': bookObj
+                    },
+                    json_dumps_params={'ensure_ascii': False})
+        except:
+            return JsonResponse({
+                'status': 1,
+                'msg': '参数有误',
+            },
+                                json_dumps_params={'ensure_ascii': False})
+        return JsonResponse({
+            'status': 2,
+            'msg': '新增失败',
+        },
+                            json_dumps_params={'ensure_ascii': False})
+        print(request.body)
         return JsonResponse('post ok', safe=False)
+
+
+# drf框架的封装风格
+from rest_framework.views import APIView
+from rest_framework.response import Responses
+from rest_framework.request import Request
+from rest_framework.serializers import Serializer
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated  # 是否登录用户\
+from rest_framework.throttling import SimpleRateThrottle  # 频率

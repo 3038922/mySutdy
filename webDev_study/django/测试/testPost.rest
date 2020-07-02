@@ -1,7 +1,8 @@
-POST http://127.0.0.1:8000/app02/ajax HTTP/1.1
-content-type: application/json
+POST http://10.195.106.43:11112/api/books/ HTTP/1.1
 
+content-type: application/json
+#content-type: xxx-application/x-www-form-urlencoded
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "title": "咕咕鸡",
+    "price": "8.88"
 }
