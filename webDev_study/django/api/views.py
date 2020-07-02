@@ -2,6 +2,9 @@ from django.http import JsonResponse
 from django.views import View
 from . import models
 
+from rest_framework.views import APIView  # DRF 视图类
+from rest_framework.response import Response  # DRF 返回类
+
 
 # Create your views here.
 # 六大基础接口 获取一个 获取所有 增加一个 删除一个 整体更新一个 局部更新一个
@@ -69,10 +72,14 @@ class Book(View):
 
 
 # drf框架的封装风格
-from rest_framework.views import APIView
-from rest_framework.response import Responses
-from rest_framework.request import Request
-from rest_framework.serializers import Serializer
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated  # 是否登录用户\
-from rest_framework.throttling import SimpleRateThrottle  # 频率
+
+
+# from rest_framework.request import Request
+# from rest_framework.serializers import Serializer
+# from rest_framework.authentication import TokenAuthentication
+# from rest_framework.permissions import IsAuthenticated  # 是否登录用户
+# from rest_framework.throttling import SimpleRateThrottle  # 频率
+class Test(APIView):
+    # 自定解析类
+    def get(self, request, *args, **kwargs):
+        return Response('drf ok')
