@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 from django.views import View
-from . import models
-
-from rest_framework.views import APIView  # DRF 视图类
 from rest_framework.response import Response  # DRF 返回类
+from rest_framework.views import APIView  # DRF 视图类
+
+from . import models
 
 
 # Create your views here.
@@ -73,13 +73,23 @@ class Book(View):
 
 # drf框架的封装风格
 
-
 # from rest_framework.request import Request
 # from rest_framework.serializers import Serializer
 # from rest_framework.authentication import TokenAuthentication
 # from rest_framework.permissions import IsAuthenticated  # 是否登录用户
 # from rest_framework.throttling import SimpleRateThrottle  # 频率
+# drf 对原生request做了二次封装 requestl._request 就是原生request
+# 原生request 对象和睡醒和方法都可以被drf兼容
+
+
 class Test(APIView):
     # 自定解析类
     def get(self, request, *args, **kwargs):
-        return Response('drf ok')
+        print(request.GET)  # 兼容
+        print(request.query_params)  # 拓展
+        return Response('drf get ok')
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)  # 兼容
+        print(request.data)  # 拓展 兼容性最强
+        return Response('drf post ok')
