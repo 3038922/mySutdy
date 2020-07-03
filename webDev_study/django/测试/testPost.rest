@@ -1,7 +1,7 @@
-POST http://127.0.0.1:11112/api/test/ HTTP/1.1
+POST http://127.0.0.1:11112/api/books/ HTTP/1.1
+Content-Type: application/json
+# 上面两行必须写一起
 
-content-type: application/json
-#content-type: xxx-application/x-www-form-urlencoded
 {
     "title": "咕咕鸡",
     "price": "8.88"

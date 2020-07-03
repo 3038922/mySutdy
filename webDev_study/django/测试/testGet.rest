@@ -1,4 +1,4 @@
-GET http://10.195.106.43:11112/api/test/
+GET http://10.195.106.43:11112/api/books/
 content-type: application/x-www-form-urlencoded
 //这里必须有空行
 
