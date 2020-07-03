@@ -93,3 +93,14 @@ class Test(APIView):
         print(request.POST)  # 兼容
         print(request.data)  # 拓展 兼容性最强
         return Response('drf post ok')
+
+
+# 再setting.py中配置REST_FREAMWORK 完成的是全局配置 所有接口统一处理
+# 如果只有部分接口特殊化 可以完成 局部配置
+class Test2(APIView):
+    # 自定解析类
+    def get(self, request, *args, **kwargs):
+        return Response('drf 2get ok')
+
+    def post(self, request, *args, **kwargs):
+        return Response('drf 2post ok')

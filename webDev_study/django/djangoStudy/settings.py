@@ -152,3 +152,12 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 print("静态目录:", STATICFILES_DIRS)
+
+# 自定义DRF配置 全局配置
+# drf提供的渲染类
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': [
+#         'rest_framework.renderers.JSONRenderer',
+#         'rest_framework.renderers.TemplateHTMLRenderer',
+#     ]
+# }
