@@ -156,14 +156,17 @@ print("静态目录:", STATICFILES_DIRS)
 # 自定义DRF配置 全局配置
 # drf提供的渲染类
 REST_FRAMEWORK = {
-    # 'DEFAULT_RENDERER_CLASSES': [
-    #     'rest_framework.renderers.JSONRenderer',
-    #     'rest_framework.renderers.TemplateHTMLRenderer',
-    # ]
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
     # 全局解析配置
     'DEFAULT_PARSER_CALSSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
-    ]
+    ],
+    # 全局配置异常模块
+    'Exception_HANDLE':
+    'api.exception.exception_handler',
 }
