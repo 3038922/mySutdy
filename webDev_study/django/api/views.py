@@ -1,9 +1,21 @@
-from django.views import View
 from rest_framework.response import Response  # DRF 返回类
 from rest_framework.views import APIView  # DRF 视图类
 from rest_framework.parsers import JSONParser  #DRF 导入JSON解析
-from django.http import JsonResponse
-from . import models
+
+ORDER_DICT = {
+    1: {
+        'name': '媳妇',
+        'age': 18,
+        'gender': '男',
+        'content': '详细信息'
+    },
+    2: {
+        'name': '老狗',
+        'age': 8,
+        'gender': '女',
+        'content': '详细信息'
+    }
+}
 
 
 # 根据用户名生成MD5值
@@ -32,27 +44,47 @@ class Book(APIView):
 
 
 class AuthView(APIView):
+    """
+    用于用户登录认证
+    """
     def get(self, request, *args, **kwargs):
-        return JsonResponse('get ok')
+        return Response('get ok')
 
     def post(self, request, *args, **kwargs):
         ret = {'code': 1000, 'msg': None}
         try:
-            user = request.data.get('username')  #使用data 就可以解析json
-            pwd = request.data.get('password')
-            obj = models.UserInfo.filter(username=user, password=pwd).first()
-            print('POST请求DEBUG: ', user, ' ', pwd)
+            print('request.data:', request.data)
+            # user = request.data.get('username')  #使用data 就可以解析json
+            # pwd = request.data.get('password')
+            # obj = models.UserInfo.filter(username=user, password=pwd).first()
+            # print('POST请求DEBUG: ', user, ' ', pwd)
             # 为登录用户创建索引
-            token = md5(user)
-            # 存在就更新 不存在就创建 token
-            models.UserToken.objects.update_or_create(user=obj,
-                                                      defaults={'token': token})
-            # 给用户返回token
-            ret['token'] = token
+            # token = md5(user)
+            # # 存在就更新 不存在就创建 token
+            # models.UserToken.objects.update_or_create(user=obj,
+            #                                           defaults={'token': token})
+            # # 给用户返回token
+            # ret['token'] = token
         except Exception as e:
             ret['code'] = 1002
             ret['msg'] = '请求异常'
-        return JsonResponse(ret)
+        return Response(ret)
+
+
+class OrderView(APIView):
+    """
+    订单相关业务
+    """
+    def get(self, request, *args, **kwargs):
+        ret = {'code': 1000, 'msg': None, 'data': None}
+        try:
+            ret['data'] = ORDER_DICT
+        except Exception as e:
+            pass
+        return Response(ret)
+
+    def post(self, request, *args, **kwargs):
+        pass
 
 
 # Create your views here.
