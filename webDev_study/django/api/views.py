@@ -2,7 +2,18 @@ from django.views import View
 from rest_framework.response import Response  # DRF 返回类
 from rest_framework.views import APIView  # DRF 视图类
 from rest_framework.parsers import JSONParser  #DRF 导入JSON解析
+from django.http import JsonResponse
 from . import models
+
+
+# 根据用户名生成MD5值
+def md5(user):
+    import hashlib
+    import time
+    ctime = str(time.time())  # 把当前时间转为字符串
+    m = hashlib.md5(bytes(user, encoding='UTF-8'))  #第一层用户名MD5
+    m.update(bytes(ctime, encoding='UTF-8'))  #加入时间戳
+    return m.hexdigest()
 
 
 class Book(APIView):
@@ -18,6 +29,30 @@ class Book(APIView):
         # 数据包参数 有三种方式 form-data urlendcoding json
         print(request.data)
         return Response('post ok')
+
+
+class AuthView(APIView):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse('get ok')
+
+    def post(self, request, *args, **kwargs):
+        ret = {'code': 1000, 'msg': None}
+        try:
+            user = request.data.get('username')  #使用data 就可以解析json
+            pwd = request.data.get('password')
+            obj = models.UserInfo.filter(username=user, password=pwd).first()
+            print('POST请求DEBUG: ', user, ' ', pwd)
+            # 为登录用户创建索引
+            token = md5(user)
+            # 存在就更新 不存在就创建 token
+            models.UserToken.objects.update_or_create(user=obj,
+                                                      defaults={'token': token})
+            # 给用户返回token
+            ret['token'] = token
+        except Exception as e:
+            ret['code'] = 1002
+            ret['msg'] = '请求异常'
+        return JsonResponse(ret)
 
 
 # Create your views here.
