@@ -115,20 +115,16 @@ DATABASES = {
 # 验证
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -155,18 +151,22 @@ print("静态目录:", STATICFILES_DIRS)
 
 # 自定义DRF配置 全局配置
 # drf提供的渲染类
-# REST_FRAMEWORK = {
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework.renderers.JSONRenderer',
-#         'rest_framework.renderers.BrowsableAPIRenderer',
-#     ],
-#     # 全局解析配置
-#     'DEFAULT_PARSER_CALSSES': [
-#         'rest_framework.parsers.JSONParser',
-#         'rest_framework.parsers.FormParser',
-#         'rest_framework.parsers.MultiPartParser',
-#     ],
-#     # 全局配置异常模块
-#     'Exception_HANDLE':
-#     'api.exception.exception_handler',
-# }
+REST_FRAMEWORK = {
+    # 自定义认证 不用默认的
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'api.utils.auth.FirstAuthtication',
+    #     'api.utils.auth.Authtication',
+    # ]
+    # 'DEFAULT_RENDERER_CLASSES': [
+    #     'rest_framework.renderers.JSONRenderer',
+    #     'rest_framework.renderers.BrowsableAPIRenderer',
+    # ],
+    # # 全局解析配置
+    # 'DEFAULT_PARSER_CALSSES': [
+    #     'rest_framework.parsers.JSONParser',
+    #     'rest_framework.parsers.FormParser',
+    #     'rest_framework.parsers.MultiPartParser',
+    # ],
+    # # 全局配置异常模块
+    # 'Exception_HANDLE': 'api.exception.exception_handler',
+}

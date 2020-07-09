@@ -5,20 +5,7 @@ from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.request import Request
 from api import models
-ORDER_DICT = {
-    1: {
-        'name': '媳妇',
-        'age': 18,
-        'gender': '男',
-        'content': '详细信息'
-    },
-    2: {
-        'name': '老狗',
-        'age': 8,
-        'gender': '女',
-        'content': '详细信息'
-    }
-}
+ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
 # 根据用户名生成MD5值
@@ -58,42 +45,25 @@ class AuthView(APIView):
         try:
             user = request.data.get('username')  #使用data 就可以解析json
             pwd = request.data.get('password')
-            # obj = models.UserInfo.filter(username=user, password=pwd).first()
+            obj = models.UserInfo.objects.filter(username=user, password=pwd).first()
             print('POST请求DEBUG: ', user, ' ', pwd)
             #为登录用户创建索引
             token = md5(user)
             # 存在就更新 不存在就创建 token
-            # models.UserToken.objects.update_or_create(user=obj,
-            #                                           defaults={'token': token})
+            models.UserToken.objects.update_or_create(user=obj, defaults={'token': token})
             # 给用户返回token
             ret['token'] = token
         except Exception as e:
+            print("e:", e)
             ret['code'] = 1002
             ret['msg'] = '请求异常'
         return Response(ret)
-
-
-class Authtication(object):
-    def authenticate(self, request):
-        token = request._request.GET.get('token')
-        token_obj = models.UserToken.objects.filter(token=token).first
-        if not token_obj:
-            raise execeptions.AuthenticationFailed('用户验证失败')
-        # 在rest_framework内部会将整个两个字段复制给request 以供后续操作使用
-        return (token_obj.user, token_obj)
-
-    def authenticate_header(self, request):
-        pass
 
 
 class OrderView(APIView):
     """
     订单相关业务
     """
-    authentication_classes = [
-        Authtication,
-    ]
-
     def get(self, request, *args, **kwargs):
         ret = {'code': 1000, 'msg': None, 'data': None}
         try:
@@ -104,6 +74,14 @@ class OrderView(APIView):
 
     def post(self, request, *args, **kwargs):
         pass
+
+
+class UserInfoView(APIView):
+    """
+    订单相关业务
+    """
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('用户信息')
 
 
 # Create your views here.
