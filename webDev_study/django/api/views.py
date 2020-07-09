@@ -37,6 +37,8 @@ class AuthView(APIView):
     """
     用于用户登录认证
     """
+    authentication_classes = []  # 没登陆上不认证
+
     def get(self, request, *args, **kwargs):
         return Response('get ok')
 
@@ -65,6 +67,7 @@ class OrderView(APIView):
     订单相关业务
     """
     def get(self, request, *args, **kwargs):
+        self.dispatch
         ret = {'code': 1000, 'msg': None, 'data': None}
         try:
             ret['data'] = ORDER_DICT
@@ -81,7 +84,8 @@ class UserInfoView(APIView):
     订单相关业务
     """
     def get(self, request, *args, **kwargs):
-        return HttpResponse('用户信息')
+        print(request.user)
+        return Response('用户信息')
 
 
 # Create your views here.

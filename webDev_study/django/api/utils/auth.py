@@ -1,8 +1,12 @@
 from rest_framework import exceptions
 from api import models
+from rest_framework.authentication import BaseAuthentication  # rest_framework 里的写好的认证类
 
 
-class FirstAuthtication(object):
+class FirstAuthtication(BaseAuthentication):
+    """
+    最好继承rest_framework里的认证类
+    """
     def authenticate(self, request):
         pass
 
@@ -10,15 +14,14 @@ class FirstAuthtication(object):
         pass
 
 
-class Authtication(object):
+class Authtication(BaseAuthentication):
     def authenticate(self, request):
         token = request._request.GET.get('token')
-        print('obj_test:', models.UserToken.objects.filter(token=token).first)
-        token_obj = models.UserToken.objects.filter(token=token).first
+        token_obj = models.UserToken.objects.filter(token=token).first()
         if not token_obj:
-            raise execeptions.AuthenticationFailed('用户验证失败')
+            raise exceptions.AuthenticationFailed('用户验证失败')
         # 在rest_framework内部会将整个两个字段复制给request 以供后续操作使用
         return (token_obj.user, token_obj)
 
     def authenticate_header(self, request):
-        pass
+        return 'basic realm="api"'

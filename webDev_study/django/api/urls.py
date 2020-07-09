@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^books/(?P<pk>.*)/$', views.Book.as_view()),
     url(r'^v1/auth/$', views.AuthView.as_view()),
     url(r'^v1/order/$', views.OrderView.as_view()),
+    url(r'^v1/userinfo/$', views.UserInfoView.as_view()),
 ]
