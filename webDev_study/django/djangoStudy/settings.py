@@ -161,6 +161,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'api.utils.permission.SVIPMyPermission',
     ],
+    #自定义访问频率
+    'DEFAULT_THROTTLE_CLASSES': [
+        'api.utils.throttle.VisitThrottle',
+    ],
+    # 使用官方的访问频率控制
+    'DEFAULT_THROTTLE_RATES': {
+        'Luffy': '3/m'  # 每分钟访问3次
+    }
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     #     'rest_framework.renderers.BrowsableAPIRenderer',

@@ -1,4 +1,7 @@
 from rest_framework.permissions import BasePermission
+"""
+访问权限控制
+"""
 
 
 class SVIPMyPermission(BasePermission):

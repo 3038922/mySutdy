@@ -1,6 +1,9 @@
 from rest_framework import exceptions
 from api import models
 from rest_framework.authentication import BaseAuthentication  # rest_framework 里的写好的认证类
+"""
+访问TOKEN 验证
+"""
 
 
 class FirstAuthtication(BaseAuthentication):

@@ -39,11 +39,20 @@ class AuthView(APIView):
     用于用户登录认证
     """
     authentication_classes = []  # 没登陆上不认证
+    permission_classes = []  # 这个名字不能乱取
+
+    # throttle_classes = [
+    #     VisitThrottle,
+    # ]  # 访问频率控制
 
     def get(self, request, *args, **kwargs):
         return Response('get ok')
 
     def post(self, request, *args, **kwargs):
+        """
+        1 去request 去获取IP 
+        2 去做访问记录
+        """
         ret = {'code': 1000, 'msg': None}
         try:
             user = request.data.get('username')  #使用data 就可以解析json
