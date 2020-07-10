@@ -1,6 +1,10 @@
-class SVIPMyPermission(object):
+from rest_framework.permissions import BasePermission
+
+
+class SVIPMyPermission(BasePermission):
     """
     权限模块
+    注意继承 BasePermission
     """
     message = '必须是SVIP才能访问'
 
@@ -10,7 +14,7 @@ class SVIPMyPermission(object):
         return True
 
 
-class MyPermission1(object):
+class MyPermission1(BasePermission):
     """
     权限模块
     """
