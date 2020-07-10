@@ -5,6 +5,7 @@ from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.request import Request
 from api import models
+from api.utils.permission import MyPermission1  #单视图应用
 ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
@@ -64,9 +65,17 @@ class AuthView(APIView):
 
 class OrderView(APIView):
     """
-    订单相关业务
+    订单相关业务(只有SVIP用户有权限)
     """
+
+    # 权限控制 全局定义后默认都读全局的
+    # permission_classes = [
+    #     SVIPMyPermission,
+    # ]
+
     def get(self, request, *args, **kwargs):
+        # if request.user.user_type != 3:  # 权限控制
+        #     return Response('无权访问')
         self.dispatch
         ret = {'code': 1000, 'msg': None, 'data': None}
         try:
@@ -83,6 +92,11 @@ class UserInfoView(APIView):
     """
     订单相关业务
     """
+    # 权限控制
+    permission_classes = [
+        MyPermission1,
+    ]
+
     def get(self, request, *args, **kwargs):
         print(request.user)
         return Response('用户信息')

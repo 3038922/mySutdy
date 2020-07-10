@@ -156,7 +156,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.utils.auth.FirstAuthtication',
         'api.utils.auth.Authtication',
-    ]
+    ],
+    #自定义权限认证
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.utils.permission.SVIPMyPermission',
+    ],
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     #     'rest_framework.renderers.BrowsableAPIRenderer',

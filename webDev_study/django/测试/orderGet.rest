@@ -1,0 +1,3 @@
+GET http://127.0.0.1:11112/api/v1/order/?token=c56e9a17de291db8d9f40e2b84b26cfa
+content-type: application/x-www-form-urlencoded
+Authorization: token c56e9a17de291db8d9f40e2b84b26cfa
