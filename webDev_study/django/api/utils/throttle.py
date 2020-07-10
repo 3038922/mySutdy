@@ -42,4 +42,20 @@ from rest_framework.throttling import BaseThrottle, SimpleRateThrottle
 
 
 class VisitThrottle(SimpleRateThrottle):
+    """
+    对匿名用户的限制
+    """
     scope = "Luffy"  # 随便写的 当KEY用的
+
+    def get_cache_key(self, request, view):
+        return self.get_ident(request)  # 使用IP判断
+
+
+class UserThrottle(SimpleRateThrottle):
+    """
+    对已登录的用户的限制
+    """
+    scope = "LuffyUser"  # 随便写的 当KEY用的
+
+    def get_cache_key(self, request, view):
+        return self.request.user.username  # 改用用户名判断

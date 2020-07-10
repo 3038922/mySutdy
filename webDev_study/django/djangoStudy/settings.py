@@ -163,11 +163,13 @@ REST_FRAMEWORK = {
     ],
     #自定义访问频率
     'DEFAULT_THROTTLE_CLASSES': [
-        'api.utils.throttle.VisitThrottle',
+        #'api.utils.throttle.VisitThrottle',  # 匿名用户访问频率限制
+        'api.utils.throttle.UserThrottle',  # 登录用户访问频率限制
     ],
     # 使用官方的访问频率控制
     'DEFAULT_THROTTLE_RATES': {
-        'Luffy': '3/m'  # 每分钟访问3次
+        'Luffy': '3/m',  # 每分钟访问3次
+        'LuffyUser': '10/m'  # 登录用户一分钟访问10次
     }
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
