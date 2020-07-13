@@ -15,6 +15,11 @@ class Book(models.Model):
         return '<<%s>>' % self.title
 
 
+# ?????
+class UserGroup(models.Model):
+    title = models.CharField(max_length=32)
+
+
 # 用户级别
 class UserInfo(models.Model):
     user_type_choices = (
@@ -23,11 +28,19 @@ class UserInfo(models.Model):
         (3, 'SVIP'),
     )
     user_type = models.IntegerField(choices=user_type_choices)
+
     username = models.CharField(max_length=32, unique=True)  # unique 用户名是唯一的
     password = models.CharField(max_length=64)
+    group = models.ForeignKey("UserGroup", on_delete=models.CASCADE)  # ?????
+    roles = models.ManyToManyField("Role")  # ????
 
 
 # 创建token
 class UserToken(models.Model):
     user = models.OneToOneField(UserInfo, on_delete=models.CASCADE)
     token = models.CharField(max_length=64)
+
+
+# 角色 ????
+class Role(models.Model):
+    title = models.CharField(max_length=32)

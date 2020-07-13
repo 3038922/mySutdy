@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     # 自己的
     # 加入commdapp的自定义数据库表
     'common.apps.CommonConfig',
-    'App',  # 把自己的应用进行安装
     'api',
 ]
 

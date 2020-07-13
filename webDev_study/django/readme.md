@@ -31,3 +31,14 @@
 ### DRF 框架 前后端分离仅做后端使用
 
 - 安装框架 `pip3 install djangorestframework`
+
+### django 声明周期
+
+#### wsgi 协议
+
+- wsgiref 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (django 框架)
+- werkzeug 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (FLASK 框架)
+- tornado 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (FLASK 框架)
+- uwsgi 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (django 框架 线上使用 正式发布后使用)
+
+### django 生命周期 (rest framework)
