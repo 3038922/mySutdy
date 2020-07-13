@@ -103,12 +103,17 @@ class UserInfoView(APIView):
     订单相关业务
     """
     # 权限控制
+    authentication_classes = []  # 没登陆上不认证
     permission_classes = [
-        MyPermission1,
+        # MyPermission1,
     ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
 
     def get(self, request, *args, **kwargs):
-        print(request.user)
+        # print(request.user)
+        print('版本号:', request.version)
         return Response('用户信息')
 
 

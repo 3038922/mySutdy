@@ -169,7 +169,12 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'Luffy': '3/m',  # 每分钟访问3次
         'LuffyUser': '10/m'  # 登录用户一分钟访问10次
-    }
+    },
+    # 使用路径传递版本号
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_VERSION': 'v1',
+    'ALLOWED_VERSIONS': ['v1', 'v2', 'v3'],
+    'VERSION_PARAM': 'version',
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     #     'rest_framework.renderers.BrowsableAPIRenderer',
