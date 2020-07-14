@@ -1,13 +1,19 @@
-from rest_framework.response import Response  # DRF 返回类
-from rest_framework.views import APIView  # DRF 视图类
-from rest_framework.parsers import JSONParser, FormParser  #DRF 导入JSON解析 导入FORM解析
+import json
+from django.http import HttpResponse
+from django.urls import reverse
 from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
+from rest_framework.parsers import (
+    FormParser,  # DRF 导入JSON解析 导入FORM解析
+    JSONParser)
 from rest_framework.request import Request
+from rest_framework.response import Response  # DRF 返回类
+from rest_framework.views import APIView  # DRF 视图类
+
 from api import models
-from api.utils.permission import MyPermission1  #单视图应用
-from api.utils.throttle import VisitThrottle  #匿名用户登录限制
-from django.urls import reverse
+from api.utils.permission import MyPermission1  # 单视图应用
+from api.utils.throttle import VisitThrottle  # 匿名用户登录限制
+from rest_framework import serializers  # rest_framework 的 序列化
 ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
@@ -99,6 +105,22 @@ class OrderView(APIView):
         pass
 
 
+class UserInfoSerializer(serializers.Serializer):
+    user_type = serializers.IntegerField()  # 这样返回的是数组
+    ooo = serializers.CharField(source='get_user_type_display')  # 取用户组对应的中文
+    username = serializers.CharField()
+    password = serializers.CharField()
+    gp = serializers.CharField(source='group.title')
+    rls = serializers.SerializerMethodField()  # 自定义显示
+
+    def get_rls(self, row):
+        relo_obj_list = row.roles.all()
+        ret = []
+        for it in relo_obj_list:
+            ret.append({'id': it.id, 'tittle': it.title})
+        return ret
+
+
 class UserInfoView(APIView):
     """
     订单相关业务
@@ -113,18 +135,10 @@ class UserInfoView(APIView):
     ]  # 匿名访问频率控制
 
     def get(self, request, *args, **kwargs):
-        self.dispatch
-        # print(request.user)
-        print('版本号:', request.version)
-        # 获取处理版本的对象
-        print('获取处理版本的对象:', request.versioning_scheme)
-        # 基于REST_FRAMEWORK  反向生成
-        u1 = request.versioning_scheme.reverse(viewname='uuu', request=request)
-        print('u1:', u1)
-        # # 基于DJANGO 反向生成 不知道为啥不行
-        # u2 = reverse(viewname='uuu', kwargs={'version': 3})
-        # print('u2:', u2)
-        return Response('用户信息')
+        users = models.UserInfo.objects.all()
+        ser = UserInfoSerializer(instance=users, many=True)
+        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return HttpResponse(ret)
 
 
 class VersionView(APIView):
@@ -189,6 +203,34 @@ class ParserView(APIView):
         """
         print("request.data:", request.data)
         return Response('解析POST请求')
+
+
+class RolesSerializer(serializers.Serializer):
+    title = serializers.CharField()
+
+
+class RolesView(APIView):
+    # 权限控制
+    authentication_classes = []  # 没登陆上不认证
+    permission_classes = [
+        # MyPermission1,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+
+    def get(self, request, *args, **kwargs):
+        # 方式1 但实际测试错误的 不知道为啥
+        # roles = models.Role.objects.all().values('id', 'title')  # 拿到全部querySet
+        # roles - list(roles)
+        # ret = json.dumps(roles, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        # return HttpResponse(ret)
+        # 方法2
+        roles = models.Role.objects.all()
+        ser = RolesSerializer(instance=roles, many=True)  # many=True 表示多条数据
+        # ser.data 序列化后的结果 是个字典
+        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return HttpResponse(ret)
 
 
 # Create your views here.

@@ -91,3 +91,5 @@ $.ajax{(
         JSONParser,  # 只能解析 Content-type: application/json 这个头 其他头报错
     ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
 ```
+
+### rest framework 序列化(获取)
