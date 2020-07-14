@@ -175,7 +175,9 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSION': 'v1',
     'ALLOWED_VERSIONS': ['v1', 'v2', 'v3'],
     'VERSION_PARAM': 'version',
-    # 'DEFAULT_RENDERER_CLASSES': [
+    # 自定义全局解析器
+    'DEFAULT_PARSER_CALSSES': ['rest_framework.JSONParser', 'rest_framework.FormParser']
+    #     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     #     'rest_framework.renderers.BrowsableAPIRenderer',
     # ],

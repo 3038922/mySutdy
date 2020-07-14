@@ -167,16 +167,19 @@ class ParserView(APIView):
     throttle_classes = [
         VisitThrottle,
     ]  # 匿名访问频率控制
-    parser_classes = [
-        JSONParser,  # 只能解析 Content-type: application/json 
-        FormParser,  # 只能解析 `Content-type: application/x-www-form-urlencoded`
-    ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
+
+    # 已设置为全局
+    # parser_classes = [
+    #     JSONParser,  # 只能解析 Content-type: application/json
+    #     FormParser,  # 只能解析 `Content-type: application/x-www-form-urlencoded`
+    # ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
 
     def get(self, request, *args, **kwargs):
         self.dispatch
         return Response('解析GET请求')
 
     def post(self, request, *args, **kwargs):
+        self.dispatch  # ???这东西干嘛的 ?
         """
         1 获取用户请求
         2 获取用户请求体
