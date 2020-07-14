@@ -7,6 +7,7 @@ from rest_framework.request import Request
 from api import models
 from api.utils.permission import MyPermission1  #单视图应用
 from api.utils.throttle import VisitThrottle  #匿名用户登录限制
+from django.urls import reverse
 ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
@@ -112,9 +113,46 @@ class UserInfoView(APIView):
     ]  # 匿名访问频率控制
 
     def get(self, request, *args, **kwargs):
+        self.dispatch
         # print(request.user)
         print('版本号:', request.version)
+        # 获取处理版本的对象
+        print('获取处理版本的对象:', request.versioning_scheme)
+        # 基于REST_FRAMEWORK  反向生成
+        u1 = request.versioning_scheme.reverse(viewname='uuu', request=request)
+        print('u1:', u1)
+        # # 基于DJANGO 反向生成 不知道为啥不行
+        # u2 = reverse(viewname='uuu', kwargs={'version': 3})
+        # print('u2:', u2)
         return Response('用户信息')
+
+
+class Version(APIView):
+    """
+    获取版本号
+    """
+    # 权限控制
+    authentication_classes = []  # 没登陆上不认证
+    permission_classes = [
+        # MyPermission1,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+
+    def get(self, request, *args, **kwargs):
+        self.dispatch
+        # print(request.user)
+        print('版本号:', request.version)
+        # 获取处理版本的对象
+        print('获取处理版本的对象:', request.versioning_scheme)
+        # 基于REST_FRAMEWORK  反向生成
+        u1 = request.versioning_scheme.reverse(viewname='uuu', request=request)
+        print('u1:', u1)
+        # # 基于DJANGO 反向生成 不知道为啥不行
+        # u2 = reverse(viewname='uuu', kwargs={'version': 3})
+        # print('u2:', u2)
+        return Response('获取版本号')
 
 
 # Create your views here.

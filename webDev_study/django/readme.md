@@ -41,4 +41,45 @@
 - tornado 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (FLASK 框架)
 - uwsgi 是实现了 wsgi 协议的一个模块 模块本质 一个 socket 服务端 (django 框架 线上使用 正式发布后使用)
 
-### django 生命周期 (rest framework)
+### django 解析
+
+- 请求头必须为 `Content-type: application/x-www-form-urlencoded` 时,`request.POST`中才会有值
+- 数据格式要求: `name=alex&age=18&gender=男`
+- ajax 提交 他会自动加上请求头 DATA 也会转变为 `name=alex&age=18&gender=男`
+
+```
+$.ajax{(
+  usl:...,
+  type:POST,
+  data:{name:alex,age=18}
+)}
+```
+
+- 情况 1:如果定制了请求头 requset.body 有值 request.POST 没有值
+
+```
+$.ajax{(
+  usl:...,
+  type:POST,
+  headers:{'Content-type': "application/json"}
+  data:{name:alex,age=18}
+)}
+```
+
+- 情况 2:这样写依然 request.body 有值 request.POST 没有值
+
+```
+$.ajax{(
+  usl:...,
+  type:POST,
+  headers:{'Content-type': "application/json"}
+  data:JSON.stringfy({name:alex,age=18})
+)}
+```
+
+- 如果是 JSON 传参
+- 这样可以取到值 `json.loads(requset.boy)`
+
+### rest framework 解析
+
+- 请求头必须为 `Content-type: application/x-www-form-urlencoded` 时,`request.POST`中才会有值
