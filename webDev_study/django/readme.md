@@ -93,3 +93,68 @@ $.ajax{(
 ```
 
 ### rest framework 序列化(获取)
+
+```
+class UserInfoSerializer(serializers.Serializer):
+    """
+    序列化方法1
+    """
+    user_type = serializers.IntegerField()  # 这样返回的是数组
+    ooo = serializers.CharField(source='get_user_type_display')  # 取用户组对应的中文
+    username = serializers.CharField()
+    password = serializers.CharField()
+    gp = serializers.CharField(source='group.title')
+    rls = serializers.SerializerMethodField()  # 自定义显示
+
+    def get_rls(self, row):
+        relo_obj_list = row.roles.all()
+        ret = []
+        for it in relo_obj_list:
+            ret.append({'id': it.id, 'tittle': it.title})
+        return ret
+```
+
+```
+class UserInfoSerializer(serializers.ModelSerializer):
+    """
+    序列化方法2
+    """
+    ooo = serializers.CharField(source='get_user_type_display')  # 取用户组对应的中文
+    rls = serializers.SerializerMethodField()  # 自定义显示
+
+    def get_rls(self, row):
+        relo_obj_list = row.roles.all()
+        ret = []
+        for it in relo_obj_list:
+            ret.append({'id': it.id, 'tittle': it.title})
+        return ret
+
+    class Meta:
+        model = models.UserInfo
+        # fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
+        fields = ['ooo', 'id', 'username', 'password', 'rls']  # 实现上面一样的写法
+```
+
+- 配合上面返回 JSON 等
+
+```
+class UserInfoView(APIView):
+    """
+    订单相关业务
+    """
+    # authentication_classes = []  # 没登陆上不认证
+    # # 权限控制 谁都可以访问
+    # permission_classes = [
+    #     # MyPermission1,
+    # ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+
+    def get(self, request, *args, **kwargs):
+        self.dispatch
+        users = models.UserInfo.objects.all()
+        ser = UserInfoSerializer(instance=users, many=True)
+        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return HttpResponse(ret)
+```
