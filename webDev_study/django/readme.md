@@ -82,4 +82,12 @@ $.ajax{(
 
 ### rest framework 解析
 
-- 请求头必须为 `Content-type: application/x-www-form-urlencoded` 时,`request.POST`中才会有值
+- 使用`request.data`解析
+- 视图函数加入`JSONParser`可以解析 JSON 但注意只能解析 `Content-type: application/json`
+- 视图函数加入`FormParser`可以解析 form 但注意只能解析 `Content-type: application/x-www-form-urlencoded`
+
+```
+    parser_classes = [
+        JSONParser,  # 只能解析 Content-type: application/json 这个头 其他头报错
+    ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
+```

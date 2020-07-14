@@ -1,6 +1,6 @@
 from rest_framework.response import Response  # DRF 返回类
 from rest_framework.views import APIView  # DRF 视图类
-from rest_framework.parsers import JSONParser  #DRF 导入JSON解析
+from rest_framework.parsers import JSONParser, FormParser  #DRF 导入JSON解析 导入FORM解析
 from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.request import Request
@@ -127,7 +127,7 @@ class UserInfoView(APIView):
         return Response('用户信息')
 
 
-class Version(APIView):
+class VersionView(APIView):
     """
     获取版本号
     """
@@ -153,6 +153,39 @@ class Version(APIView):
         # u2 = reverse(viewname='uuu', kwargs={'version': 3})
         # print('u2:', u2)
         return Response('获取版本号')
+
+
+class ParserView(APIView):
+    """
+    解析
+    """
+    # 权限控制
+    authentication_classes = []  # 没登陆上不认证
+    permission_classes = [
+        # MyPermission1,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+    parser_classes = [
+        JSONParser,  # 只能解析 Content-type: application/json 
+        FormParser,  # 只能解析 `Content-type: application/x-www-form-urlencoded`
+    ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
+
+    def get(self, request, *args, **kwargs):
+        self.dispatch
+        return Response('解析GET请求')
+
+    def post(self, request, *args, **kwargs):
+        """
+        1 获取用户请求
+        2 获取用户请求体
+        3 格局用户请求头 和   parser_classes = [JSONParser,FormParser] 中支持的请求头进行比较
+        4 JSONParser || FormParser 对象去请求体
+        5 request.data
+        """
+        print("request.data:", request.data)
+        return Response('解析POST请求')
 
 
 # Create your views here.
