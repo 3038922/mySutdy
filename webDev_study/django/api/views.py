@@ -123,25 +123,37 @@ class OrderView(APIView):
 #             ret.append({'id': it.id, 'tittle': it.title})
 #         return ret
 
+# class UserInfoSerializer(serializers.ModelSerializer):
+#     """
+#     序列化方法2
+#     """
+#     ooo = serializers.CharField(source='get_user_type_display')  # 取用户组对应的中文
+#     rls = serializers.SerializerMethodField()  # 自定义显示
+
+#     def get_rls(self, row):
+#         relo_obj_list = row.roles.all()
+#         ret = []
+#         for it in relo_obj_list:
+#             ret.append({'id': it.id, 'tittle': it.title})
+#         return ret
+
+#     class Meta:
+#         model = models.UserInfo
+#         # fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
+#         fields = ['ooo', 'id', 'username', 'password', 'rls']  # 实现上面一样的写法
+
 
 class UserInfoSerializer(serializers.ModelSerializer):
     """
-    序列化方法2
+    序列化方法3 自动序列化链表
     """
-    ooo = serializers.CharField(source='get_user_type_display')  # 取用户组对应的中文
-    rls = serializers.SerializerMethodField()  # 自定义显示
-
-    def get_rls(self, row):
-        relo_obj_list = row.roles.all()
-        ret = []
-        for it in relo_obj_list:
-            ret.append({'id': it.id, 'tittle': it.title})
-        return ret
+    group = serializers.HyperlinkedIdentityField(view_name='gp', lookup_field='group_id', lookup_url_kwarg='pk')  # 这样写能反向出组的URL
 
     class Meta:
         model = models.UserInfo
         # fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
-        fields = ['ooo', 'id', 'username', 'password', 'rls']  # 实现上面一样的写法
+        fields = ['id', 'username', 'password', 'group', 'roles']
+        depth = 0  # 不写默认深度=0 0-10 一般写到3
 
 
 class UserInfoView(APIView):
@@ -158,13 +170,73 @@ class UserInfoView(APIView):
     ]  # 匿名访问频率控制
 
     def get(self, request, *args, **kwargs):
-        self.dispatch
         users = models.UserInfo.objects.all()
-        ser = UserInfoSerializer(instance=users, many=True)
+        ser = UserInfoSerializer(instance=users, many=True, context={'request': request})
+        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return Response(ret)
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        return Response('提交数据')
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserGroup
+        fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
+
+
+class GroupView(APIView):
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        obj = models.UserInfo.objects.filter(pk=pk).first()
+        ser = GroupSerializer(instance=obj, many=False)
         ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
         return Response(ret)
 
 
+############################### 验证 ################################
+class PasswordValidator(object):
+    def __init__(self, base):
+        self.base = base
+
+    def __call__(self, value):
+        if not value.startswith(self.base):
+            message = '标题必须以 %s 开头.' % self.base
+            raise serializers.ValidationError(message)
+
+    def set_context(self, serializers_field):
+        pass
+
+
+class UserGroupSerializer(serializers.Serializer):
+    title = serializers.CharField(error_messages={'required': '标题不能为空'}, validators=[PasswordValidator('老男人')])  # 不写可以
+
+    class Meta:
+        model = models.UserGroup
+        fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
+
+
+class UserGroupView(APIView):
+    throttle_classes = [
+        VisitThrottle,
+    ]  # 匿名访问频率控制
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        ser = UserGroupSerializer(data=request.data)
+        if ser.is_valid():
+            print(ser.validated_data)
+        else:
+            print(ser.errors)
+        return Response('提交数据')
+
+
+###################################################################
 class VersionView(APIView):
     """
     获取版本号

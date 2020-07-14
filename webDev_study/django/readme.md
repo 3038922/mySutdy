@@ -135,6 +135,19 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = ['ooo', 'id', 'username', 'password', 'rls']  # 实现上面一样的写法
 ```
 
+```
+class UserInfoSerializer(serializers.ModelSerializer):
+    """
+    序列化方法3 自动序列化链表
+    """
+    class Meta:
+        model = models.UserInfo
+        # fields = '__all__'  #     这样写是获取全部数据库内容 但比较简陋
+        fields = ['id', 'username', 'password', 'group', 'roles']
+        depth = 1  # 不写默认深度=0 0-10 一般写到3
+
+```
+
 - 配合上面返回 JSON 等
 
 ```
