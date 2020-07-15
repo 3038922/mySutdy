@@ -411,14 +411,16 @@ class V2View(GenericViewSet):
 
 class V3View(ModelViewSet):
     """
-    这个似乎 GET POST 都不用写了
+    继承全能函数  增删改查都具备了
+    复杂的 还是自己写吧
+    通过改路由 可以确定自己需要的功能
     """
     # 权限控制 全局定义后默认都读全局的
     permission_classes = [
         # SVIPMyPermission,
     ]
     throttle_classes = [
-        VisitThrottle,
+        # VisitThrottle,
     ]
 
     queryset = models.Role.objects.all()

@@ -16,5 +16,19 @@ urlpatterns = [
     url(r'^(?P<version>[v1|v2][v3]+)/pager1/$', views.Pager1View.as_view()),  # 分页
     url(r'^(?P<version>[v1|v2][v3]+)/v1/$', views.V1View.as_view()),  # 视图1 没用 也没必要记
     url(r'^(?P<version>[v1|v2][v3]+)/v2/$', views.V2View.as_view({'get': 'list'})),  # 视图2 参数意思就是list 替换get 
-    url(r'^(?P<version>[v1|v2][v3]+)/v3/$', views.V3View.as_view({'get': 'list'})),  # 视图2 参数意思就是list 替换get 
+    # 使用rest_framework 内置完整视图函数需要写两条路由
+    url(
+        r'^(?P<version>[v1|v2][v3]+)/v3/$',
+        views.V3View.as_view({
+            'get': 'list',  # 显示全部
+            'post': 'create',  # 增
+        })),  # 视图2 参数意思就是list 替换get 
+    url(
+        r'^(?P<version>[v1|v2][v3]+)/v3/(?P<pk>\d+)/$',
+        views.V3View.as_view({
+            'get': 'retrieve',  # 查
+            'delete': 'destroy',  # 删
+            'put': 'update',  # 改 全部更新
+            'patch': 'partial_update',  # 改 部分更新
+        })),  # 视图2 参数意思就是list 替换get 
 ]

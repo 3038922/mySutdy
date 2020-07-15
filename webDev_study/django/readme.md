@@ -171,3 +171,60 @@ class UserInfoView(APIView):
         ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
         return HttpResponse(ret)
 ```
+
+### 增删改查
+
+- 使用 restframe_work 完整的增删改查
+
+```
+class V3View(ModelViewSet):
+    """
+    继承全能函数  增删改查都具备了
+    复杂的 还是自己写吧
+    通过改路由 可以确定自己需要的功能
+    """
+    # 权限控制 全局定义后默认都读全局的
+    permission_classes = [
+        # SVIPMyPermission,
+    ]
+    throttle_classes = [
+        # VisitThrottle,
+    ]
+
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+```
+
+### 只需要增删
+
+```
+
+class V3View(CreateModelMixin,GenericViewSet,DestroyModelMixin):
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+```
+
+### 如果要完成复杂的逻辑 `GenericViewSet` 或者 `APIView`
+
+```
+
+class V2View(GenericViewSet):
+    """
+    还是没啥用 GenericAPIView 继承了 APIView
+    """
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+
+    def list(self, request, *args, **kwargs):
+        # 获取数据
+        roles = self.get_queryset()
+        # 进行分页
+        pager_roles = self.paginate_queryset(roles)
+        # 序列化
+        ser = self.get_serializer(instance=pager_roles, many=True)
+        return Response(ser.data)
+
+```
