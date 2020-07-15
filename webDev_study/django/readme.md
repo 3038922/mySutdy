@@ -228,3 +228,16 @@ class V2View(GenericViewSet):
         return Response(ser.data)
 
 ```
+
+### 自动生成的路由
+
+```
+from django.conf.urls import url, include
+from rest_framework import routers # 使用 rest_framework 自带的自动路由
+router = routers.DefaultRouter()
+router.register(r'xxx', views.V3View)
+urlpatterns = [
+    # 加入自动路由 带版本号的
+     url(r'^(?P<version>[v1|v2][v3]+)/', include(router.urls)),
+]
+```
