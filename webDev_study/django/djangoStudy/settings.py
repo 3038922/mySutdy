@@ -176,7 +176,9 @@ REST_FRAMEWORK = {
     'ALLOWED_VERSIONS': ['v1', 'v2', 'v3'],
     'VERSION_PARAM': 'version',
     # 自定义全局解析器
-    'DEFAULT_PARSER_CALSSES': ['rest_framework.JSONParser', 'rest_framework.FormParser']
+    'DEFAULT_PARSER_CALSSES': ['rest_framework.JSONParser', 'rest_framework.FormParser'],
+    # 每页显示几行数据
+    'PAGE_SIZE': 5,
     #     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.JSONRenderer',
     #     'rest_framework.renderers.BrowsableAPIRenderer',

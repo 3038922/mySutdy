@@ -1,5 +1,3 @@
-import json
-from django.http import HttpResponse
 from django.urls import reverse
 from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
@@ -14,6 +12,8 @@ from api import models
 from api.utils.permission import MyPermission1  # 单视图应用
 from api.utils.throttle import VisitThrottle  # 匿名用户登录限制
 from rest_framework import serializers  # rest_framework 的 序列化
+from api.utils.serializsers.pager import PagerSerialiser  # 导入自己写的pagerxu'l
+from rest_framework.pagination import PageNumberPagination  # 用REST_FRAMEWORK自带类做分页
 ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
@@ -172,8 +172,8 @@ class UserInfoView(APIView):
     def get(self, request, *args, **kwargs):
         users = models.UserInfo.objects.all()
         ser = UserInfoSerializer(instance=users, many=True, context={'request': request})
-        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
-        return Response(ret)
+        # ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return Response(ser.data)  # 使用REST_FRAMEWORK 内置Response 就不用JSON解析一次了
 
     def post(self, request, *args, **kwargs):
         print(request.data)
@@ -195,8 +195,8 @@ class GroupView(APIView):
         pk = kwargs.get('pk')
         obj = models.UserInfo.objects.filter(pk=pk).first()
         ser = GroupSerializer(instance=obj, many=False)
-        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
-        return Response(ret)
+        # ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return Response(ser.data)
 
 
 ############################### 验证 ################################
@@ -298,6 +298,10 @@ class RolesSerializer(serializers.Serializer):
 
 
 class RolesView(APIView):
+    throttle_classes = [
+        VisitThrottle,
+    ]  #
+
     # 权限控制
     def get(self, request, *args, **kwargs):
         # 方式1 但实际测试错误的 不知道为啥
@@ -309,8 +313,48 @@ class RolesView(APIView):
         roles = models.Role.objects.all()
         ser = RolesSerializer(instance=roles, many=True)  # many=True 表示多条数据
         # ser.data 序列化后的结果 是个字典
-        ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
-        return HttpResponse(ret)
+        # ret = json.dumps(ser.data, ensure_ascii=False)  # ensure_ascii=False 显示中文
+        return Response(ser.data)
+
+
+class MyPageNumberPagination(PageNumberPagination):
+    """
+    继承写法
+    """
+    # 每页显示多少行
+    page_size = 3
+    # 配置页码 ?page=xxx用的
+    page_query_param = 'page'
+    # 传参数用
+    page_size_query_param = None
+    # 最大页面显示量
+    max_page_size = None
+
+
+class Pager1View(APIView):
+    """
+    分页
+    """
+    authentication_classes = []  # 没登陆上不认证
+    # 权限控制 全局定义后默认都读全局的
+    permission_classes = [
+        # SVIPMyPermission,
+    ]
+    throttle_classes = [
+        # VisitThrottle,
+    ]  #
+
+    def get(self, request, *args, **kwargs):
+        roles = models.Role.objects.all()
+        # 创建分页对象
+        # pg = PageNumberPagination() # 默认
+        pg = MyPageNumberPagination()  # 自定义
+        # 在数据库中获取分页数据
+        pagerRoles = pg.paginate_queryset(queryset=roles, request=request, view=self)
+        # 序列化分页后的数据
+        ser = PagerSerialiser(instance=pagerRoles, many=True)
+        # return Response(ser.data)  #用了Response 直接返回就是了 不用json了
+        return pg.get_paginated_response(ser.data)  # 这样写多返回点东西 比如上一页 下一页
 
 
 # Create your views here.
