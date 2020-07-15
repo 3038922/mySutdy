@@ -1,19 +1,20 @@
-from django.urls import reverse
+from rest_framework import serializers  # rest_framework 的 序列化
 from rest_framework import exceptions
 from rest_framework.authentication import BasicAuthentication
-from rest_framework.parsers import (
-    FormParser,  # DRF 导入JSON解析 导入FORM解析
-    JSONParser)
-from rest_framework.request import Request
+from rest_framework.generics import GenericAPIView
+from rest_framework.pagination import \
+    PageNumberPagination  # 用REST_FRAMEWORK自带类做分页
+from rest_framework.parsers import FormParser  # DRF 导入JSON解析 导入FORM解析
+from rest_framework.parsers import JSONParser
+from rest_framework.request import Request  # 请求
 from rest_framework.response import Response  # DRF 返回类
 from rest_framework.views import APIView  # DRF 视图类
-
+from rest_framework.viewsets import GenericViewSet, ModelViewSet  # 视图设置类
 from api import models
 from api.utils.permission import MyPermission1  # 单视图应用
-from api.utils.throttle import VisitThrottle  # 匿名用户登录限制
-from rest_framework import serializers  # rest_framework 的 序列化
 from api.utils.serializsers.pager import PagerSerialiser  # 导入自己写的pagerxu'l
-from rest_framework.pagination import PageNumberPagination  # 用REST_FRAMEWORK自带类做分页
+from api.utils.throttle import VisitThrottle  # 匿名用户登录限制
+
 ORDER_DICT = {1: {'name': '媳妇', 'age': 18, 'gender': '男', 'content': '详细信息'}, 2: {'name': '老狗', 'age': 8, 'gender': '女', 'content': '详细信息'}}
 
 
@@ -341,7 +342,7 @@ class Pager1View(APIView):
         # SVIPMyPermission,
     ]
     throttle_classes = [
-        # VisitThrottle,
+        VisitThrottle,
     ]  #
 
     def get(self, request, *args, **kwargs):
@@ -355,6 +356,83 @@ class Pager1View(APIView):
         ser = PagerSerialiser(instance=pagerRoles, many=True)
         # return Response(ser.data)  #用了Response 直接返回就是了 不用json了
         return pg.get_paginated_response(ser.data)  # 这样写多返回点东西 比如上一页 下一页
+
+
+class V1View(GenericAPIView):
+    """
+    没啥用 GenericAPIView 继承了 APIView
+    """
+    # 权限控制 全局定义后默认都读全局的
+    permission_classes = [
+        # SVIPMyPermission,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]  #
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+
+    def get(self, request, *args, **kwargs):
+        # 获取数据
+        roles = self.get_queryset()
+        # 进行分页
+        pager_roles = self.paginate_queryset(roles)
+        # 序列化
+        ser = self.get_serializer(instance=pager_roles, many=True)
+        return Response(ser.data)
+
+
+class V2View(GenericViewSet):
+    """
+    还是没啥用 GenericAPIView 继承了 APIView
+    """
+    # 权限控制 全局定义后默认都读全局的
+    permission_classes = [
+        # SVIPMyPermission,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]
+
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+
+    def list(self, request, *args, **kwargs):
+        # 获取数据
+        roles = self.get_queryset()
+        # 进行分页
+        pager_roles = self.paginate_queryset(roles)
+        # 序列化
+        ser = self.get_serializer(instance=pager_roles, many=True)
+        return Response(ser.data)
+
+
+class V3View(ModelViewSet):
+    """
+    这个似乎 GET POST 都不用写了
+    """
+    # 权限控制 全局定义后默认都读全局的
+    permission_classes = [
+        # SVIPMyPermission,
+    ]
+    throttle_classes = [
+        VisitThrottle,
+    ]
+
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerialiser
+    pagination_class = PageNumberPagination
+
+    # def list(self, request, *args, **kwargs):
+    #     # 获取数据
+    #     roles = self.get_queryset()
+    #     # 进行分页
+    #     pager_roles = self.paginate_queryset(roles)
+    #     # 序列化
+    #     ser = self.get_serializer(instance=pager_roles, many=True)
+    #     return Response(ser.data)
 
 
 # Create your views here.
