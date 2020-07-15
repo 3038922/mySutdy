@@ -151,6 +151,12 @@ print("静态目录:", STATICFILES_DIRS)
 # 自定义DRF配置 全局配置
 # drf提供的渲染类
 REST_FRAMEWORK = {
+    # REST_FRAMEWORK的默认页面的配置
+    #     # 'DEFAULT_RENDERER_CLASSES': [
+    #     'rest_framework.renderers.JSONRenderer',
+    #     'rest_framework.renderers.BrowsableAPIRenderer',
+    # ],
+
     # 自定义认证 不用默认的
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.utils.auth.FirstAuthtication',
@@ -179,16 +185,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CALSSES': ['rest_framework.JSONParser', 'rest_framework.FormParser'],
     # 每页显示几行数据
     'PAGE_SIZE': 5,
-    #     # 'DEFAULT_RENDERER_CLASSES': [
-    #     'rest_framework.renderers.JSONRenderer',
-    #     'rest_framework.renderers.BrowsableAPIRenderer',
-    # ],
-    # # 全局解析配置
-    # 'DEFAULT_PARSER_CALSSES': [
-    #     'rest_framework.parsers.JSONParser',
-    #     'rest_framework.parsers.FormParser',
-    #     'rest_framework.parsers.MultiPartParser',
-    # ],
+
     # # 全局配置异常模块
     # 'Exception_HANDLE': 'api.exception.exception_handler',
 }
