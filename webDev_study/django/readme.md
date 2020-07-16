@@ -47,7 +47,7 @@
 - 数据格式要求: `name=alex&age=18&gender=男`
 - ajax 提交 他会自动加上请求头 DATA 也会转变为 `name=alex&age=18&gender=男`
 
-```
+```py
 $.ajax{(
   usl:...,
   type:POST,
@@ -57,7 +57,7 @@ $.ajax{(
 
 - 情况 1:如果定制了请求头 requset.body 有值 request.POST 没有值
 
-```
+```py
 $.ajax{(
   usl:...,
   type:POST,
@@ -68,7 +68,7 @@ $.ajax{(
 
 - 情况 2:这样写依然 request.body 有值 request.POST 没有值
 
-```
+```py
 $.ajax{(
   usl:...,
   type:POST,
@@ -86,7 +86,7 @@ $.ajax{(
 - 视图函数加入`JSONParser`可以解析 JSON 但注意只能解析 `Content-type: application/json`
 - 视图函数加入`FormParser`可以解析 form 但注意只能解析 `Content-type: application/x-www-form-urlencoded`
 
-```
+```py
     parser_classes = [
         JSONParser,  # 只能解析 Content-type: application/json 这个头 其他头报错
     ]  #调用REST_FRAMEWORK 内置解析器 允许用户发JSON格式数据
@@ -94,7 +94,7 @@ $.ajax{(
 
 ### rest framework 序列化(获取)
 
-```
+```py
 class UserInfoSerializer(serializers.Serializer):
     """
     序列化方法1
@@ -114,7 +114,7 @@ class UserInfoSerializer(serializers.Serializer):
         return ret
 ```
 
-```
+```py
 class UserInfoSerializer(serializers.ModelSerializer):
     """
     序列化方法2
@@ -135,7 +135,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = ['ooo', 'id', 'username', 'password', 'rls']  # 实现上面一样的写法
 ```
 
-```
+```py
 class UserInfoSerializer(serializers.ModelSerializer):
     """
     序列化方法3 自动序列化链表
@@ -150,7 +150,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
 - 配合上面返回 JSON 等
 
-```
+```py
 class UserInfoView(APIView):
     """
     订单相关业务
@@ -176,7 +176,7 @@ class UserInfoView(APIView):
 
 - 使用 restframe_work 完整的增删改查
 
-```
+```py
 class V3View(ModelViewSet):
     """
     继承全能函数  增删改查都具备了
@@ -198,7 +198,7 @@ class V3View(ModelViewSet):
 
 ### 只需要增删
 
-```
+```py
 
 class V3View(CreateModelMixin,GenericViewSet,DestroyModelMixin):
     queryset = models.Role.objects.all()
@@ -208,7 +208,7 @@ class V3View(CreateModelMixin,GenericViewSet,DestroyModelMixin):
 
 ### 如果要完成复杂的逻辑 `GenericViewSet` 或者 `APIView`
 
-```
+```py
 
 class V2View(GenericViewSet):
     """
@@ -231,7 +231,7 @@ class V2View(GenericViewSet):
 
 ### 自动生成的路由
 
-```
+```py
 from django.conf.urls import url, include
 from rest_framework import routers # 使用 rest_framework 自带的自动路由
 router = routers.DefaultRouter()
@@ -241,3 +241,5 @@ urlpatterns = [
      url(r'^(?P<version>[v1|v2][v3]+)/', include(router.urls)),
 ]
 ```
+
+### con
