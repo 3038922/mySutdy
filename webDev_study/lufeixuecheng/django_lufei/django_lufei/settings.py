@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # 第三方的
     'rest_framework',
     # 自己的
+    'api'
 ]
 
 MIDDLEWARE = [
