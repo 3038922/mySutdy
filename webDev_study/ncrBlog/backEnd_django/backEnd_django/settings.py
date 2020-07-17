@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # 自己的
     'api',
+    'blog',
 ]
 
 MIDDLEWARE = [
