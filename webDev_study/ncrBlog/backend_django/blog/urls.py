@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from blog import views
 from rest_framework import routers
 
-app_name = 'JiaBlog'
+app_name = 'blog'
 
 # 定义路由地址
 route = routers.DefaultRouter()
