@@ -127,55 +127,56 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# 用户自定义日志配置
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,  # 是否禁用已存在的日志器
-    'formatters': {
-        # 日志格式
-        'verbose': {
-            'format': '%(levelname) %(asctime)s %(module)s %(lineno)d %(message)s'
-        },
-        'simple': {  # 简单格式
-            'format': '%(levelname) %(module)s %(lineno)d %(message)s'
-        },
-    },
-    # 过滤
-    'filters': {
-        'required_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue'
-        }
-    },
-    # 定义具体处理日志的方式
-    'handlers': {
-        # 控制台输出
-        'console': {
-            'level': 'INFO',
-            'filter': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        # 输出info日志
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/blog.log'),
-            'maxBytes': 300 * 1024 * 1024,
-            'backupCount': 10,
-            'formatter': 'verbose',
-            'encoding': 'utf-8',  # 设置默认编码
-        },
-    },
-    # 配置用哪几种 handlers 来处理日志
-    'loggers': {
-        # 类型 为 django 处理所有类型的日志， 默认调用
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',  #日志接受最低级别
-            'propagate': True
-        },
-    }
-}
+# 用户自定义日志配置 失败
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,  # 是否禁用已存在的日志器
+#     'formatters': {
+#         # 日志格式
+#         'verbose': {
+#             'format': '%(levelname) %(asctime)s %(module)s %(lineno)d %(message)s'
+#         },
+#         'simple': {  # 简单格式
+#             'format': '%(levelname) %(module)s %(lineno)d %(message)s'
+#         },
+#     },
+#     # 过滤
+#     'filters': {
+#         'required_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue'
+#         }
+#     },
+#     # 定义具体处理日志的方式
+#     'handlers': {
+#         # 控制台输出
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],  # 只有在 DEBUG 为 True 时才在屏幕打印日志
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         # 输出info日志
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/blog.log'),
+#             'maxBytes': 300 * 1024 * 1024,
+#             'backupCount': 10,
+#             'formatter': 'verbose',
+#             'encoding': 'utf-8',  # 设置默认编码
+#         },
+#     },
+#     # 配置用哪几种 handlers 来处理日志
+#     'loggers': {
+#         # 类型 为 django 处理所有类型的日志， 默认调用
+#         'django': {
+#             'handlers': ['console', 'file'],
+#             'level': 'INFO',  #日志接受最低级别
+#             'propagate': True
+#         },
+#     }
+# }
 # REST_FRAMEWORK 自定义设置
 REST_FRAMEWORK = {
     # 自定以分页显示 每页10行

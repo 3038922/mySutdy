@@ -20,7 +20,8 @@ class Category(models.Model):
     文章分类 复杂 递归分类
     """
     names = models.CharField(max_length=12)  # 分类名称
-    belong = models.ForeignKey(self, on_delete=models.CASCADE)  # 一对多的关联 递归
+
+    #belong = models.ForeignKey(self, on_delete=models.CASCADE)  # 一对多的关联 递归
 
     def __init__(self):
         return self.id
