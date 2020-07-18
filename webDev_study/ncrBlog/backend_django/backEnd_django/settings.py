@@ -178,6 +178,10 @@ STATIC_URL = '/static/'
 # }
 # REST_FRAMEWORK 自定义设置
 REST_FRAMEWORK = {
+    # 权限验证,测试的时候暂时注释掉
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAdminUser',
+    # ],
     # 自定以分页显示 每页10行
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
