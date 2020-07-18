@@ -1,15 +1,15 @@
-from rest_framework import serializers, viewsets
-from blog.models import Articles
+from blog.models import Users
+from blog.serializers import UsersSerializer
+from rest_framework import generics
 
 # Create your views here.
 
 
-class ArticlesSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Articles  # 指定的模型类
-        fields = ('id', 'title', 'body', 'timestamp', 'authorname', 'views', 'tags', 'category')  # 需要序列化的属性
+class UsersList(generics.ListCreateAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
 
 
-class GetArticleInfo(viewsets.ModelViewSet):
-    queryset = Articles.objects.all().order_by('-id')
-    serializer_class = ArticlesSerializers
+class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
