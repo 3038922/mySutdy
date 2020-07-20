@@ -25,7 +25,8 @@ SECRET_KEY = '_7t%5yoj2u)*8=8j6mb!3)9jj0c4*xdn319xy=m7wi)^ixxx)y'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# 替换系统的用户配置
+AUTH_USER_MODEL = 'users.UserProfile'
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     # 第三方的
     'rest_framework',
     # 自己的
+    'users'
 ]
 
 MIDDLEWARE = [
