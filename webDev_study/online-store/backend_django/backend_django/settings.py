@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 第三方的
     'rest_framework',
+    # 'tinymce',  #这个似乎不行 富文本编辑器
     # 自己的
-    'users'
+    'users',
+    'goods'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# django-tinymce 父文本编辑器配置
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 800,
+    'height': 600,
+}
