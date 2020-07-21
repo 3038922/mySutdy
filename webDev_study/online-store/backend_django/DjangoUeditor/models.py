@@ -12,20 +12,18 @@ class UEditorField(models.TextField):
         imagePath:图片上传的路径,如"images/",实现上传到"{{MEDIA_ROOT}}/images"文件夹
         filePath:附件上传的路径,如"files/",实现上传到"{{MEDIA_ROOT}}/files"文件夹
     """
-
-    def __init__(
-            self,
-            verbose_name=None,
-            width=600,
-            height=300,
-            toolbars="full",
-            imagePath="",
-            filePath="",
-            upload_settings={},
-            settings={},
-            command=None,
-            event_handler=None,
-            **kwargs):
+    def __init__(self,
+                 verbose_name=None,
+                 width=600,
+                 height=300,
+                 toolbars="full",
+                 imagePath="",
+                 filePath="",
+                 upload_settings={},
+                 settings={},
+                 command=None,
+                 event_handler=None,
+                 **kwargs):
         self.ueditor_settings = locals().copy()
         kwargs["verbose_name"] = verbose_name
         del self.ueditor_settings["self"], self.ueditor_settings[
@@ -36,9 +34,9 @@ class UEditorField(models.TextField):
         defaults = {'widget': UEditorWidget(attrs=self.ueditor_settings)}
         defaults.update(kwargs)
         if defaults['widget'] == admin_widgets.AdminTextareaWidget:
-            defaults['widget'] = AdminUEditorWidget(
-                attrs=self.ueditor_settings)
+            defaults['widget'] = AdminUEditorWidget(attrs=self.ueditor_settings)
         return super(UEditorField, self).formfield(**defaults)
+
 
 # 以下支持south
 try:
