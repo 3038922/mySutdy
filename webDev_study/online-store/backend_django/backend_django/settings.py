@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 第三方的
     'rest_framework',
+    'DjangoUeditor', # 富文本编辑器
     # 'tinymce',  #这个似乎不行 富文本编辑器
     # 自己的
     'users',
@@ -129,9 +130,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# django-tinymce 父文本编辑器配置
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'advanced',
-    'width': 800,
-    'height': 600,
-}
