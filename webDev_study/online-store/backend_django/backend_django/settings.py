@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # 自己的
     'users',
     'goods',
-    'trade'
+    'trade',
+    'user_operation'
 ]
 
 MIDDLEWARE = [
