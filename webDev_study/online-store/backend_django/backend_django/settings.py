@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 第三方的
     'rest_framework',
-    'DjangoUeditor',  # 富文本编辑器
+    'tinymce',  # 替换DjangoUeditor 富文本编辑器
     # 自己的
     'users',
     'goods',
@@ -129,3 +129,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# 富文本编辑器
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 1000,
+    'height': 300,
+    'language': 'zh',
+}
