@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     # 第三方的
     'rest_framework',
     'tinymce',  # 替换DjangoUeditor 富文本编辑器
-    # 'crispy'
-    #'xadmin'
+    # 'django-crispy-forms'
+    # 'xadmin'
     # 自己的
     'users',
     'goods',
