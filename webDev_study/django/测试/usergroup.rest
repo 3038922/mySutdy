@@ -1,7 +1,0 @@
-POST http://127.0.0.1:11112/api/v3/usergroup/?token=8705dd0f9e68474d8cbb0d46063f7247 HTTP/1.1
-Content-type: application/json
-Authorization: token 8705dd0f9e68474d8cbb0d46063f7247
-
-{
-    "title": "老男人游客"
-}
