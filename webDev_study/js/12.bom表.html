@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+    <script src="usrapi.js"></script>
+    <script>
+        alert("hello");
+        window.alert("world");
+        var conf = confirm("你确定要离开么?"); //弹出一个带确定或者取消的对话框
+        document.write(conf);
+        var prom = prompt("请输入内容", 100) //弹出一个带输入框的提示框 参数1 面板上要显示的内容 参数2 输入框里的默认值
+        document.write("<br/>")
+        document.write(prom);
+    </script>
+    <script>
+        window.onload = function () {
+            //获取按钮
+            $("btn1").onclick = function () {
+                /**  
+                 * para1 跳转的url
+                 * para2 字符串 给打开的窗口起个名字
+                 * para3 一个特殊函数的字符串 控制打开窗口的属性
+                */
+                open("https://www.baidu.com", "xxx", 'width=400,height=400,top=200,left=300');
+            }
+            $("btn2").onclick = function () {
+                document.write(history.length);
+            }
+            $("forward").onclick = function () {
+                document.write(history.forward());
+            }
+            $("back").onclick = function () {
+                document.write(history.back());
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="btn1">打开百度</button>
+        <button id="btn2">获取历史记录条数</button>
+        <button id="forward">前进</button>
+        <button id="back">后退</button>
+    </div>
+</body>
+
+</html>

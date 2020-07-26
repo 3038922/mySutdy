@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VUE事件处理器</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <button @click="handleClick">隐藏</button>
+        <button @click="handleClick()">颜色</button>
+        <div v-show="isShow" :style="stylearr">1111111111111111111111</div>
+        <!-- 加上.self 后只有点自己才会触发 子节点不会触发 -->
+        <ul @click.self="handleUlClick()">
+            <!-- 事件修饰符 防止冒泡 上层函数被执行 -->
+            <li @click.stop="handleLiClick($event)">1111</li>
+            <!-- 这个还是触发冒泡 -->
+            <li @click="handleLiClick($event)">2222</li>
+            <!-- 只触发一次 -->
+            <li @click.once="handleLiClick($event)">3333</li>
+        </ul>
+        <!-- 阻止跳转百度 -->
+        <a href="http://www.baidu.com" @click.prevent="handleChangePage()">跳转百度</a>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                isShow: false,
+                stylearr: [{ background: "blue" }, { background: "red" }],//可以动态添加,删除 
+            },
+            methods: {
+                handleClick(str) {
+                    this.isShow = !this.isShow;
+                },
+                handleUlClick(ev) {
+                    console.log("i am ul", ev);
+                },
+                handleLiClick(ev) {
+                    console.log("i am li", ev);
+                },
+                handleChangePage(ev) {
+                    console.log("i am 跳转百度", ev);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

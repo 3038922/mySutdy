@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子传父</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 儿子2想去改父组件里的属性去改控制儿子1的显示 -->
+        <!-- 儿子2去控制父亲的data 
+            @myevent 是HTML中定义的
+            @handleevent 是父组件里定义的-->
+        <navbar @myevent="handleEvent($event)"></navbar>
+        <siderbar v-show="isShow"></siderbar>
+    </div>
+
+    <script type="text/javascript">
+        //子组件1
+        Vue.component("siderbar", {
+            template: `<div style="background:yellow;width:200px;"><ul>
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ul></div>`,
+            // 子组件参数
+            data() {
+                //这里写法有点奇葩 要传出去的要加个return 
+                return {
+                    childname: "子组件的状态",
+                }
+            },
+            //子组件函数
+            methods: {
+                payMoney() {
+                    //.$emit 是VUE官方内置方法  去匹配父组件里的@myevent
+                    //.$emit 分发 事件的意思
+                    console.log("儿子打钱啦!")
+                    this.$emit("myevent", this.childname);
+                }
+            },
+            //接受父组件传来的属性 无法验证不好 放弃
+            // props: ["myname", "myshow"],
+            //改成对象写法 属性验证
+            props: {
+                myname: String,
+                myshow: Boolean,
+            },
+            //子组件的局部定义组件
+            components: {
+                navbarchild: {
+                    template: `<div>navbarchild-只能在navbar中使用</div>`,
+                }
+            }
+        })
+        //子组件2
+        Vue.component("navbar", {
+            template: `<div>navbar
+                     <button @click="handleClick($event)">navbar-butoon</button>
+                    </div>`,
+            props: {
+                isFatherShow: Boolean,
+            },
+            //子组件函数
+            methods: {
+                handleClick(ev) {
+                    //.$emit 是VUE官方内置方法  去匹配父组件里的@myevent
+                    //.$emit 分发 事件的意思
+                    console.log(ev);
+                    this.$emit("myevent");
+                },
+            }
+        })
+
+
+        //根节点
+        new Vue({
+            el: "#box",
+            data: {
+                parentname: "我是根节点的属性",
+                isShow: false,
+            },
+            methods: {
+                handleEvent() {
+                    this.isShow = !this.isShow;
+                }
+
+            }
+        })//root component 根组件
+    </script>
+</body>
+
+</html>

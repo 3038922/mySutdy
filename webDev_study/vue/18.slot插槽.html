@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot插槽</title>
+    <script src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <child>
+            <!-- 这里写的东西都被忽略 除非子组件里写slot-->
+            <div slot="a"> aaaaaaaaaa </div>
+            <button slot="b" @click="isShow=!isShow">隐藏显示</button>
+        </child>
+        <!-- 这里加上isShow选项控制i显示不显示 -->
+        <swiper v-show="isShow">
+            <li v-for="data in datalist">
+                {{data}}
+            </li>
+        </swiper>
+    </div>
+
+
+    <script>
+        Vue.component("child", {
+            //具名插槽
+            template: `<div>
+                <p>i am child</p>
+                <slot name='b' ></slot>
+                <slot name='a' ></slot>
+                </div>`,
+        });
+        //轮播组件
+        Vue.component("swiper", {
+            template: `<div>
+                      <ul>
+                        <slot></slot>
+                    </ul>
+                </div>`,
+        });
+        new Vue({
+            el: "#box",
+            data: {
+                datalist: ["1111", "2222", "3333"],
+                isShow: false,
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载数据</title>
+    <script>
+        //这里要注意 必须放在服务上运行.
+        window.onload = function () {
+            var oBtn1 = document.getElementById("btn1");
+            oBtn1.onclick = function () {
+                var xhr = new XMLHttpRequest();
+                /**
+                 * 1 请求方式 有get post;
+                 * 2 请求文件的路径 可以绝对 也可相对
+                 * 3 是否异步 true 异步 false 同步
+                 **/
+                xhr.open("get", "1.txt", "true");
+                //发送 相当于敲回车
+                xhr.send();
+                //等下服务器响应
+                /**
+                 * 0 调用open方法之前
+                 * 1 调用send方法之后,发送请求
+                 * 2 send方法完成,已经接受到了所有的相应内容
+                 * 3 正在解析下载到的数据
+                 * 4 解析完成
+                 **/
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4)
+                        if (xhr.status == 200)
+                            alert(xhr.responseText);
+                        else
+                            alert(xhr.status);
+                }
+
+            }
+            var oBtn1 = document.getElementById("btn1");
+            oBtn1.onclick = function () {
+                var xhr = new XMLHttpRequest();
+                /**
+                 * 1 请求方式 有get post;
+                 * 2 请求文件的路径 可以绝对 也可相对
+                 * 3 是否异步 true 异步 false 同步
+                 **/
+                xhr.open("get", "1.txt", "true");
+                //发送 相当于敲回车
+                xhr.send();
+                //等下服务器响应
+                /**
+                 * 0 调用open方法之前
+                 * 1 调用send方法之后,发送请求
+                 * 2 send方法完成,已经接受到了所有的相应内容
+                 * 3 正在解析下载到的数据
+                 * 4 解析完成
+                 **/
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4)
+                        if (xhr.status == 200)
+                            alert(xhr.responseText);
+                        else
+                            alert(xhr.status);
+                }
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="btn1">下载1.txt</button>
+        <button id="btn2">下载2.txt</button>
+    </div>
+</body>
+
+</html>

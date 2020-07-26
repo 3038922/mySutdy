@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <navbar></navbar>
+        <child></child>
+
+    </div>
+    <script type="text/javascript">
+        //全局组件
+        Vue.component("navbar", {
+            template: `<section>
+            <div style="background:yellow">
+            <button @click="handleindex()">主页</button> 
+            <button>返回</button>
+            <child></child>
+            <navbarchild></navbarchild>
+          
+        </div>
+        </section>`,
+            methods: {
+                handleindex() {
+                    console.log("index");
+                }
+            },
+            //局部定义组件
+            components: {
+                navbarchild: {
+                    template: `<div>navbarchild-只能在navbar中使用</div>`,
+                }
+            }
+        })
+        //全局组件 谁都可以访问
+        Vue.component("child", {
+            template: `<div> child组件-全局定义 </div>`,
+        })
+
+
+        new Vue({
+            el: "#box",
+            data: {
+
+            },
+            methods: {
+
+            },
+            coputed: {
+
+            }
+        })//root component 根组件
+    </script>
+</body>
+
+</html>

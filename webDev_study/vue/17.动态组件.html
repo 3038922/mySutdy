@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件</title>
+    <script src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 传统静态写法 -->
+        <!-- <index></index>
+        <list></list>
+        <cart></cart> -->
+        <!-- 新款动态写法 自己都不知道加载谁 -->
+        <!-- keep-alive 保留状态 避免重新渲染 表示切换后 方框里的东西一直存在 -->
+        <keep-alive>
+            <transition name="animate__animated  animate__backOutUp animate__backInDown" mode="out-in">
+                <component :is="who"></component>
+            </transition>
+        </keep-alive>
+        <footer>
+            <ul>
+                <li><a @click="who='index'">首页</a></li>
+                <li><a @click="who='list'">列表页</a></li>
+                <li><a @click="who='cart'">购物车页面</a></li>
+            </ul>
+        </footer>
+    </div>
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                who: 'index',
+            },
+            //局部写法
+            components: {
+                //首页
+                "index": {
+                    template: `<div>首页<input type="text"></div>`,
+                },
+                //列表
+                "list": {
+                    template: `<div>列表 <input type="text"></div>`,
+                },
+                //购物车
+                "cart": {
+                    template: `<div>购物车<input type="text"></div>`,
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

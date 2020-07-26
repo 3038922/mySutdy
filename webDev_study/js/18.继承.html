@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承</title>
+    <script>
+        class Person {
+            constructor(name, sex, age) {
+                this.name = name;
+                this.sex = sex;
+                this.age = age;
+            }
+            show() {
+                alert(`姓名: ${this.name} 性别: ${this.sex} 年龄: ${this.age}`);
+            }
+        };
+        class Work extends Person {
+            constructor(name, sex, age, job) {
+                super(name, sex, age);
+                this.job = job;
+            }
+            show() {
+                alert(`asdf: ${this.name} 性别: ${this.sex} 年龄: ${this.age}`);
+            }
+            showjob() {
+                alert(`我的工作是 ${this.job}`);
+            }
+        };
+    </script>
+
+</head>
+
+<body>
+    <script>
+        var lisi = new Work("李四", "女", 99, "程序员");
+        lisi.show();
+        lisi.showjob();
+    </script>
+</body>
+
+</html>

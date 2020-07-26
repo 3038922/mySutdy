@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+
+<body>
+    <script>
+        //创建
+        var obj1 = new Object;
+        var obj2 = Object;
+        var obj3 = {
+            username: "钢铁侠",
+            age: 99,
+            show: function () {
+                document.write(obj3.username, " ", obj3.age);
+            }
+        };
+        var car = {
+            speed: 100,
+            show: function (road) {
+                document.write(road.len / car.speed);
+            }
+        }
+        var road = {
+            len: 1000,
+        }
+        //新增属性
+        obj1.username = "chen";
+        obj1.age = 35;
+
+        //测试
+        document.write(obj1.username, " ", obj1.age)
+        document.write("<br/>");
+        obj3.show();
+        document.write("<br/>");
+        car.show(road);
+    </script>
+</body>
+
+</html>

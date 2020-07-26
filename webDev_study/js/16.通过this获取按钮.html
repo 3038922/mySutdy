@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+    <style>
+        .active {
+            background-color: orange;
+            color: blue;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            btns = document.getElementsByTagName("button");
+            //this : 只要封装函数,函数内部都会自当生成this变量,this存储的当前函数主人的地址.this永远指向当前函数的主人
+            for (iterator of btns) {
+                iterator.onclick = function () {
+                    for (it1 of btns) {
+                        it1.className = "";
+                    }
+                    this.className = 'active';
+                }
+            }
+            alert("循环结束");
+        }
+    </script>
+</head>
+
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+</body>
+
+</html>

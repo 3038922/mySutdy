@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script>
+        //通过ajax 下载数据
+        window.onload = function () {
+            var obtn1 = document.getElementById("btn1");
+            var oT1 = document.getElementById("t1");
+            obtn1.onclick = function () {
+                $.post({
+                    url: "userlist.php",
+                    success: function (result) {
+                        var arr = JSON.parse(result);//解析字符串
+                        var str = "";
+                        for (var i = 0; i < arr.length; i++)
+                            str += `<tr><td>${arr[i].id}</td>
+                            <td>${arr[i].username}</td>
+                            <td>${arr[i].password}</td>
+                            <td>${arr[i].create_date}</td>
+                            <td id=${arr[i].id}> 
+                                <a href="modify.html?id=${arr[i].id}">编辑</a>
+                                /
+                                <a href="#">删除</a>
+                                </td>
+                            </tr>`;
+                        oT1.innerHTML = str;
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                })
+            };
+            //add 委托事件
+            oT1.onclick = function (ev) {
+                var e = ev;//获取事件触发对象
+                var target = e.target;
+                if (target.nodeName.toLowerCase() == "a" && target.innerHTML == "删除")//先转小写 然后判断是不是A标签 且是删除
+                {
+                    var id = target.parentNode.id;
+                    $.post({
+                        url: "delete.php",
+                        data: {
+                            id: id
+                        },
+                        success: function (result) {
+                            var obj = result;
+                            if (!obj.code)
+                                oT1.removeChild(target.parentNode.parentNode);
+                            alert(JSON.parse(result).message);
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                        }
+                    });
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h2 class="display-4">用户列表</h2>
+            <button id="btn1" type="button" class="btn btn-primary btn-lg">获取所有用户信息</button>
+            <br>
+            <table class='table table-bordered'>
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>用户名</td>
+                        <td>密码</td>
+                        <td>注册时间</td>
+                    </tr>
+                </thead>
+                <tbody id="t1">
+
+                </tbody>
+            </table>
+            <!-- <div class="panel-footer">
+                <a href="insert.html">添加学生</a>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>

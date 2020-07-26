@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array</title>
+</head>
+
+<body>
+    <script>
+        //创建方式 1
+        var arr = new Array(1100, "3343", false);
+        //创建方式 2
+        var arr1 = Array(222, "hello", true);
+        //创建方式3 常量方式创建
+        var arr2 = (1100, "3343", false);
+        //注意这里是创建元素个数为10的数组
+        var arr3 = new Array(10)
+        //元素个数为1 元素值为10
+        var arr4 = [10]
+        for (var i = 0; i < arr.length; i++)
+            document.write(arr[i] + " ");
+        document.write("<br/>");
+        for (const it of arr1) {
+            document.write(it + " ")
+        }
+        document.write("<br/>");
+        arr3.push("guguji") //add
+        arr3.pop() //删除最近ADD的那个
+        for (var index = 0; indpex < arr3.length; index++) {
+            document.write(arr3[index] + " ");
+        }
+        //第一个是 起始位置 第二个参数是 长度
+        var res = arr2.splice(1, 4);//截取
+        //join(字符串) 把原数组之间拼接
+        var res = arr2.join("+");
+
+    </script>
+</body>
+
+</html>

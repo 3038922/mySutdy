@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/www/wwwroot/myStudy/webDev_study/drogon/build",
+  "command": "/bin/clang++-10   -I../ -I../models -isystem /usr/include/jsoncpp  -g   -std=c++17 -o CMakeFiles/drogon.dir/main.cc.o -c /www/wwwroot/myStudy/webDev_study/drogon/main.cc",
+  "file": "/www/wwwroot/myStudy/webDev_study/drogon/main.cc"
+}
+]

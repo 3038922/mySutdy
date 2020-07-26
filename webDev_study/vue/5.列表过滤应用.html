@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤应用</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+    <style>
+        .red {
+            background: red;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- @input 只要改变就触发 @change只要离开焦点就触发  -->
+        <input type="text" @input="handleInput()" v-model="mytext" />
+        <ul>
+            <li v-for="data in newlist">
+                {{data}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                newlist: [],//过滤后的结果
+                datalist: ["aaa", "vvv", "protoss", "add", "cee", "candy"],
+                obj: {
+                    name: "candy",
+                    sex: "femail",
+                    age: 100,
+                    data: "2014-7-24"
+                },
+                mytext: "",
+            },
+            methods: {
+                handleInput() {
+                    //利用输入框的字符,过滤出包含字段的信息栏
+                    this.newlist = this.datalist.filter(item => item.indexOf(this.mytext) > -1);
+                    //后面还有一种计算属性.更优雅的办法
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

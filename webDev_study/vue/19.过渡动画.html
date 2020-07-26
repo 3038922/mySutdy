@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡动画</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+    <link rel="stylesheet" href="css/animate.css">
+</head>
+
+<body>
+    <div class="animate__animated animate__bounce animate__fadeInRight">hinge</div>
+    <div id="box">
+        <button @click="isShow=!isShow">click</button>
+        <!-- 动画效果 -->
+        <transition name="animate__animated animate__fadeInRight animate__fadeOutTopRight" mode="in-out">
+            <!-- key值不一样也会形成切换 -->
+            <p v-if="isShow" key="1">11111</p>
+            <p v-else>32222</p>
+        </transition>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                isShow: false,
+            }
+        })
+    </script>
+</body>
+
+</html>

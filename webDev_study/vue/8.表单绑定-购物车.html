@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单绑定-购物车</title>
+    <script type="text/javascript" src="vue.js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <input type="checkbox" @change="handleAllSelect" v-model="isAllChecked" />全选
+        <ul>
+            <li v-for="data in datalist">
+                <!-- 动态数据绑定 不明白为啥是 :value ,: + value-->
+                <input type="checkbox" v-model="checkgroup" :value="data" @change="handleLiChange" />
+                {{data}}
+                <button @click=handleDel(data)>del</button>
+                {{data.number}}
+                <button @click=data.number++>add</button>
+            </li>
+            <p>计算总金额:{{handleTotal()}}</p>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                datalist: [
+                    {
+                        name: "咕咕鸡",
+                        price: 10,
+                        number: 1,
+                        id: '1',
+                    },
+                    {
+                        name: "candy",
+                        price: 100,
+                        number: 2,
+                        id: '2',
+                    },
+                    {
+                        name: "喵喵",
+                        price: 80,
+                        number: 3,
+                        id: '3',
+                    },
+                    {
+                        name: "汪汪队",
+                        price: 44,
+                        number: 1,
+                        id: '4',
+                    },
+                ],
+                checkgroup: [],
+                isAllChecked: false,
+            },
+            methods: {
+                handleTotal() {
+                    var total = 0;
+                    for (var it in this.checkgroup)
+                        total += (this.checkgroup[it].price * this.checkgroup[it].number);
+                    return total;
+                },
+                handleAllSelect() {
+                    if (this.isAllChecked)
+                        this.checkgroup = this.datalist;
+                    else
+                        this.checkgroup = [];
+                },
+                handleLiChange() {
+                    if (this.checkgroup.length == this.datalist.length)
+                        this.isAllChecked = true;
+                    else
+                        this.isAllChecked = false;
+                },
+                handleDel(data) {
+                    console.log("del");
+                    if (data.number > 0)
+                        data.number--;
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>
