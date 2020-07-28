@@ -18,6 +18,7 @@
 - 添加一个远程库 `git remote add mirror git@192.168.31.193:3038922/myStudy.git`
 - 添加另外一个远程库 `git remote set-url --add origin git@192.168.31.193:3038922/myStudy.git`
 - 查看远程库及地址 `git remote -v`
+- 删除远程仓库地址 `git remote rm origin`
 - 强制服务器端覆盖本地
   "```
   git fetch --all
