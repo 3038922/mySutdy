@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 查询参数
+# 参数验证
 from fastapi import FastAPI, Query  # Query查询参数的意思
 from typing import List  # 列表
 
