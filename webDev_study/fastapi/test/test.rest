@@ -1,0 +1,7 @@
+@baseUrl = http://127.0.0.1:11112
+
+### Cookie测试
+GET {{baseUrl}}/items/ HTTP/1.1
+Cookie:ads_id=777;asd=8888
+Content-type: application/json
+
