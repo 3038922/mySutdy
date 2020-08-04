@@ -5,7 +5,7 @@
 - `pip install fastapi`
 - `pip install uvicorn`
 - `pip install pydantic[email]`
-- `pip install jinja2` 模拟前端用的
+- `pip install python-multipart` 搞 files 用的
 
 ## 运行
 
