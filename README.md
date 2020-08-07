@@ -1,6 +1,10 @@
 # mySutdy
 
-我的学习过程
+- 我的学习过程
+
+## powershell
+
+- 查看 powershell 版本号 `$host.Version.ToString()`
 
 ## git 操作
 
