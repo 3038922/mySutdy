@@ -24,48 +24,57 @@
 - 查看远程库及地址 `git remote -v`
 - 删除远程仓库地址 `git remote rm origin`
 - 强制服务器端覆盖本地
-  "```
+
+```sh
   git fetch --all
   git reset --hard origin/master
   git pull
 
-````"
-- git服务器搭建
-"```
-创建子项目
-cd ..
-sudo mkdir cadlib.git
-sudo git init --bare cadlib.git
+```
 
-修子字项目权限
-sudo chown -R ares:ares cadlib.git
+- git 服务器搭建
 
-Git服务器启动
-sudo service ssh start
-```"
-- gitignore没起作用!
-"```
+```sh
+  创建子项目
+  cd ..
+  sudo mkdir cadlib.git
+  sudo git init --bare cadlib.git
+```
+
+- 修子字项目权限
+  `sudo chown -R ares:ares cadlib.git`
+
+- Git 服务器启动
+  `sudo service ssh start`
+
+- gitignore 没起作用!
+
+```sh
 git rm -r --cached .
 git add .
 git commit -m 'update .gitignore'
-```"
+```
+
 - .git 文件夹过大
-"```
-git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch  lib/json_vc71_libmtd.lib' --prune-empty --tag-name-filter cat -- --all
-git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
-git reflog expire --expire=now --all
-git gc --aggressive --prune=now
 
-git push --force --verbose --dry-run
-git push --force
-```"
+```sh
+  git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch lib/json_vc71_libmtd.lib' --prune-empty --tag-name-filter cat -- --all
+  git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+  git reflog expire --expire=now --all
+  git gc --aggressive --prune=now
+  git push --force --verbose --dry-run
+  git push --force
+```
+
 - .git 合并其他分支的某一文件夹
-`git checkout release include/ncrapi/userConfig/**`
-`git checkout master firmware/**`
-
+  '''sh
+  git checkout release include/ncrapi/userConfig/**
+  git checkout master firmware/**
+  '''
 - .git 强制覆盖分支
-"```
-git checkout release                         //将当前分支切换到主分支
-git reset --hard dev                           //将主分支重置为test分支
-git push origin release -f             //将重置后的master分支强制推送到远程仓库
-````
+
+```sh
+  git checkout release                         //将当前分支切换到主分支
+  git reset --hard dev                           //将主分支重置为 test 分支
+  git push origin release -f             //将重置后的 master 分支强制推送到远程仓库
+```
