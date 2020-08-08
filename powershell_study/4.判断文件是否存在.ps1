@@ -15,6 +15,13 @@
 # -or ：或
 # -xor ：异或
 # -not ：逆
+$flag3 = $host.Version.ToString()
+if ($flag3 -ge "5.0.0.0") {
+    Write-Host $flag3 -ForegroundColor Green
+}
+else {
+    Write-Host "powershell当前版本为:$flag3,请升级powershell至于5.x以上" -ForegroundColor Red
+}
 
 $flag1 = Test-Path C:\Scripts\Archive
 if ($flag1 -eq 'True') {

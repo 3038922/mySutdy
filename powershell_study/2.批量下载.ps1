@@ -10,6 +10,10 @@ function DownloadItem {
         $watch = Measure-Command {
             # 下载文件到临时文件夹
             Invoke-WebRequest -Uri $url -Method Get -Headers @{"Referer" = $referer } -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36" -TimeoutSec 120 -OutFile $tmpFileName
+            $flag = Test-Path $path 
+            if (-not $flag) { 
+                mkdir.exe $path 
+            }
             # 将临时文件移动到目标文件夹
             Move-Item -Path $tmpFileName -Destination $destFileName -Force
         }
@@ -44,9 +48,9 @@ function StartDownload {
     $script:succeed = 0
 }
 
-$url = "https://qzrobot.top/index.php/s/y85HnHAHj8XPjCC/download"
-$tmpFileName = "c:/temp/"
-DownloadItem -url $url -path $tmpFileName -filename "asdf.xlsx"
+$url = "https://qzrobot.top/index.php/s/ckFtR2YwynSrSiz/download"
+$path = "c:\ASDF\"
+DownloadItem -url $url -path $path -filename "asdf.exe"
 #Invoke-WebRequest -Uri $url  -Method Get -Headers @{"Referer" = $referer } -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36" -TimeoutSec 120 -OutFile $tmpFileName
 
 # [int]$script:completed = 0  # 下载完成数量
