@@ -39,3 +39,12 @@ if ($flag2 -eq 'True') {
 else {
     Write-Host $flag2 -ForegroundColor Red
 }
+# 多条件判断
+$ccls = Test-Path C:\ccls
+Write-Host "ccls: $ccls" -ForegroundColor Green
+$ninja = Test-Path C:\ninja
+Write-Host "ninja: $ninja" -ForegroundColor Green
+$llvm = Test-Path C:\llvm
+Write-Host "llvm: $llvm" -ForegroundColor Green
+$flag3 = -not $ccls -and -not $ninja -and -not $llvm
+Write-Host $flag3 -ForegroundColor Green
