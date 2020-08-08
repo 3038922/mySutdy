@@ -26,6 +26,24 @@ function DownloadItem {
         $script:completed += 1
     }
 }
+# 开始下载（普通方法）
+function StartDownload {
+    param([array]$urlList, [string]$path, [string]$referer)
+    $last = $urlList.Count
+    $watch = Measure-Command {
+        for ($i = 0; $i -lt $last; $i++) {
+            DownloadItem -url $urlList[$i] -path $path -referer $referer
+            Start-Sleep -Milliseconds 200  # 延迟0.2秒
+        }
+    }
+    $failed = $script:completed - $succeed
+    $elapsed = [Math]::Round($watch.TotalMilliseconds / 1000, 2)  # 总计耗时（秒）
+    Write-Output ""
+    Write-Host "总共下载 $script:completed，成功 $script:succeed，失败 $failed，耗时 $elapsed s" -ForegroundColor Red -BackgroundColor Yellow
+    $script:completed = 0
+    $script:succeed = 0
+}
+
 $url = "https://qzrobot.top/index.php/s/y85HnHAHj8XPjCC/download"
 $tmpFileName = "c:/temp/"
 DownloadItem -url $url -path $tmpFileName -filename "asdf.xlsx"
