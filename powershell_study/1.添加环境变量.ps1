@@ -13,4 +13,16 @@ foreach ($it in $addPath) {
 }
 Write-Host "$path" -ForegroundColor Green
 
-#[environment]::SetEnvironmentvariable("Path", $path, "machine") #设置环境变量 user machine
+[environment]::SetEnvironmentvariable("Path", $path, "machine") #设置环境变量 user machine
+
+
+# Write-Host "正在检查ninja版本" -ForegroundColor Green
+# $ninja = & ninja.exe --version
+# Write-Host "正在检查clang版本" -ForegroundColor Green
+# $clang = & clang.exe --version
+# Write-Host "正在检查ccls版本" -ForegroundColor Green
+# $ccls = & ccls.exe --version
+# Write-Host "正在检查arm-none-eabi版本" -ForegroundColor Green
+# $arm_none_eabi = & arm-none-eabi-gcc.exe --version
+# Write-Host "正在检查prosv5版本" -ForegroundColor Green
+# $prosv5 = & prosv5.exe --version

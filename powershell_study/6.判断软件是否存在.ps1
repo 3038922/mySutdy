@@ -1,51 +1,51 @@
-Write-Host "ÕıÔÚ¼ì²écmakeÊÇ·ñ°²×°"  -ForegroundColor Green
+ï»¿Write-Host "æ­£åœ¨æ£€æŸ¥cmakeæ˜¯å¦å®‰è£…"  -ForegroundColor Green
 $p = & { cmake --version } 2>&1
 if ($p -is [System.Management.Automation.ErrorRecord]) {
-    Write-Host "cmakeÃ»ÓĞ°²×°»òÕß»·¾³±äÁ¿Ã»ÓĞÌí¼Ó" -ForegroundColor Red
-    Write-Host "±¾³ÌĞò¼´½«½áÊø,Çë°²×°ºóÔÙ´Î³¢ÊÔ" -ForegroundColor Red
+    Write-Host "cmakeæ²¡æœ‰å®‰è£…æˆ–è€…ç¯å¢ƒå˜é‡æ²¡æœ‰æ·»åŠ " -ForegroundColor Red
+    Write-Host "æœ¬ç¨‹åºå³å°†ç»“æŸ,è¯·å®‰è£…åå†æ¬¡å°è¯•" -ForegroundColor Red
     return
 }
 else {
     Write-Host  $p -ForegroundColor Green
 }
-Write-Host "ÕıÔÚ¼ì²égitÊÇ·ñ°²×°"  -ForegroundColor Green
+Write-Host "æ­£åœ¨æ£€æŸ¥gitæ˜¯å¦å®‰è£…"  -ForegroundColor Green
 $p = & { git --version } 2>&1
 if ($p -is [System.Management.Automation.ErrorRecord]) {
-    Write-Host "gitÃ»ÓĞ°²×°»òÕß»·¾³±äÁ¿Ã»ÓĞÌí¼Ó" -ForegroundColor Red
-    Write-Host "±¾³ÌĞò¼´½«½áÊø,Çë°²×°ºóÔÙ´Î³¢ÊÔ" -ForegroundColor Red
+    Write-Host "gitæ²¡æœ‰å®‰è£…æˆ–è€…ç¯å¢ƒå˜é‡æ²¡æœ‰æ·»åŠ " -ForegroundColor Red
+    Write-Host "æœ¬ç¨‹åºå³å°†ç»“æŸ,è¯·å®‰è£…åå†æ¬¡å°è¯•" -ForegroundColor Red
     return
 }
 else {
     Write-Host  $p -ForegroundColor Green
 }
-Write-Host "ÕıÔÚ¼ì²épythonÊÇ·ñ°²×°"  -ForegroundColor Green
+Write-Host "æ­£åœ¨æ£€æŸ¥pythonæ˜¯å¦å®‰è£…"  -ForegroundColor Green
 $p = & { python --version } 2>&1
 if ($p -is [System.Management.Automation.ErrorRecord]) {
-    Write-Host "pythonÃ»ÓĞ°²×°»òÕß»·¾³±äÁ¿Ã»ÓĞÌí¼Ó" -ForegroundColor Red
-    Write-Host "±¾³ÌĞò¼´½«½áÊø,Çë°²×°ºóÔÙ´Î³¢ÊÔ" -ForegroundColor Red
+    Write-Host "pythonæ²¡æœ‰å®‰è£…æˆ–è€…ç¯å¢ƒå˜é‡æ²¡æœ‰æ·»åŠ " -ForegroundColor Red
+    Write-Host "æœ¬ç¨‹åºå³å°†ç»“æŸ,è¯·å®‰è£…åå†æ¬¡å°è¯•" -ForegroundColor Red
     return
 }
 else {
     Write-Host  $p -ForegroundColor Green
 }
-Write-Host "ÕıÔÚ¼ì²évscodeÊÇ·ñ°²×°"  -ForegroundColor Green
+Write-Host "æ­£åœ¨æ£€æŸ¥vscodeæ˜¯å¦å®‰è£…"  -ForegroundColor Green
 $p = & { code --version } 2>&1
 if ($p -is [System.Management.Automation.ErrorRecord]) {
-    Write-Host "vscodeÃ»ÓĞ°²×°»òÕß»·¾³±äÁ¿Ã»ÓĞÌí¼Ó" -ForegroundColor Red
-    Write-Host "±¾³ÌĞò¼´½«½áÊø,Çë°²×°ºóÔÙ´Î³¢ÊÔ" -ForegroundColor Red
+    Write-Host "vscodeæ²¡æœ‰å®‰è£…æˆ–è€…ç¯å¢ƒå˜é‡æ²¡æœ‰æ·»åŠ " -ForegroundColor Red
+    Write-Host "æœ¬ç¨‹åºå³å°†ç»“æŸ,è¯·å®‰è£…åå†æ¬¡å°è¯•" -ForegroundColor Red
     return
 }
 else {
     Write-Host  $p -ForegroundColor Green
 }
 
-# Write-Host "ÕıÔÚ¼ì²éninja°æ±¾" -ForegroundColor Green
+# Write-Host "æ­£åœ¨æ£€æŸ¥ninjaç‰ˆæœ¬" -ForegroundColor Green
 # $ninja = & ninja.exe --version
-# Write-Host "ÕıÔÚ¼ì²éclang°æ±¾" -ForegroundColor Green
+# Write-Host "æ­£åœ¨æ£€æŸ¥clangç‰ˆæœ¬" -ForegroundColor Green
 # $clang = & clang.exe --version
-# Write-Host "ÕıÔÚ¼ì²éccls°æ±¾" -ForegroundColor Green
+# Write-Host "æ­£åœ¨æ£€æŸ¥cclsç‰ˆæœ¬" -ForegroundColor Green
 # $ccls = & ccls.exe --version
-# Write-Host "ÕıÔÚ¼ì²éarm-none-eabi°æ±¾" -ForegroundColor Green
+# Write-Host "æ­£åœ¨æ£€æŸ¥arm-none-eabiç‰ˆæœ¬" -ForegroundColor Green
 # $arm_none_eabi = & arm-none-eabi-gcc.exe --version
-# Write-Host "ÕıÔÚ¼ì²éprosv5°æ±¾" -ForegroundColor Green
+# Write-Host "æ­£åœ¨æ£€æŸ¥prosv5ç‰ˆæœ¬" -ForegroundColor Green
 # $prosv5 = & prosv5.exe --version
