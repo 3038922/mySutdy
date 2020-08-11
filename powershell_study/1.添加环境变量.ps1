@@ -1,16 +1,16 @@
-# ÓÀ¾ÃÈ«¾ÖĞŞ¸Äwindows10ÏµÍ³»·¾³±äÁ¿
-$path = [environment]::GetEnvironmentVariable('Path', 'machine') # »ñÈ¡Êı¾İ
-$addPath = @('C:\Program Files\Git\cmd', 'c:\test', 'c:\windows')
+ï»¿# æ°¸ä¹…å…¨å±€ä¿®æ”¹windows10ç³»ç»Ÿç¯å¢ƒå˜é‡
+$path = [environment]::GetEnvironmentVariable('Path', 'machine') # è·å–æ•°æ®
+$addPath = @('C:\ccls\Release', 'C:\llvm\Release\bin', 'C:\ninja', 'C:\Program Files\PROS\toolchain\usr\bin')
 
 foreach ($it in $addPath) { 
     if ($path.split(";") -Contains $it) {
-        Write-Host "Â·¾¶: $it ÒÑ´æÔÚ" -ForegroundColor yellow 
+        Write-Host "è·¯å¾„: $it å·²å­˜åœ¨" -ForegroundColor yellow 
     }
     else {
-        $path += ($it + ";")
-        Write-Host "Â·¾¶: $it ÒÑÌí¼Ó" -ForegroundColor green 
+        $path += (";" + $it )
+        Write-Host "è·¯å¾„: $it å·²æ·»åŠ " -ForegroundColor green 
     }
 }
 Write-Host "$path" -ForegroundColor Green
 
-#[environment]::SetEnvironmentvariable("Path", $newvalue, "machine") #ÉèÖÃ»·¾³±äÁ¿ user machine
+#[environment]::SetEnvironmentvariable("Path", $path, "machine") #è®¾ç½®ç¯å¢ƒå˜é‡ user machine
