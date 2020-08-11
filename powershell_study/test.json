@@ -1,2 +1,149 @@
-﻿这是一个测试添加内容
-这是一个测试添加内容
+﻿{
+  "sync.gist": "6c091a7b4ddcb213e72d430dac23422f",
+  "editor.quickSuggestions": {
+    "//": "开启自动显示建议",
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.tabSize": 4, //制表符符号eslint
+  "editor.formatOnSave": true, //关闭快速预览
+  "editor.tabCompletion": "on",
+  // 控制字体系列。
+  "editor.fontFamily": "Fira Code Retina",
+  //"cmake.configureOnOpen": true
+  "search.followSymlinks": false, //关闭rg.exe进程
+  // 控制调试控制台中的字体系列。
+  "debug.console.fontFamily": "Fira Code Retina",
+  // 控制终端的字体系列，默认为 `editor.fontFamily` 的值。
+  "terminal.integrated.fontFamily": "Fira Code Retina",
+  //ccls
+  "ccls.cache.hierarchicalPath": true,
+  "ccls.launch.command": "ccls",
+  "ccls.cache.directory": "${workspaceFolder}./ccls-cache",
+  "ccls.index.threads": 20,
+  "ccls.completion.enableSnippetInsertion": true, //如果为true，则在完成函数/方法调用时，参数声明将作为片段插入到函数/方法调用参数中
+  "ccls.highlight.function.face": ["enabled"],
+  "ccls.highlight.type.face": ["enabled"],
+  "ccls.highlight.variable.face": ["enabled"],
+  // 控制在将设置编辑为 json 时是否使用拆分 json 编辑器。
+  "workbench.settings.useSplitJSON": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.alwaysShowStagedChangesResourceGroup": true,
+  "git.alwaysSignOff": true,
+  "git.showPushSuccessNotification": true,
+  "git.enableSmartCommit": true,
+  "commentTranslate.multiLineMerge": true,
+  "workbench.colorTheme": "Monokai",
+  "window.zoomLevel": 0,
+  "sync.gist": "6c091a7b4ddcb213e72d430dac23422f",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.sideBar.location": "left",
+  "extensions.ignoreRecommendations": false,
+  "workbench.iconTheme": "vscode-icons",
+  "cmake.configureOnOpen": true,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "default",
+      "filenamePattern": "*.py"
+    }
+  ],
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    }
+  ],
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": ["--style", "{column_limit: 100,indent_width: 4}"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.languageServer": "Pylance",
+  "python.autoComplete.extraPaths": [],
+  "python.linting.pylintArgs": ["--load-plugins", "--disable=C0114,C0115,C0116,invalid-name"],
+  "files.associations": {
+    "*.ejs": "html",
+    "*.js": "javascript",
+    "*.vue": "vue"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "css.remoteStyleSheets": [
+    {
+      "php.validate.executablePath": "/www/server/php/74/bin/php"
+    }
+  ],
+  "remote.SSH.remotePlatform": {
+    "10.195.106.43": "linux"
+  },
+  "vetur.format.defaultFormatter.html": "js-beautify-html", //格式化.vue中html
+  "vetur.format.defaultFormatter.js": "vscode-typescript", //让vue中的js按编辑器自带的ts格式进行格式化
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      // "wrap_attributes": "force-aligned" //属性强制折行对齐
+      "wrap_attributes": "auto"
+    }
+  },
+  "vetur.validation.template": false,
+  "vetur.format.enable": true,
+  // "vetur.format.defaultFormatter.html": "prettyhtml",
+  // "vetur.format.defaultFormatterOptions": {
+  //   "prettier": {
+  //     "semi": false, //  不要分号分号
+  //     "singleQuote": true //  要单引号
+  //   }
+  // },
+  //prettier
+  //  #让函数(名)和后面的括号之间加个空格
+  "prettier.semi": false, //去掉代码结尾的分号
+  "prettier.singleQuote": true, //使用单引号替代双引号
+  "prettier.jsxSingleQuote": true,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.printWidth": 160,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+  "prettier.useTabs": false,
+  "prettier.trailingComma": "none",
+  "tabnine.experimentalAutoImports": true,
+  "terminal.external.windowsExec": "powershell.exe"
+}
