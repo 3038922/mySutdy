@@ -3,7 +3,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 msg_from = '31612534qq.com'  # 发送方邮箱地址。
-password = 'nmraqzxehnuubiij'  # 发送方QQ邮箱授权码，不是QQ邮箱密码。
+password = 'xxxx'  # 发送方QQ邮箱授权码，不是QQ邮箱密码。
 msg_to = '31612534qqqq.com'  # 收件人邮箱地址。
 
 subject = "test python"  # 主题。
