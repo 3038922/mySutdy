@@ -6,6 +6,8 @@ def isPrime(n):
     质数判断
     '''
     stop = math.sqrt(n) + 1
+    if n < 2:
+        return False
     if n == 2:
         return True
     if n % 2 == 0:
