@@ -195,8 +195,11 @@ void recursionPrint(const json &pragma)
             }
             for (auto &[key, val] : pragma.items())
             {
-                std::cout << "\n"
-                          << key << ": "; //这里可以右移
+                if (!val.is_object())
+                    std::cout << key << ": " << val; //这里可以右移
+                else
+                    std::cout << "\n"
+                              << key << ": ";
                 recursionPrint(val);
             }
             break;
