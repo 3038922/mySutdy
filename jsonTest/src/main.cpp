@@ -196,12 +196,17 @@ void recursionPrint(const json &pragma)
             for (auto &[key, val] : pragma.items())
             {
                 std::cout << "\n"
-                          << key << ": " << val; //这里可以右移
+                          << key << ": "; //这里可以右移
                 recursionPrint(val);
             }
             break;
         }
         case json::value_t::array: {
+            if (pragma.empty())
+            {
+                std::cout << "[[[[[[[[[[[[[[[[[[[[[[[[[[[["; //这里可以右移
+                return;
+            }
             // first n-1 elements
             for (auto i = pragma.cbegin(); i != pragma.cend() - 1; ++i)
             {
