@@ -190,14 +190,23 @@ void recursionPrint(const json &pragma)
         case json::value_t::object: {
             if (pragma.empty())
             {
+                std::cout << "{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{"; //这里可以右移
                 return;
             }
-            //第一遍：遍历此对象的元素
             for (auto &[key, val] : pragma.items())
             {
                 std::cout << "\n"
-                          << key << ": "; //这里可以右移
+                          << key << ": " << val; //这里可以右移
                 recursionPrint(val);
+            }
+            break;
+        }
+        case json::value_t::array: {
+            // first n-1 elements
+            for (auto i = pragma.cbegin(); i != pragma.cend() - 1; ++i)
+            {
+                std::cout << *i;
+                recursionPrint(*i);
             }
             break;
         }
@@ -208,6 +217,7 @@ void recursionPrint(const json &pragma)
 
 int main(int argc, char *argv[])
 {
+    system("chcp 65001");
     recursionPrint(userData);
     return 0;
 }
