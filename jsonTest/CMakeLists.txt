@@ -9,11 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-Wno-unused-variable -Wno-unused-function)
 
 #头文件路径
-INCLUDE_DIRECTORIES("./")
+INCLUDE_DIRECTORIES("./include/")
 #枚举头文件
-file(GLOB_RECURSE INCLUDES "./*.h" "./*.hpp")
+file(GLOB_RECURSE INCLUDES "./include/*.h" "./include/*.hpp")
 #枚举源文件
-file(GLOB_RECURSE SOURCES "./*.c" "./*.cpp")
+file(GLOB_RECURSE SOURCES "./src/*.c" "./src/*.cpp")
 #加入一些-D
 #ADD_DEFINITIONS () 
 
@@ -25,7 +25,6 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/firmware) #设置各种库存放�
 
 # #添加需要链接的库文件目录 新建好了 链接的时候用
 LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
-include_directories(${SDL2_INCLUDE_DIRS})
 #生成可执行文件
 add_executable(main ${SOURCES} ${INCLUDES})
 #添加一个run命令

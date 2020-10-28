@@ -208,7 +208,6 @@ void recursionPrint(const json &pragma)
 
 int main(int argc, char *argv[])
 {
-    // recursionPrint(userData, "");
-    std::cout << userData.dump(4) << std::endl;
+    recursionPrint(userData);
     return 0;
 }
