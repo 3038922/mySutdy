@@ -11,7 +11,7 @@ add_compile_options(-Wno-unused-variable -Wno-unused-function)
 #头文件路径
 INCLUDE_DIRECTORIES("./include/")
 #枚举头文件
-file(GLOB_RECURSE INCLUDES "./include/*.h" "./include/*.hpp")
+file(GLOB_RECURSE INCLUDES "../include/*.h" "./include/*.hpp")
 #枚举源文件
 file(GLOB_RECURSE SOURCES "./src/*.c" "./src/*.cpp")
 #加入一些-D

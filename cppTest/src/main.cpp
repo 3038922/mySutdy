@@ -1,9 +1,10 @@
 
+#include "circular_buffer.hpp"
 #include "userConfig.hpp"
 #include <string>
 
 //递归打印
-void recursionPrint(const json &pragma, std::string_view ignore)
+void recursionPrintTest(const json &pragma, std::string_view ignore)
 {
     switch (pragma.type())
     {
@@ -16,7 +17,7 @@ void recursionPrint(const json &pragma, std::string_view ignore)
                         std::cout << key << ": " << val << std::endl; //这里可以右移
                     else
                         std::cout << key << ": " << std::endl;
-                    recursionPrint(val, ignore);
+                    recursionPrintTest(val, ignore);
                 }
             }
             break;
@@ -25,7 +26,7 @@ void recursionPrint(const json &pragma, std::string_view ignore)
             for (auto i = pragma.cbegin(); i != pragma.cend() - 1; ++i)
             {
                 std::cout << i.value() << " ";
-                recursionPrint(*i, ignore);
+                recursionPrintTest(*i, ignore);
             }
             std::cout << std::endl;
             break;
@@ -34,10 +35,25 @@ void recursionPrint(const json &pragma, std::string_view ignore)
             break;
     }
 }
-
+void circular_bufferTest()
+{
+    // constructors accept iterators, initializer lists or count + element
+    ncrapi::circular_buffer<int, 4> cb{1, 2, 3};
+    cb.push_back(4); // 1234
+    cb.push_back(5); // 1235
+    // iterators are supported and constexpr ( except reverse ones because std::reverse_iterator )
+    for (auto &value : cb)
+        std::cout << value << " ";
+    cb.size();     // 3
+    cb.max_size(); // 4
+    cb.clear();    //
+                   // this can also be done constexpr.
+                   // using c++14 the only non constexpr api is emplace_back and emplace_front
+}
 int main(int argc, char *argv[])
 {
     system("chcp 65001");
-    recursionPrint(userData, "马达");
+    // recursionPrintTest(userData, "马达");
+    circular_bufferTest();
     return 0;
 }

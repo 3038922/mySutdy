@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "C:/Users/aresp/Desktop/usercode/myStudy/cppTest/build",
+    "command": "C:\\LLVM\\Release\\bin\\clang-cl.exe  /nologo -TP  -I..\\.\\include  /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -Wno-unused-variable -Wno-unused-function -std:c++17 /FoCMakeFiles\\main.dir\\src\\main.cpp.obj /FdTARGET_COMPILE_PDB -c C:\\Users\\aresp\\Desktop\\usercode\\myStudy\\cppTest\\src\\main.cpp",
+    "file": "C:/Users/aresp/Desktop/usercode/myStudy/cppTest/src/main.cpp"
+  }
+]
