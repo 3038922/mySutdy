@@ -44,6 +44,8 @@ void circular_bufferTest()
     // iterators are supported and constexpr ( except reverse ones because std::reverse_iterator )
     for (auto &value : cb)
         std::cout << value << " ";
+    std::cout << "\n"
+              << "back():" << cb.back() << std::endl;
     cb.size();     // 3
     cb.max_size(); // 4
     cb.clear();    //
