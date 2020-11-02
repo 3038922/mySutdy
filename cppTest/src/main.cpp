@@ -44,13 +44,19 @@ void circular_bufferTest()
     // iterators are supported and constexpr ( except reverse ones because std::reverse_iterator )
     for (auto &value : cb)
         std::cout << value << " ";
-    std::cout << "\n"
-              << "back():" << cb.back() << std::endl;
+    std::cout << "\n";
+    std::cout << "cb back():" << cb.back() << std::endl;
     cb.size();     // 3
     cb.max_size(); // 4
-    cb.clear();    //
-                   // this can also be done constexpr.
-                   // using c++14 the only non constexpr api is emplace_back and emplace_front
+    cb.clear();
+    std::cout << "cb clear:" << cb.size() << " back():" << cb.back() << std::endl;
+    cb.push_back(111);
+    std::cout << "cb clear:" << cb.size() << " back():" << cb.back() << std::endl;
+    ncrapi::circular_buffer<int, 4> cb1;
+    std::cout << "cb1: size():" << cb1.size() << " back():" << cb1.back() << std::endl;
+    //
+    // this can also be done constexpr.
+    // using c++14 the only non constexpr api is emplace_back and emplace_front
 }
 int main(int argc, char *argv[])
 {
