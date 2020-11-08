@@ -76,4 +76,29 @@ def test5():
         print()
 
 
-test5()
+def test6():
+    maxTime = 8
+    sadlyDay = 1
+    for i in range(1, 8):
+        x, y = map(int, input().split())
+        if (x + y > maxTime):
+            maxTime = x + y
+            sadlyDay = i
+    print(sadlyDay)
+
+
+def test7():
+    x, y = map(int, input().split())
+    count = 0
+    for i in range(x, y + 1):
+        count += str(i).count('2')
+    print(count)
+
+
+def test8():
+    n, k = map(int, input().split())
+    arr = list(set(map(int, input().split())))
+    if (len(arr) < k):
+        print("No result")
+    else:
+        print(arr[k - 1])
