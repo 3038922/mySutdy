@@ -37,4 +37,43 @@ def test3():
         print(it, end=" ")
 
 
-test3()
+def test4():
+    """
+    二维数组和排序
+    这样就建好了结构体，排序 sort()使用起来需要记一下格式
+    A.sort(key=lambda x:(x[0],x[1]))
+    这样写的话，就意味着 A[]数组的第一维由小到大，当第一维度相同的时候，第二维度也是由小到大，那
+    么想要由某一维度由大到小的话，只需要在前面加个减号”-”符号即可，如下：
+    A.sort(key=lambda x:(x[0],-x[1]))
+    这样写的话，就意味着 A[]数组的第一维由小到大，当第一维度相同的时候，第二维度是由大到小。Python
+    的时效不是很好，所以对于排序来说的，如果能数据范围不大的话还是建议计数排序。
+    """
+    matrix = [[112, 2, 3], [4, 5444, 6], [22, 33, 44]]
+    # x = []
+    # y = []
+    # A = []
+    # N = 4  #4行
+    # for i in range(N):
+    #     x, y = map(int, input().split())
+    #     x.append(x)  #此处需要追加的形式，否则库函数不起作用
+    #     y.append(i)
+    #     A = list(zip(x, y))  #此时就在捆绑,并强制转换成列表 list
+    for it in matrix:
+        it.sort(reverse=True)
+    for it in matrix:
+        print(it, " ")
+
+
+def test5():
+    n = int(input())
+    count = 1
+    for i in range(1, n + 1):  # 注意空格 1开始不要0开始
+        for j in range(i):
+            print(count, end='')
+            count += 1
+            if (count > 9):
+                count = 0
+        print()
+
+
+test5()
