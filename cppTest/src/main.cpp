@@ -38,17 +38,20 @@ void recursionPrintTest(const json &pragma, std::string_view ignore)
 void circular_bufferTest()
 {
     // constructors accept iterators, initializer lists or count + element
-    ncrapi::circular_buffer<int, 4> cb{1, 2, 3};
-    cb.push_back(4); // 1234
-    cb.push_back(5); // 1235
+    ncrapi::circular_buffer<int, 4> cb{100, 999, 888};
+    cb.push_back(4444); // 1234
+    cb.push_back(555);  // 1235
+    cb.push_back(777);  // 1235
     // iterators are supported and constexpr ( except reverse ones because std::reverse_iterator )
-    for (auto &value : cb)
-        std::cout << value << " ";
-    std::cout << "\n";
-    std::cout << "cb back():" << cb.back() << std::endl;
+    // for (auto &value : cb)
+    //     std::cout << value << " ";
+    // std::cout << "\n";
+    std::cout << "cb back():" << cb.back() << " cb back()-1:" << cb.data()[0] << std::endl;
     cb.size();     // 3
     cb.max_size(); // 4
     cb.clear();
+    for (auto &value : cb)
+        std::cout << "cb clear:" << value << " "; //没输出任何东西
     std::cout << "cb clear:" << cb.size() << " back():" << cb.back() << std::endl;
     cb.push_back(111);
     std::cout << "cb clear:" << cb.size() << " back():" << cb.back() << std::endl;
