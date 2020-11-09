@@ -102,3 +102,6 @@ def test8():
         print("No result")
     else:
         print(arr[k - 1])
+
+
+test8()

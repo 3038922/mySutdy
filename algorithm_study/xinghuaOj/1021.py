@@ -1,19 +1,20 @@
 import math
+from math import sqrt
 
 
 def isPrime(n):
     '''
     质数判断
     '''
-    stop = math.sqrt(n) + 1
-    if n < 2:
+    if (n < 2):
         return False
-    if n == 2:
+    if (n == 2):
         return True
-    if n % 2 == 0:
+    if (n % 2 == 0):
         return False
-    for i in range(3, stop, 2):
-        if n % i == 0:
+    stop = int(math.sqrt(n))
+    for i in range(2, stop + 1):
+        if (n % i == 0):
             return False
     return True
 

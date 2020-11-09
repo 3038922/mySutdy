@@ -2,14 +2,16 @@
 #include <string>
 using namespace std;
 
-bool prime(int pre) {
-  pre = sqrt(pre);
-  if (pre < 2)
+bool isPrime(const int n) {
+  if (n < 2)
     return false;
-  if (pre == 2)
+  if (n == 2)
     return true;
-  for (int i = 2; i < pre; i++)
-    if (pre % i == 0)
+  if (n % 2 == 0)
+    return false;
+  int stop = sqrt(n);
+  for (int i = 2; i <= stop + 1; i++)
+    if (n % i == 0)
       return false;
   return true;
 }
@@ -26,7 +28,7 @@ int main() {
     if (arr[i] < min && arr[i] > 0)
       min = arr[i];
   }
-  bool now = prime(max - min);
+  bool now = isPrime(max - min);
   cout << (now ? "Lucky Word" : "No Answer") << '\n';
   cout << (now ? max - min : 0) << endl;
   return 0;
