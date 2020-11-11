@@ -1,5 +1,5 @@
-robot1 = list(map(str, input().upper()))
-robot2 = list(map(str, input().upper()))
+robot1 = list(map(str, input().strip()))
+robot2 = list(map(str, input().strip()))
 recoderList = []
 for r1 in robot1:
     for r2 in robot2:

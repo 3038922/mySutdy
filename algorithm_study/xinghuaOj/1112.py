@@ -1,14 +1,24 @@
 target = input().lower()
-line = list(input().strip().lower().split())
+line = input().lower()
+lenLine = len(line)
 count = 0
 pos = -1
-i = 0
-for it in line:
-    if it == target:
-        if (pos == -1):
-            pos = i
-        count += 1
-    i += 1
+lastSpace = 0
+for i in range(0, lenLine):
+    if (line[i] == " "):
+        tempStr = line[lastSpace:i]
+        if (tempStr == target):
+            if (pos == -1):
+                pos = i - len(tempStr)
+            count += 1
+        lastSpace = i + 1
+    elif (i == lenLine - 1):
+        tempStr = line[lastSpace:i + 1]
+        if (tempStr == target):
+            if (pos == -1):
+                pos = i - len(tempStr)
+            count += 1
+
 if (pos == -1):
     print(pos)
 else:
