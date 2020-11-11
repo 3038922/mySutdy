@@ -17,4 +17,3 @@ while (True):
         break
 
 print(ps)
-# print(ps)3
