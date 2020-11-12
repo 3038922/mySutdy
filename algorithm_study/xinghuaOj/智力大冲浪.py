@@ -39,9 +39,11 @@ timeAndFine = []
 totalTime = 0  #罚款总数
 for i in range(0, games):
     totalTime += time[i]
-    timeAndFine.append([time[i], fine[i], fine[i] / time[i], True])
-#以扣款数比例来排序 第二排序以扣钱多到少排序 贪心 这样答案是错的...
-timeAndFine.sort(key=lambda x: (x[2], -x[0]))
+    #timeAndFine.append([time[i], fine[i], fine[i] / time[i], True])
+    #以扣款数比例来排序 第二排序以扣钱多到少排序 贪心 但这样答案是错的...
+    timeAndFine.append([time[i], fine[i], True])
+#题解意思是用金额排序....也就是贪心算法本质并不一定是最正确的解法
+timeAndFine.sort(key=lambda x: (-x[1], x[0]))  # 扣钱多的先玩 扣钱一样多的花费时间少的先玩
 print(totalTime)
 if (totalTime % 10 != 0):
     for it in timeAndFine:
