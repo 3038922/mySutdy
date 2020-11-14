@@ -7,35 +7,38 @@
 3 5 2 
 
 
-[8, 9, 2, 0]
-[4, 6, 1, 0]
-[3, 5, 2, 0]
 [1, 4, 2, 0]
+[3, 5, 2, 0]
+[4, 6, 1, 0]
+[8, 9, 2, 0]
 """
 treeNums = int(input())
 hopeNums = int(input())
 targetList = []
+
 for i in range(hopeNums):
     targetList.append(list(map(int, input().split())))
-    targetList[i].append(0)
-targetList.sort(key=lambda x: (-x[1], -x[2]))
-for it in targetList:
-    print(it)
+targetList.sort(key=lambda x: (x[1]))  #从小到大排
+roadList = [False for n in range(targetList[hopeNums - 1][1] + 1)]  #路段似乎得建大点 因为遍历的时候没0点
 treeCount = 0
 
-for i in range(hopeNums - 1):
-    for j in range(hopeNums - 1, i - 1, -1):
-        # for 循环那些树的区间 有多少树
-        needTree = targetList[i][2] - targetList[i][3]  # 需要定义每段区间还需要种多少树
-        nextNeedTree = targetList[j][2] - targetList[j][3]
-        if (targetList[i][0] <= targetList[j][1] and needTree > 1
-                and nextNeedTree > 1):  #如果本次的端点和下次端点相交
-            targetList[i][3] += 1  #给当前的路种树
-            targetList[j][3] += 1  #给相交的路种树
-            treeCount += targetList[i][3]  #统计树的数量
-            #print("i:", i, "j:", j, "相交或者相切", treeCount)
-        elif (j == i and targetList[i][3] == 0):
-            targetList[i][3] = targetList[i][2]
+for it in targetList:
+    for j in roadList[it[0]:it[1]]:
+        """
+        遍历区间里的点 统计有没树
+        """
+        if (j):  # 如果检测到种树
+            it[2] -= 1  #目标值-=1
+    if (it[2] > 0):  #需要目标还没完成 就继续种树
+        for j in range(it[1], it[0] - 1, -1):
+            """
+            如果
+            """
+            if (roadList[j] == False):
+                roadList[j] = True  #标记已种树
+                it[2] -= 1  #目标值-=1
+                treeCount += 1
+
 for it in targetList:
     print(it)
 print(treeCount)

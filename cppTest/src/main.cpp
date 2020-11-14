@@ -2,7 +2,11 @@
 #include "circular_buffer.hpp"
 #include "userConfig.hpp"
 #include <string>
-
+//取出item()的返回值
+void f(decltype(json().items().begin()) &it)
+{
+    std::cout << "key: " << it.key() << ", value: " << it.value() << '\n';
+}
 //递归打印
 void recursionPrintTest(const json &pragma, std::string_view ignore)
 {
