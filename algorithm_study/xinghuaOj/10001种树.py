@@ -24,29 +24,18 @@ treeCount = 0
 for it in targetList:
     print(it)
     if (it[2] > 0):  #需要目标还没完成 就继续种树
-        count = 0
-        for j in roadList[it[0]:it[1]]:
-            """
-           遍历区间 看看还需要种多少树
-            """
-            # print("target:", it[2], roadList[j], "count:", count)
-            if (roadList[j]):  # 如果检测到种树ss
-                count += 1
-
-            for j in range(it[1], it[0] - 1, -1):
-                if (count < it[2]) and (roadList[j] == False):
-                    """
-                    倒着遍历每个区间 如果已经种的树比需要种的少 
-                    且 如果标记为没种树 
-                    """
-                    #  print("j:", j, "left:", it[0], "right:", it[1], roadList[j])
-                    """
-                    如果
-                    """
-                    roadList[j] = True  #标记已种树
-                    print("在 roadlist", j, "位置种树")
-                    it[2] -= 1  #目标值-=1
-                    treeCount += 1
+        for j in range(it[1], it[0] - 1, -1):
+            if (roadList[j] == False):
+                """
+                倒着遍历每个区间 如果已经种的树比需要种的少 
+                且 如果标记为没种树 
+                """
+                if (it[2] == 0):
+                    break
+                roadList[j] = True  #标记已种树
+                print("在 roadlist", j, "位置种树")
+                it[2] -= 1  #目标值-=1
+                treeCount += 1
 
 for it in targetList:
     print(it)
