@@ -22,9 +22,14 @@ targetList.sort(key=lambda x: (x[1]))  #从小到大排
 roadList = [False for n in range(0, targetList[hopeNums - 1][1] + 1)]  #路段似乎得建大点 因为遍历的时候没0点
 treeCount = 0
 for it in targetList:
-    print(it)
+    # print(it)
     if (it[2] > 0):  #需要目标还没完成 就继续种树
         for j in range(it[1], it[0] - 1, -1):
+            if (roadList[j]):
+                it[2] -= 1  #这里目标值不减的话会误报
+
+        for j in range(it[1], it[0] - 1, -1):
+            # print("j:", j)
             if (roadList[j] == False):
                 """
                 倒着遍历每个区间 如果已经种的树比需要种的少 
@@ -33,10 +38,10 @@ for it in targetList:
                 if (it[2] == 0):
                     break
                 roadList[j] = True  #标记已种树
-                print("在 roadlist", j, "位置种树")
+                # print("在 roadlist", j, "位置种树")
                 it[2] -= 1  #目标值-=1
                 treeCount += 1
 
-for it in targetList:
-    print(it)
+# for it in targetList:
+#     print(it)
 print(treeCount)
