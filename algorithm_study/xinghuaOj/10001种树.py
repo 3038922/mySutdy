@@ -22,10 +22,17 @@ targetList.sort(key=lambda x: (x[1]))  #从小到大排
 roadList = [False for n in range(0, targetList[hopeNums - 1][1] + 1)]  #路段似乎得建大点 因为遍历的时候没0点
 treeCount = 0
 for it in targetList:
+    if (it[0] > it[1]):
+        """
+        防止数据乱写
+        """
+        tmp = it[0]
+        it[0] = it[1]
+        it[1] = tmp
     # print(it)
     if (it[2] > 0):  #需要目标还没完成 就继续种树
-        for j in range(it[1], it[0] - 1, -1):
-            if (roadList[j]):
+        for i in range(it[0], it[1] + 1):
+            if (roadList[i]):
                 it[2] -= 1  #这里目标值不减的话会误报
 
         for j in range(it[1], it[0] - 1, -1):
