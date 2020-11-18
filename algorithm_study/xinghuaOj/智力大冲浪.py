@@ -1,55 +1,32 @@
 """
-题目描述
-    小伟报名参加中央电视台的智力大冲浪节目。本次挑战赛吸引了众多参赛者，主持人为了表彰大家的勇气，先奖励每个参赛者m元。
-    先不要太高兴！因为这些钱还不一定都是你的！接下来主持人宣布了比赛规则：
-    首先，比赛时间分为n个时段，它又给出了很多小游戏，每个小游戏都必须在规定期限ti 前完成（包括边界时间ti）。
-    如果一个游戏没能在规定期限前完成，则要从奖励费m元中扣去一部分钱wi（wi为自然数），不同的游戏扣去的钱可能不一样的。
-    当然，每个游戏本身都很简单，保证每个参赛者都能在一个时段内完成，而且都必须从整时段开始。
-    主持人只是想考考每个参赛者如何安排组织自己做游戏的顺序。作为参赛者，小伟很想赢得冠军，当然更想赢取最多的钱！
-    注意：比赛绝对不会让参赛者赔钱。
-输入
-第1行为m，表示一开始奖励给每位参赛者的钱；
-第2行为n，表示有n个小游戏；
-第3行有n个整数，分别表示游戏1到n的规定完成期限ti；
-第4行有n个整数，分别表示游戏1到n不能在规定期限前完成（包括边界时间）的扣款数wi。
-输出
-输出共一行一个整数，表示小伟能赢取最多的钱。
 样例输入 Copy
 10000
 7
 4 2 4 3 1 4 6
 70 60 50 40 30 20 10
 
-样例输出 Copy
 9950
 
-提示
-【样例解释】一种可行的方案如下图：其中#1代表第1个游戏，#2代表第2个游戏，依次类推。
-      
-【数据规模】
-对于50%的数据： 1≤n≤500；
-对于100%的数据：1≤n≤50,000；1≤m≤231-1；1≤ti≤n；1≤wi≤1,000；
 """
 money = int(input())
 games = int(input())
-time = list(map(int, input().split()))
+time = list(map(int, input().split()))  #时间
 fine = list(map(int, input().split()))  #罚款
 timeAndFine = []
-#先把总钱数加起来
-totalTime = 0  #罚款总数
 for i in range(0, games):
-    totalTime += time[i]
     #timeAndFine.append([time[i], fine[i], fine[i] / time[i], True])
     #以扣款数比例来排序 第二排序以扣钱多到少排序 贪心 但这样答案是错的...
-    timeAndFine.append([time[i], fine[i], True])
+    timeAndFine.append([time[i], fine[i]])
 #题解意思是用金额排序....也就是贪心算法本质并不一定是最正确的解法
 timeAndFine.sort(key=lambda x: (-x[1], x[0]))  # 扣钱多的先玩 扣钱一样多的花费时间少的先玩
-print(totalTime)
-if (totalTime % 10 != 0):
-    for it in timeAndFine:
-        print(it)
-        # if (it[0] == totalTime % 10):  #如果凑的到 就跳出 损失最小
-        #     money -= it[1]
-        #     break
+i = 0
+for it in timeAndFine:
+    if (it[0] > 0):  #如果有时间完成就去完成
+        for j in range(i + 1, games):  #完成后，所有能站此座位的的，都少了一座位，就-1。。
+            if (it[0] <= timeAndFine[j][0]):  #如果这次时间花的比上次时间少
+                timeAndFine[j][0] -= 1
+    else:  #没时间，就代表必须扣相应的钱了。
+        money -= it[1]
+    i += 1
 
 print(money)

@@ -16,7 +16,7 @@ treeNums = int(input())
 hopeNums = int(input())
 targetList = []
 
-for i in range(hopeNums):
+for i in range(0, hopeNums):
     targetList.append(list(map(int, input().split())))
 targetList.sort(key=lambda x: (x[1]))  #从小到大排
 roadList = [False for n in range(0, targetList[hopeNums - 1][1] + 1)]  #路段似乎得建大点 因为遍历的时候没0点
