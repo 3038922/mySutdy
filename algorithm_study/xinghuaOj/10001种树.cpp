@@ -10,7 +10,7 @@ class target
     int begin;
     int end;
     int hope;
-};
+} targetList[5000];
 void f(target t)
 {
     cout << "[" << t.begin << "," << t.end << "," << t.hope << "]" << endl;
@@ -20,7 +20,6 @@ int main()
 {
     // input
     int treeCount = 0, hopeNums = 0, treeNums = 0;
-    target targetList[50001];
     bool roadList[N] = {false};
     cin >> treeNums;
     cin >> hopeNums;
@@ -29,30 +28,30 @@ int main()
         cin >> targetList[i].begin >> targetList[i].end >> targetList[i].hope;
     }
     // sort
-    sort(targetList, targetList + hopeNums - 1, cmp);
-    // for_each(targetList.begin(), targetList.end(), f);
-    for (auto it : targetList)
+    sort(targetList, targetList + hopeNums, cmp);
+    //for_each(targetList, targetList + hopeNums, f);
+    for (auto i = 0; i < hopeNums; i++)
     {
-        //cout << "[" << it.begin << "," << it.end << "," << it.hope << "]" << endl;
-        if (it.hope > 0)
+        //cout << "[" << targetList[i].begin << "," << targetList[i].end << "," << targetList[i].hope << "]" << endl;
+        if (targetList[i].hope > 0)
         {
-            for (auto j = it.begin; j <= it.end; j++)
+            for (auto j = targetList[i].begin; j <= targetList[i].end; j++)
             {
                 //先扫一次 看看该节点内有没被标记的
                 //   cout << j << ",";
                 if (roadList[j])
-                    it.hope--;
+                    targetList[i].hope--;
             }
             // cout << endl;
-            for (auto j = it.end; j >= it.begin; j--)
+            for (auto j = targetList[i].end; j >= targetList[i].begin; j--)
             {
                 if (!roadList[j])
                 {
-                    if (it.hope < 1)
+                    if (targetList[i].hope < 1)
                         break;
                     roadList[j] = true;
                     //cout << "在 roadlist" << j << "位置种树" << endl;
-                    it.hope--;
+                    targetList[i].hope--;
                     treeCount++;
                 }
             }
