@@ -4,34 +4,30 @@
 #include <map>
 #include <algorithm>
 using namespace std;
+pair<int, int> cmp(pair<int, int> a,pair<int,int>b)
+{
+  if(a.second<b.second)
+    return a;
+}
 class Solution {
 public:
+
     int distributeCandies(vector<int>& candyType) {
         sort(candyType.begin(),candyType.end());
+        vector<pair<int,int>> vecList;
         //需要考虑元素种类不对称问题
-        map<int,size_t> mapList;
-        int last=candyType[0];
-        int count=1;//统计元素个数
-        for(auto it:candyType)
+        int last=-1;
+        int i=0;
+        for(auto &it:candyType)
         { 
-           if(it!=last)
-           {  
-            auto numes=count(candyType.begin(),candyType.end(),it);
-             mapList.insert(it,);
-             count=1;
-           }
-          else
-            count++ ;
-          last=it;
+        if(it!=last)
+           vecList.push_back(make_pair(it, count(candyType.begin()+i, candyType.end(), it)));
+        last=it;
+        i++;
         }
-        for (auto it : nums)
-            cout<<it.first<<" "<<it.second<<endl;
-    //     for (int i=0; i<candyType.size();i++)
-    //                  ;
-    //     if(len%2==0)
-    //       return len;
-    //     else
-    //       return len/2+2;
+        sort(vecList.begin(),vecList.end());
+        for (auto it : vecList)
+           cout<<it.first<<" "<<it.second<<endl;
         return  0;
      }
 };
